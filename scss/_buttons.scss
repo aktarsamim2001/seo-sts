@@ -1,0 +1,98 @@
+.rv-button {
+  @apply relative overflow-hidden;
+
+  // Common top and bottom
+  .rv-button-top,
+  .rv-button-bottom {
+    @apply block w-full min-w-[210px] px-[39px] py-[25px] transition duration-500 md:inline-block md:w-auto;
+    span {
+      @apply inline-block font-normal uppercase tracking-[1.12px] transition duration-500;
+    }
+  }
+
+  .rv-button-top {
+    @apply relative z-10;
+  }
+
+  .rv-button-bottom {
+    @apply absolute left-0 top-0 z-[9] h-full w-full translate-y-full;
+    span {
+      @apply rotate-12;
+    }
+  }
+
+  &:hover {
+    .rv-button-top {
+      @apply -translate-y-[101%];
+      span {
+        @apply -rotate-12;
+      }
+    }
+    .rv-button-bottom {
+      @apply translate-y-0;
+      span {
+        @apply rotate-0;
+      }
+    }
+  }
+
+  &-primary {
+    .rv-button-top {
+      @apply z-10 border border-[#53B9FF] bg-[#53B9FF]; // Light blue top
+      span {
+        @apply text-black; // Black text for contrast
+      }
+    }
+    .rv-button-bottom {
+      @apply z-[9] border border-[#F54BB4] bg-[#F54BB4]; // Pink hover
+      span {
+        @apply text-black; // Black text for contrast
+      }
+    }
+  }
+
+  &-secondary {
+    .rv-button-top {
+      @apply z-10 border border-[#F54BB4] bg-[#F54BB4]; // Pink top
+      span {
+        @apply text-white; 
+      }
+    }
+    .rv-button-bottom {
+      @apply z-[9] border border-[#001442] bg-[#001442]; // Dark blue hover
+      span {
+        @apply text-[#F54BB4]; // Pink text on hover
+      }
+    }
+  }
+
+  &-success {
+    .rv-button-top {
+      @apply z-10 border border-[#9BCB4B] bg-[#9BCB4B]; // Green top
+      span {
+        @apply text-[#001442]; // Dark blue text
+      }
+    }
+    .rv-button-bottom {
+      @apply z-[9] border border-[#001442] bg-[#001442]; // Dark blue hover
+      span {
+        @apply text-[#9BCB4B]; // Green text
+      }
+    }
+  }
+
+  &-white {
+    .rv-button-top {
+      @apply z-10 border border-white bg-white;
+      span {
+        @apply text-[#001442];
+      }
+    }
+    .rv-button-bottom {
+      @apply z-[9] border border-[#001442] bg-[#001442];
+      span {
+        @apply text-white;
+      }
+    }
+  }
+}

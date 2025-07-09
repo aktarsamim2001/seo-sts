@@ -1,0 +1,30 @@
+// Career  tab-------
+.tab-button {
+  position: relative;
+  transition: all 0.6s;
+
+  &.active {
+    background-color: #F54BB4 !important; // brandPink
+    color: #FFFFFF !important; // white
+
+    // For dark mode support, uncomment below:
+    // @media (prefers-color-scheme: dark) {
+    //   background-color: #001442 !important; // brandDark
+    // }
+  }
+}
+
+.tab-content {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
