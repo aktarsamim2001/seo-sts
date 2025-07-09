@@ -92,8 +92,8 @@ const ServicesV6 = () => {
                 }`}
                 onClick={() => toggleAccordion(index)}>
                 <h3 className="flex flex-col items-center gap-x-10 gap-y-3 text-[25px] font-normal leading-[25.2px] text-secondary dark:text-white md:flex-row md:text-5xl md:leading-[1.2]">
-                  <span className="text-inherit">{service.title}</span>
-                  <span className="pr-[2px] text-base text-secondary/70 dark:text-white/70 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
+                  <span className="max-w-sm text-inherit">{service.title}</span>
+                  <span className="flex items-start pr-[2px] text-base text-secondary/70 dark:text-white/70 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
                     {service.subtitle}
                   </span>
                 </h3>

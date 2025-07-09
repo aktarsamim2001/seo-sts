@@ -45,7 +45,7 @@ const ContactForm = () => {
           You are interested in
         </label>
 
-        <div className="mt-3 flex flex-wrap gap-6">
+        <div className="mt-3 grid h-full grid-cols-1 gap-6 md:grid-cols-3">
           {interestData.map((item) => (
             <div key={item.id} className="radio-wrapper">
               <input

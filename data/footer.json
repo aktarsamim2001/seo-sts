@@ -1,21 +1,20 @@
 [
   {
-    "title": "Resources",
+    "title": "QUICK MENUS",
     "links": [
-      { "href": "/ai-blog", "label": "Home" },
-      { "href": "/seo-blog", "label": "About Us" },
-      { "href": "/design-agency", "label": "Services" },
-      { "href": "/digital-agency", "label": "Portfolio" },
-      { "href": "/portfolio-agency/case-study", "label": "Case Studies" },
-      { "href": "/blogs", "label": "Blogs" },
+      { "href": "/", "label": "Home" },
+      { "href": "/about", "label": "About Us" },
+      { "href": "/services", "label": "Services" },
+      { "href": "/portfolio-agency/case-study", "label": "Portfolio" },
+      { "href": "/ai-blog", "label": "Blogs" },
       { "href": "/contact", "label": "Contact Us" },
       { "href": "/get-a-quote", "label": "Get A Quote" }
     ]
   },
   {
-    "title": "Company",
+    "title": "WHAT WE DO",
     "links": [
-      { "href": "/about", "label": "About Us" },
+      { "href": "/about", "label": "Brand Identity Design" },
       { "href": "/services/illustration", "label": "Illustration & Custom Graphics" },
       { "href": "/services/packaging", "label": "Packaging & Print Design" },
       { "href": "/services/photo", "label": "Photo & Image Production" },

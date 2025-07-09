@@ -35,7 +35,7 @@ const ServicesV14 = () => {
         </RevealWrapperV2>
         <TextAppearAnimation02>
           <h2 className="text-appear mb-3">
-            Marketing solutions designed for <br />
+            Degital solutions designed for <br />
             <i className="font-instrument text-[#F54BB4]"> maximum impact</i>
           </h2>
         </TextAppearAnimation02>
@@ -51,7 +51,7 @@ const ServicesV14 = () => {
           <RevealWrapper
             key={service.slug || idx}
             className="reveal-me group border border-[#F54BB4] px-6 py-9 lg:px-[30px] lg:py-[50px]">
-            <Link href={`/marketing/services/${service.slug || idx}`}>
+            <Link href={`services/media`}>
               <figure>
                 <Image
                   src={service.logo}

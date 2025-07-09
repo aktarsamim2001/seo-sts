@@ -18,8 +18,8 @@ const AboutPage = () => {
       <PageHero
         badgeTitle="About"
         title="SmartTask "
-        italicTitle="Studios"
-        description="As a agency we are working on client projects, official Webflow Templates and cloneables for the Webflow community."
+        italicTitle=""
+        description="At SmartTask Studios, we transform ideas into powerful visual stories. From brand identity and custom graphics to digital marketing and motion design, we craft compelling content and experiences that elevate brands across print, web, and social platforms."
       />
       <Video />
       <About />
@@ -36,7 +36,9 @@ const AboutPage = () => {
           ]}
         />
         with us.
-        <i className="block font-instrument italic max-md:inline-block max-sm:pl-2 sm:mt-10">A virtual coffee?</i>
+        <i className="block font-instrument italic text-[#F54BB4] max-md:inline-block max-sm:pl-2 sm:mt-10">
+          A virtual coffee?
+        </i>
       </CTA>
     </LayoutOne>
   )

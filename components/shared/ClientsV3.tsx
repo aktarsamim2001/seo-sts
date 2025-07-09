@@ -18,7 +18,7 @@ const bottomContent = [
 
 const ClientsV3 = () => {
   return (
-    <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="overflow-hidden pb-14 md:pb-16 md:pt-8 lg:pb-[68px] lg:pt-[78px] xl:pb-[80px] xl:pt-[90px]">
       <RevealWrapper>
         <Marquee pauseOnHover>
           <div className="flex items-center justify-between py-2.5 pb-5">

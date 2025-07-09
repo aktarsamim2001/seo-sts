@@ -9,7 +9,6 @@ import { FC, useState } from 'react'
 import RevealWrapper from '../animation/RevealWrapper'
 import Pagination from './Pagination'
 
-// Add brand color variables for use in styles
 const brandPink = '#F54BB4' // border
 
 interface BlogsProps {
@@ -17,7 +16,6 @@ interface BlogsProps {
 }
 
 const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
-  // Merge Blogs prop with aiDrivenPersonalizationInMarketing data
   const allBlogs = [...Blogs, ...aiDrivenPersonalizationInMarketing]
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 7

@@ -39,9 +39,9 @@ const ContactPage = () => {
           </div>
         </div>
 
-        <div className="grid w-full grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px]">
+        <div className="grid w-full grid-cols-1 gap-[30px] md:grid-cols-2">
           {/* ✅ STATIC CARD 1 */}
-          <RevealWrapper className="group border border-[#F54BB4] px-6 py-9 lg:px-[30px] lg:py-[50px]">
+          <RevealWrapper className="group border border-[#F54BB4] px-6 py-9 lg:px-[30px] lg:py-[25px]">
             <Link href="/marketing/services/static-service-1">
               <h5 className="mb-2 mt-4 lg:mb-3 lg:mt-6">Address</h5>
               <p className="">2261 Market Street #5039 San Francisco, CA 94114</p>
@@ -49,7 +49,7 @@ const ContactPage = () => {
           </RevealWrapper>
 
           {/* ✅ STATIC CARD 2 */}
-          <RevealWrapper className="group border border-[#F54BB4] px-6 py-9 lg:px-[30px] lg:py-[50px]">
+          <RevealWrapper className="group border border-[#F54BB4] px-6 py-9 lg:px-[30px] lg:py-[25px]">
             <Link href="/marketing/services/static-service-2">
               <h5 className="mb-2 mt-4 lg:mb-3 lg:mt-6">Reach Us</h5>
               <p className="">

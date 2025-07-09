@@ -171,7 +171,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
       {menuItems.map((item) => (
         <li
           key={item.title}
-          className={`menu-list-item menu-list-item-anchor ${activeItems.includes(item.title) ? 'active' : ''}`}>
+          className={`menu-list-item menu-list-item-anchor hover:text-[#9BCB4B] ${activeItems.includes(item.title) ? 'active' : ''}`}>
           {item.items ? (
             <div className="group relative flex items-center">
               <Link
@@ -179,7 +179,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
                 onClick={() => {
                   if (onItemClick) onItemClick()
                 }}
-                className={`menu-list-item-text text-[28px] leading-[70px] md:text-[42px] xl:text-[56px] xl:leading-[90px] ${activeItems.includes(item.title) ? 'text-[#F54BB4]' : 'text-white'}`}>
+                className={`menu-list-item-text text-[28px] leading-[70px] md:text-[42px] xl:text-[56px] xl:leading-[90px] ${activeItems.includes(item.title) ? 'text-[#F54BB4]' : 'text-white hover:text-[#9BCB4B]'}`}>
                 {item.title}
               </Link>
               {/* Dropdown toggle button, only visible on mobile */}
@@ -209,7 +209,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
               onClick={() => {
                 if (onItemClick) onItemClick()
               }}
-              className={`menu-list-item-text text-[28px] leading-[70px] md:text-[42px] xl:text-[56px] xl:leading-[90px] ${activeItems.includes(item.title) ? 'text-[#F54BB4]' : 'text-white'}`}>
+              className={`menu-list-item-text text-[28px] leading-[70px] md:text-[42px] xl:text-[56px] xl:leading-[90px] ${activeItems.includes(item.title) ? 'text-[#F54BB4]' : 'text-white hover:text-[#9BCB4B]'}`}>
               {item.title}
             </Link>
           )}
@@ -224,7 +224,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
                     onClick={() => {
                       onItemClick && onItemClick()
                     }}
-                    className={`menu-list-item-dropdown-list inline-block pb-1 pl-3 text-base leading-8 text-white md:text-2xl md:leading-[50px]`}>
+                    className={`menu-list-item-dropdown-list inline-block pb-1 pl-3 text-base leading-8 text-white hover:text-[#9BCB4B] md:text-2xl md:leading-[50px]`}>
                     {subItem.title.includes('-') ? (
                       <>
                         {subItem.title.split('-')[0]}-

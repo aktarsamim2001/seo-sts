@@ -14,8 +14,8 @@ const WhyChooseUsV6 = () => {
             <TextAppearAnimation>
               <h2 className="text-appear lg:leading-[1.1]">
                 Smart, scalable &amp;
-                <i className="font-instrument"> secure </i>
-                <i className="font-instrument"> solutions </i>
+                <i className="font-instrument text-[#F54BB4]"> secure </i>
+                <i className="font-instrument text-[#F54BB4]"> solutions </i>
               </h2>
             </TextAppearAnimation>
           </div>

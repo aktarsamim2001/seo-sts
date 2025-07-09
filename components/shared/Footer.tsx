@@ -86,9 +86,9 @@ const Footer = () => {
                       <Image
                         src={social.icon}
                         alt={social.label}
-                        width={24}
-                        height={24}
-                        className="text-white hover:opacity-80"
+                        width={18}
+                        height={18}
+                        className="brightness-100 invert hover:opacity-80"
                       />
                     </Link>
                   ))}
@@ -100,7 +100,7 @@ const Footer = () => {
       </div>
 
       <div className="absolute bottom-0 w-full">
-        <h5 className="footer-text xs:text-5xl absolute bottom-0 left-1/2 w-full -translate-x-1/2 translate-y-[30%] text-nowrap text-center font-satoshi text-4xl font-medium tracking-widest sm:text-6xl md:text-[128px]">
+        <h5 className="footer-text xs:text-5xl absolute bottom-0 left-1/2 w-full -translate-x-1/2 translate-y-[30%] text-nowrap text-center font-satoshi text-4xl font-medium tracking-widest sm:text-6xl md:text-[108px]">
           SMARTTASK STUDIOS
         </h5>
       </div>

@@ -65,14 +65,11 @@ const About = ({ marquee = false }: AboutProps) => {
             />
           </div>
           <h3 className="mx-auto mt-[34px]" ref={revealRef}>
-            We specialize in designing cutting-edge web <br className="hidden sm:block" />
-            experiences that flawlessly blend creativity with <br />
-            innovative technology.
+            We create cutting-edge web experiences that fuse bold design with innovative technology.
             <br />
             <br />
-            We provide customized solutions for <br className="hidden sm:block" />
-            enhancing your existing site or building <br className="hidden sm:block" />a brand-new digital platform from
-            the ground up
+            From enhancing existing websites to building custom digital platforms from the ground up, we deliver
+            scalable, user-focused solutions that drive impact and growth.
           </h3>
         </div>
       </div>

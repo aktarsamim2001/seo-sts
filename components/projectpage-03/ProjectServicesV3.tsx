@@ -7,6 +7,7 @@ import image1 from '../../public/images/home-3/services-1.webp'
 import image2 from '../../public/images/home-3/services-2.webp'
 import image3 from '../../public/images/home-3/services-3.webp'
 import image4 from '../../public/images/home-3/services-4.webp'
+import Pagination from './Pagination'
 
 const serviceImages = [image1, image2, image3, image4]
 
@@ -26,9 +27,9 @@ const ProjectServicesV3 = () => {
           <div>
             <TextAppearAnimation>
               <h2 className="text-appear text-[46px] font-normal leading-[1.1] md:text-7xl md:tracking-[-2.88px] xl:text-[96px]">
-                <span className="font-instrument italic text-[#F54BB4]">Proud</span>
+                <span className="font-instrument italic !text-[#F54BB4]">Proud</span>
                 <br />
-                Case Studies
+                of Our Portfolio
               </h2>
             </TextAppearAnimation>
           </div>
@@ -45,7 +46,7 @@ const ProjectServicesV3 = () => {
         <div className="grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2">
           {projects?.map((project, idx) => (
             <RevealWrapper key={project.slug} className="single-project-item underline-hover-effect">
-              <Link href={`/portfolio-agency/case-study/${project.slug}`} className="block">
+              <div className="block">
                 <figure className="overflow-hidden">
                   <Image
                     src={serviceImages[idx % serviceImages.length]}
@@ -58,10 +59,11 @@ const ProjectServicesV3 = () => {
                 <div className="blog-title mb-1 mt-[30px] text-center">
                   <h3 className="text-center capitalize">{project.title}</h3>
                 </div>
-              </Link>
+              </div>
             </RevealWrapper>
           ))}
         </div>
+        <Pagination />
       </div>
     </section>
   )
