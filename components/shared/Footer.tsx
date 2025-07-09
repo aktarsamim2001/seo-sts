@@ -5,6 +5,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import FooterProvider from './FooterProvider'
 
+// ✅ Strong type for each section
+type FooterSection = {
+  title: string
+  links: { href: string; label: string }[]
+  socials?: { href: string; icon: string; label: string }[]
+  logo?: { src: string; alt: string }
+}
+
 const Footer = () => {
   return (
     <FooterProvider>
@@ -21,10 +29,9 @@ const Footer = () => {
             <div className="group flex max-w-[360px] items-center justify-between gap-4 bg-primary bg-opacity-30 p-4 backdrop-blur-2xl">
               <Image className="h-[70px] w-auto" src={logo} alt="logo" height={70} width={120} />
               <div>
-                <h6 className="font-satoshi text-sm font-bold text-white">Schedule a Free Meeting</h6>
-                <p className="text-sm text-white">1 spot left this month</p>
+                <h6 className="font-satoshi text-sm font-bold text-white">Get a free quote within 24 hours</h6>
               </div>
-              <Link href="/contact">
+              <Link href="/get-a-quote" className="group relative">
                 <figure className="relative h-[55px] w-[55px] cursor-pointer overflow-hidden bg-primary">
                   <Image
                     src={arrowIcon}
@@ -41,11 +48,19 @@ const Footer = () => {
             </div>
           </div>
 
-          {footerData.map((section, index) => (
+          {footerData.map((section: FooterSection, index) => (
             <div key={`Id_${index}`}>
               <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
                 {section.title}
               </h5>
+
+              {/* ✅ Optional logo */}
+              {section.logo && (
+                <div className="mb-4">
+                  <Image src={section.logo.src} alt={section.logo.alt} width={120} height={40} />
+                </div>
+              )}
+
               <ul>
                 {section.links.map(({ href, label }) => (
                   <li className="mb-4" key={href}>
@@ -57,13 +72,35 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
+
+              {/* ✅ Optional socials */}
+              {section.socials && (
+                <div className="mt-6 flex items-center gap-4">
+                  {section.socials.map((social) => (
+                    <Link
+                      key={social.href}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block">
+                      <Image
+                        src={social.icon}
+                        alt={social.label}
+                        width={24}
+                        height={24}
+                        className="text-white hover:opacity-80"
+                      />
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
       </div>
 
       <div className="absolute bottom-0 w-full">
-        <h5 className="footer-text xs:text-5xl absolute bottom-0 left-1/2 w-full -translate-x-1/2 translate-y-[30%] text-nowrap text-center font-satoshi text-4xl font-medium tracking-widest sm:text-6xl md:text-[68px] lg:text-[60px] xl:text-[150px] 2xl:text-[170px]">
+        <h5 className="footer-text xs:text-5xl absolute bottom-0 left-1/2 w-full -translate-x-1/2 translate-y-[30%] text-nowrap text-center font-satoshi text-4xl font-medium tracking-widest sm:text-6xl md:text-[128px]">
           SMARTTASK STUDIOS
         </h5>
       </div>

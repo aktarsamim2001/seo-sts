@@ -33,7 +33,7 @@ const OurWork = () => {
             <span className="rv-badge-text">Our Work</span>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">We craft emotionally engaging stories.</h2>
+            <h2 className="text-appear mx-auto max-w-[770px]">We Craft Brands For Global Reach</h2>
           </TextAppearAnimation>
         </div>
       </div>

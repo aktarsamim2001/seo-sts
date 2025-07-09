@@ -70,7 +70,7 @@ const ContactForm = () => {
             <label
               htmlFor="email"
               className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
-              Work Email
+              Email
             </label>
             <input
               type="email"
@@ -84,7 +84,7 @@ const ContactForm = () => {
             />
           </div>
 
-          <div className="relative">
+          {/* <div className="relative">
             <label
               htmlFor="service"
               className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
@@ -192,7 +192,7 @@ const ContactForm = () => {
               placeholder="Tell us about your project goals and timeline"
               className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
               required></textarea>
-          </div>
+          </div> */}
 
           <div className="col-span-full sm:mt-14 md:mx-auto">
             <button type="submit" className="rv-button rv-button-primary block w-full md:inline-block md:w-auto">

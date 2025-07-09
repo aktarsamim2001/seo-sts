@@ -18,10 +18,7 @@ const HeroAbout = ({ spacingTop }: PropsTypes) => {
     </RevealWrapper>
   ) : (
     <RevealWrapper as="section" className="container">
-      <h3 ref={revealRef}>
-        We specialize in designing cutting-edge web experiences that flawlessly blend creativity with innovative
-        technology.
-      </h3>
+      <h3 ref={revealRef}>We build innovative digital experiences where creativity meets advanced technology.</h3>
     </RevealWrapper>
   )
 }

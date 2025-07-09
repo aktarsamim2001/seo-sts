@@ -28,8 +28,8 @@ const HeroV7 = () => {
         </div>
 
         <p className="mt-10 max-w-[770px] font-normal max-lg:mx-auto">
-          As a agency we are working on client projects, official Webflow Templates and cloneables for the Webflow
-          community.
+          Transforming brands with memorable logos, stunning websites, and results-driven digital marketing strategies
+          that help businesses stand out, connect with their audience, and grow across every platform and screen.
         </p>
       </RevealWrapper>
 
