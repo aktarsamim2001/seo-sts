@@ -13,7 +13,18 @@ interface WorkType {
 }
 
 // Replace getMarkDownData with direct array import
-const services: WorkType[] = brandStrategy
+const services: WorkType[] = brandStrategy.map((service, idx) => ({
+  ...service,
+  slug:
+    (service as any).slug ||
+    (typeof service.title === 'string' &&
+      service.title
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '')) ||
+    `service-${idx}`,
+  content: (service as any).content || '',
+}))
 
 const ServicesV14 = () => {
   return (

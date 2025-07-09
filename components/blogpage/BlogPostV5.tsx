@@ -49,7 +49,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
         <RevealWrapper className="grid grid-cols-1 items-center justify-items-center gap-x-6 gap-y-[60px] md:grid-cols-2 md:items-start xl:grid-cols-3">
           {currentPageData?.slice(0, 3)?.map((blog, idx) => (
             <div
-              key={blog._uniqueKey || blog.slug || blog.title}
+              key={'slug' in blog && blog.slug ? blog.slug + '-' + idx : blog.title ? blog.title + '-' + idx : idx}
               className="underline-hover-effect group max-w-[370px]"
               style={{ borderColor: brandPink }}>
               <Link href="/seo-blog/the-evolution-of-minimalist-design" className="block">
@@ -94,7 +94,7 @@ const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
         <article className="mt-12 md:mt-[70px] [&>*:not(last-child)]:mb-10">
           {currentPageData?.slice(3)?.map((blog, idx) => (
             <RevealWrapper
-              key={blog._uniqueKey || blog.slug || blog.title}
+              key={'slug' in blog && blog.slug ? blog.slug + '-' + idx : blog.title ? blog.title + '-' + idx : idx}
               className="underline-hover-effect group flex flex-col-reverse items-center justify-center gap-x-6 gap-y-10 border dark:border-dark md:justify-normal lg:flex-row lg:p-10"
               style={{ borderColor: brandPink }}>
               <div className="flex-1 max-lg:self-center max-lg:px-7 max-lg:pb-7">

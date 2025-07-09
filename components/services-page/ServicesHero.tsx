@@ -25,7 +25,7 @@ const ServicesHero = ({ title, description, badgeTitle }: PropsType) => {
 
         <ul className="reveal-me mt-10 flex list-none justify-center md:mt-14">
           <li className="block w-full text-center md:inline-block md:w-auto">
-            <Link href="/contact" className="rv-button rv-button rv-button-primary block md:inline-block">
+            <Link href="/contact" className="rv-button rv-button-primary block md:inline-block">
               <div className="rv-button-top">
                 <span>Schedule a Free Consultation</span>
               </div>

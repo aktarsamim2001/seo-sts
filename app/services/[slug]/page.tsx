@@ -29,8 +29,8 @@ const ServiceDetails = async ({ params }: { params: Promise<{ slug: string }> })
   return (
     <LayoutOne>
       <ServicesHero
-        title={isMedia ? mediaData.title : postServices?.title}
-        description={isMedia ? mediaData.description : postServices?.description}
+        title={isMedia ? (mediaData?.title ?? '') : postServices?.title}
+        description={isMedia ? (mediaData?.description ?? '') : postServices?.description}
         scale
       />
       <ServiceContent service={service} />

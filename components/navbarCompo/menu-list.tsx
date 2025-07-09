@@ -15,7 +15,7 @@ interface MenuItemProps {
 const menuItems: MenuItemProps[] = [
   {
     title: 'Home',
-    url: '/home-07',
+    url: '/',
   },
   {
     title: 'About Us',

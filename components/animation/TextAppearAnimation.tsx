@@ -95,14 +95,15 @@ const TextAppearAnimation: FC<AnimatedTextProps> = ({ children, animationOptions
   )
 
   useEffect(() => {
+    const element = elementRef.current
     return () => {
       titleTextRef.current?.revert()
       wordSplitRefs.current.forEach((split) => split.revert())
       hasAnimatedRef.current = false
 
-      if (elementRef.current) {
+      if (element) {
         ScrollTrigger.getAll().forEach((trigger) => {
-          if (trigger.vars.trigger === elementRef.current) {
+          if (trigger.vars.trigger === element) {
             trigger.kill()
           }
         })

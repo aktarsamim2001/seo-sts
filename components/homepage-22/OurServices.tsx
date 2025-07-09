@@ -1,6 +1,6 @@
 'use client'
 
-import { ServicesType } from '@/app/home-22/page'
+import { ServicesType } from '@/interface'
 import useHorizontalScroll from '@/hooks/useHorizontalScroll'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -43,7 +43,7 @@ const OurServices = ({ servicesData }: { servicesData: ServicesType[] }) => {
                   <Image
                     width={270}
                     height={270}
-                    src={service.coverImage}
+                    src={service.coverImage || '/images/placeholder.png'}
                     alt="Keyword Research"
                     className="h-auto w-full"
                   />
@@ -53,21 +53,21 @@ const OurServices = ({ servicesData }: { servicesData: ServicesType[] }) => {
                     <Image
                       width={18}
                       height={18}
-                      src={service.logo}
+                      src={service.logo || '/images/placeholder.png'}
                       alt="Arrow Icon"
                       className="absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:hidden"
                     />
                     <Image
                       width={18}
                       height={18}
-                      src={service.logoDark}
+                      src={service.logoDark || '/images/placeholder.png'}
                       alt="Arrow Icon"
                       className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 opacity-100 transition-all duration-500 group-hover:-translate-y-12 group-hover:translate-x-8 group-hover:opacity-0 dark:block"
                     />
                     <Image
                       width={18}
                       height={18}
-                      src={service.logo}
+                      src={service.logo || '/images/placeholder.png'}
                       alt="Arrow Icon"
                       className="absolute -translate-x-[47px] translate-y-16 opacity-0 transition-all duration-500 group-hover:-translate-y-[3px] group-hover:translate-x-0 group-hover:opacity-100"
                     />
