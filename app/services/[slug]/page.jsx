@@ -5,26 +5,40 @@ import CTA from '@/components/shared/CTA'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import FaqV2 from '@/components/shared/FaqV2'
 import LayoutOne from '@/components/shared/LayoutOne'
-import { ServicesType } from '@/components/shared/ServicesV8'
 import getMarkDownContent from '@/utils/GetMarkDownContent'
 import getMarkDownData from '@/utils/GetMarkDownData'
 import { mediaServices } from '@/data/servicesV2/media'
 
 export async function generateStaticParams() {
-  const services: ServicesType[] = getMarkDownData('data/servicesV2')
+  const services = getMarkDownData('data/servicesV2')
   return services.map((service) => ({
     slug: service.slug,
   }))
 }
 
-const ServiceDetails = async ({ params }: { params: Promise<{ slug: string }> }) => {
-  const slug = (await params).slug
+export async function generateMetadata({ params }) {
+  const { slug } = params
   const service = getMarkDownContent('data/servicesV2/', slug)
   const postServices = service.data
 
-  // If the slug is 'media', use the updated JS array data
+  return {
+    title: postServices?.title || 'Service Details',
+    description: postServices?.description || '',
+    openGraph: {
+      title: postServices?.title || 'Service Details',
+      description: postServices?.description || '',
+      images: postServices?.coverImage ? [postServices.coverImage] : [],
+    },
+  }
+}
+
+const ServiceDetails = async ({ params }) => {
+  const { slug } = params
+  const service = getMarkDownContent('data/servicesV2/', slug)
+  const postServices = service.data
+
   const isMedia = slug === 'media'
-  const mediaData = isMedia ? mediaServices[0] : null)
+  const mediaData = isMedia ? mediaServices[0] : null
 
   return (
     <LayoutOne>

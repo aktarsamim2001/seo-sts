@@ -98,7 +98,7 @@ const ContactForm = () => {
       </div>
 
       {/* Submit Button */}
-      <button type="submit" className="rv-button rv-button-secondary col-span-full !w-full">
+      <button type="submit" className="rv-button rv-button-primary col-span-full !w-full">
         <div className="rv-button-top !w-full !text-center">
           <span className="!font-normal">Submit Message</span>
         </div>
