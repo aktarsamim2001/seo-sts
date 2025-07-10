@@ -44,7 +44,7 @@ const Team = () => {
         {/* Main profile card */}
         <div
           className={`our-team-details flex flex-col gap-10 gap-x-[30px] border bg-backgroundBody p-5 dark:border-dark dark:bg-[#F54BB4] max-md:items-center max-md:justify-center lg:flex-row lg:p-10 ${isTransitioning ? 'transitioning' : ''}`}>
-          <figure className="max-lg:w-full lg:min-h-[372px] lg:min-w-[330px]">
+          {/* <figure className="max-lg:w-full lg:min-h-[372px] lg:min-w-[330px]">
             <Image
               src={selectedMember.image}
               width={330}
@@ -52,7 +52,7 @@ const Team = () => {
               alt={selectedMember.name}
               className="w-full object-cover"
             />
-          </figure>
+          </figure> */}
 
           <div className="flex-1">
             <div className="mb-5 flex flex-col justify-between gap-y-10 md:flex-row lg:mb-10">
@@ -122,12 +122,12 @@ const Team = () => {
             <div
               key={member.id}
               onClick={() => handleMemberChange(member)}
-              className={`tab-member flex h-auto max-w-[350px] items-center gap-5 border p-5 dark:border-dark 2xl:max-w-[370px] ${
+              className={`tab-member flex h-auto w-full items-center gap-5 border p-5 dark:border-dark 2xl:max-w-[370px] ${
                 selectedMember.id === member.id ? 'tab-active' : ''
               }`}>
-              <figure className="relative h-[130px] w-[130px]">
+              {/* <figure className="relative h-[130px] w-[130px]">
                 <Image src={member.image} alt={member.name} fill className="object-cover" sizes="130px" />
-              </figure>
+              </figure> */}
               <div className="text-left">
                 <h3 className="mb-3 text-nowrap text-2xl leading-[1.2] tracking-[-0.72px]">{member.name}</h3>
                 <p>{member.role}</p>

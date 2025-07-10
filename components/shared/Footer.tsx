@@ -22,10 +22,7 @@ const Footer = () => {
             <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
               Reach Us
             </h5>
-            <p className="mb-5 text-sm text-white">
-              Book a quick 15 min meeting where we discuss if our offer <br />
-              would work for your case
-            </p>
+            <p className="mb-5 text-sm text-white">Any project or idea. will be happy to discuss and quote.</p>
             <div className="group flex max-w-[360px] items-center justify-between gap-4 bg-primary bg-opacity-30 p-4 backdrop-blur-2xl">
               <Image className="h-[70px] w-auto" src={logo} alt="logo" height={70} width={120} />
               <div>
@@ -100,7 +97,7 @@ const Footer = () => {
       </div>
 
       <div className="absolute bottom-0 w-full">
-        <h5 className="footer-text xs:text-5xl absolute bottom-0 left-1/2 w-full -translate-x-1/2 translate-y-[30%] text-nowrap text-center font-satoshi text-4xl font-medium tracking-widest sm:text-6xl md:text-[108px]">
+        <h5 className="footer-text xs:text-5xl absolute bottom-0 left-1/2 w-full -translate-x-1/2 translate-y-[30%] text-nowrap text-center font-satoshi text-4xl font-medium tracking-widest sm:text-6xl md:text-[110px]">
           SMARTTASK STUDIOS
         </h5>
       </div>

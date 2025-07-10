@@ -7,7 +7,7 @@ import getMarkDownData from '@/utils/GetMarkDownData'
 import { aiDrivenPersonalizationInMarketing } from '@/data/blogsV2/ai-driven-personalization-in-marketing'
 
 export const metadata = {
-  title: 'AI Blog',
+  title: 'Blog',
 }
 
 export interface BlogType {

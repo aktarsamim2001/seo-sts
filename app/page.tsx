@@ -1,7 +1,7 @@
 import HomePage from '@/app/home/page'
 
 export const metadata = {
-  title: 'Rivor | Design Agency',
+  title: 'Design Studio - SmartTask Studios',
 }
 
 const Home = () => {

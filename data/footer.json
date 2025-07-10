@@ -42,9 +42,14 @@
         "label": "Twitter"
       },
       {
-        "href": "https://youtube.com/yourchannel",
-        "icon": "images/icons/youtube.svg",
-        "label": "YouTube"
+        "href": "https://instagram.com/yourpage",
+        "icon": "images/icons/instagramLogo.svg",
+        "label": "Instagram"
+      },
+      {
+        "href": "https://linkedin.com/in/yourpage",
+        "icon": "images/icons/linkedinLogo.svg",
+        "label": "LinkedIn"
       }
     ]
   }

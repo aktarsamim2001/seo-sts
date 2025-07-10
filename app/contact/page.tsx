@@ -25,7 +25,7 @@ const ContactPage = () => {
             <TextAppearAnimation>
               <h2 className="text-appear">
                 Elevating Your <br />
-                <span className="font-instrument italic">Digital</span> Presence
+                <span className="font-instrument italic !text-[#F54BB4]">Digital Presence</span>
               </h2>
             </TextAppearAnimation>
           </div>

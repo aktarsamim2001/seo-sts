@@ -22,7 +22,8 @@ const HeroV7 = () => {
                 { id: '3', img: '/images/home 7/03.webp' },
               ]}
             />
-            <span style={{ color: '#F54BB4' }}>Shaping Web3,</span>{' '}
+            Shaping
+            <span style={{ color: '#F54BB4' }}> Web3,</span>{' '}
             <span style={{ color: '#53B9FF' }}>Tech & AI Horizons</span>
           </h1>
         </div>

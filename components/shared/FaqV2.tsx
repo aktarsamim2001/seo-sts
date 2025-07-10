@@ -36,7 +36,7 @@ const FaqV2: FC<PropsType> = ({ titleChange = false }) => {
                     className={`accordion-itemV4 faq-body-transition relative w-full space-y-6 border border-[#F54BB4] bg-backgroundBody px-6 pb-8 pt-6 duration-300 dark:border-[#F54BB4] ${
                       activeAccordion === faq.id
                         ? 'open active border-[#F54BB4] dark:border-[#F54BB4]'
-                        : 'border-black/10 dark:border-white/10'
+                        : 'h-[200px] border-black/10 dark:border-white/10'
                     } dark:bg-dark md:px-10 md:pb-[60px] md:pt-10 lg:max-w-[370px]`}
                     data-active={activeAccordion === faq.id ? true : false}>
                     <div

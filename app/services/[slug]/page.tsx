@@ -24,7 +24,7 @@ const ServiceDetails = async ({ params }: { params: Promise<{ slug: string }> })
 
   // If the slug is 'media', use the updated JS array data
   const isMedia = slug === 'media'
-  const mediaData = isMedia ? mediaServices[0] : null
+  const mediaData = isMedia ? mediaServices[0] : null)
 
   return (
     <LayoutOne>

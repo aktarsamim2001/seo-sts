@@ -27,10 +27,10 @@ const ServicesHero = ({ title, description, badgeTitle }: PropsType) => {
           <li className="block w-full text-center md:inline-block md:w-auto">
             <Link href="/contact" className="rv-button rv-button-primary block md:inline-block">
               <div className="rv-button-top">
-                <span>Get a Free Call</span>
+                <span>Lets Discuss</span>
               </div>
               <div className="rv-button-bottom">
-                <span className="text-nowrap">Get a Free Call</span>
+                <span className="text-nowrap">Lets Discuss</span>
               </div>
             </Link>
           </li>

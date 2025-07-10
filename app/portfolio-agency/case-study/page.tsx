@@ -3,7 +3,7 @@ import CtaV2 from '@/components/shared/CtaV2'
 import LayoutOne from '@/components/shared/LayoutOne'
 
 export const metadata = {
-  title: 'Case Study',
+  title: 'Portfolio',
 }
 
 const CaseStudy = () => {

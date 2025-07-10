@@ -9,7 +9,7 @@ import PageHero from '@/components/shared/PageHero'
 import Video from '@/components/shared/Video'
 
 export const metadata = {
-  title: 'About',
+  title: 'About- SmartTask Studios',
 }
 
 const AboutPage = () => {
@@ -18,7 +18,7 @@ const AboutPage = () => {
       <PageHero
         badgeTitle="About"
         title="SmartTask "
-        italicTitle=""
+        italicTitle="Studios"
         description="At SmartTask Studios, we transform ideas into powerful visual stories. From brand identity and custom graphics to digital marketing and motion design, we craft compelling content and experiences that elevate brands across print, web, and social platforms."
       />
       <Video />
