@@ -33,22 +33,22 @@
     "socials": [
       {
         "href": "https://facebook.com/yourpage",
-        "icon": "images/icons/facebook.svg",
+        "icon": "/images/icons/facebook.svg",
         "label": "Facebook"
       },
       {
         "href": "https://twitter.com/yourpage",
-        "icon": "images/icons/x-twitter.svg",
+        "icon": "/images/icons/x-twitter.svg",
         "label": "Twitter"
       },
       {
         "href": "https://instagram.com/yourpage",
-        "icon": "images/icons/instagramLogo.svg",
+        "icon": "/images/icons/instagram-logo.svg",
         "label": "Instagram"
       },
       {
         "href": "https://linkedin.com/in/yourpage",
-        "icon": "images/icons/linkedinLogo.svg",
+        "icon": "/images/icons/linkedin-logo.svg",
         "label": "LinkedIn"
       }
     ]

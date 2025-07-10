@@ -17,19 +17,10 @@ export interface BlogType {
 }
 
 const allBlogs: BlogType[] = aiDrivenPersonalizationInMarketing.map((blog, idx) => {
-  const slug =
-    (blog as any).slug ||
-    (typeof blog.title === 'string' &&
-      blog.title
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^a-z0-9-]/g, '')) ||
-    `blog-${idx}`
-  const { slug: _remove, ...rest } = blog as any
+  const { slug: _remove, ...rest } = blog
   return {
     ...rest,
-    slug,
-    _uniqueKey: `${slug}-${idx}`,
+    _uniqueKey: `blog-${idx}`,
   }
 })
 
