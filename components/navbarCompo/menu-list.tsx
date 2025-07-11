@@ -128,7 +128,9 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
             x: 10,
             duration: 0.1,
             ease: 'power3.out',
-            onComplete: () => gsap.set(dropdownRef, { display: 'none' }),
+            onComplete: () => {
+              gsap.set(dropdownRef, { display: 'none' })
+            },
           })
         }
       }
