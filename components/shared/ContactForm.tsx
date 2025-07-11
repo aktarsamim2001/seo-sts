@@ -47,7 +47,7 @@ const ContactForm = () => {
 
         <div className="mt-3 grid h-full grid-cols-1 gap-6 md:grid-cols-3">
           {interestData.map((item) => (
-            <div key={item.id} className="radio-wrapper h-full">
+            <div key={item.id} className="radio-wrapper flex h-full">
               <input
                 type="radio"
                 id={item.id}
@@ -57,7 +57,9 @@ const ContactForm = () => {
                 onChange={() => setSelectedInterest(item.value)}
                 className="hidden"
               />
-              <label htmlFor={item.id} className="interest-btn">
+              <label
+                htmlFor={item.id}
+                className="interest-btn flex h-full min-h-[64px] w-full items-center justify-center">
                 {item.value}
               </label>
             </div>
