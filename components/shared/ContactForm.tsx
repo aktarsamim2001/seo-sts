@@ -67,7 +67,7 @@ const ContactForm = () => {
 
       {/* Budget Section */}
       <div className="md:col-span-full">
-        <label className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
+        <label className="mt-3 text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
           Budget in USD:
         </label>
 

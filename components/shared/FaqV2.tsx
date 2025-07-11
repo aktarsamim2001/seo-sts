@@ -29,7 +29,7 @@ const FaqV2: FC<PropsType> = ({ titleChange = false }) => {
 
         <div className="mx-auto grid w-full grid-cols-1 items-start gap-7 md:grid-cols-2 lg:grid-cols-3">
           {faqV2Data.map((faqArray, index) => (
-            <RevealWrapper key={index} className="space-y-[30px]">
+            <RevealWrapper key={index} className="space-y-[25px] md:space-y-[30px]">
               {faqArray.map((faq) => (
                 <div className="reveal-me" key={faq.id}>
                   <div

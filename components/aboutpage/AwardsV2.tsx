@@ -78,8 +78,8 @@ const AwardsV2 = () => {
     setActiveIndex(activeIndex === index ? null : index)
   }
   return (
-    <section className="relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="container mb-8 flex flex-col gap-x-8 gap-y-4 md:mb-20 lg:flex-row lg:justify-between">
+    <section className="container relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+      <div className="mb-8 flex flex-col gap-x-8 gap-y-4 md:mb-20 lg:flex-row lg:justify-between">
         <div>
           <RevealWrapper className="rv-badge">
             <span className="rv-badge-text">Our Services</span>
