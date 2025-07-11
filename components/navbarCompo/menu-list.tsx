@@ -171,7 +171,9 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
       {menuItems.map((item) => (
         <li
           key={item.title}
-          className={`menu-list-item menu-list-item-anchor menu-text-hover hover:!text-[#9BCB4B] ${activeItems.includes(item.title) ? 'active' : ''}`}>
+          className={`menu-list-item menu-list-item-anchor menu-text-hover hover:!text-[#9BCB4B] ${activeItems.includes(item.title) ? 'active' : ''}`}
+          onMouseEnter={() => setActiveItems([item.title])}
+          onMouseLeave={() => setActiveItems([])}>
           {item.items ? (
             <div className="group relative flex items-center">
               <Link
