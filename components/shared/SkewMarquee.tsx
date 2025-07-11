@@ -13,13 +13,13 @@ const MARQUEE_IMAGES = [
   { id: 2, src: '/images/marquee-img/hero-marquee-02.webp' },
   { id: 3, src: '/images/marquee-img/hero-marquee-03.webp' },
   { id: 4, src: '/images/marquee-img/hero-marquee-04.webp' },
-  { id: 5, src: '/images/marquee-img/hero-marquee-05.webp' },
+  { id: 5, src: '/images/marquee-img/hero-marquee-02.webp' },
   { id: 6, src: '/images/marquee-img/hero-marquee-06.webp' },
   { id: 7, src: '/images/marquee-img/hero-marquee-01.webp' },
   { id: 8, src: '/images/marquee-img/hero-marquee-02.webp' },
   { id: 9, src: '/images/marquee-img/hero-marquee-03.webp' },
   { id: 10, src: '/images/marquee-img/hero-marquee-04.webp' },
-  { id: 11, src: '/images/marquee-img/hero-marquee-05.webp' },
+  { id: 11, src: '/images/marquee-img/hero-marquee-01.webp' },
   { id: 12, src: '/images/marquee-img/hero-marquee-06.webp' },
 ]
 

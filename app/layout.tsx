@@ -8,7 +8,13 @@ import { ReactNode, Suspense } from 'react'
 import '../scss/main.scss'
 
 export const metadata: Metadata = {
-  title: 'Rivor Template',
+  title: 'SmartTask Studios Template',
+  description: 'Your description here',
+  icons: {
+    icon: '/favicon.png', // Default favicon
+    shortcut: '/favicon.png', // Shortcut icon
+    apple: '/favicon.png', // For iOS home screen (optional)
+  },
 }
 
 export default function RootLayout({

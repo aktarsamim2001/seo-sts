@@ -11,6 +11,10 @@ const allBlogs = aiDrivenPersonalizationInMarketing.map((blog, idx) => ({
   _uniqueKey: `blog-${idx}`,
 }))
 
+export const metadata = {
+  title: 'AI Blog',
+}
+
 const BlogPage = () => {
   return (
     <LayoutOne>

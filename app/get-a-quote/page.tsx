@@ -43,6 +43,7 @@ const Page = () => {
             as="form"
             onSubmit={handleSubmit}
             className="reveal-me mx-auto grid max-w-[800px] grid-cols-1 gap-[30px] md:grid-cols-2">
+            {/* Full Name */}
             <div className="md:col-span-full">
               <label
                 htmlFor="name"
@@ -61,23 +62,7 @@ const Page = () => {
               />
             </div>
 
-            <div>
-              <label
-                htmlFor="company"
-                className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
-                Company Name
-              </label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                value={formData.company}
-                onChange={handleChange}
-                placeholder="Your company name"
-                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
-              />
-            </div>
-
+            {/* Email */}
             <div>
               <label
                 htmlFor="email"
@@ -96,11 +81,30 @@ const Page = () => {
               />
             </div>
 
+            {/* Phone (Optional) */}
+            <div>
+              <label
+                htmlFor="phone"
+                className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
+                Phone (Optional)
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Your phone number"
+                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+              />
+            </div>
+
+            {/* Services Looking for */}
             <div className="relative">
               <label
                 htmlFor="service"
                 className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
-                Service Type*
+                Services Looking for
               </label>
               <select
                 id="service"
@@ -109,103 +113,99 @@ const Page = () => {
                 onChange={handleChange}
                 className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
                 required>
-                <option value="UI/UX">UX Design</option>
-                <option value="Web design">Product Design</option>
-                <option value="Web development">Brand Identity</option>
-                <option value="Web development">Design System</option>
+                <option value="">Select a service</option>
+                <option value="Brand Identity">Brand Identity</option>
+                <option value="Illustration">Illustration & Graphics</option>
+                <option value="Packaging">Packaging & Print</option>
+                <option value="Photo Production">Photo & Image Production</option>
+                <option value="Video Motion">Video & Motion</option>
+                <option value="Web Design">Web & Digital Design</option>
+                <option value="Social Media Content">Social Media Content Design</option>
+                <option value="Copywriting">Copywriting & Content Strategy</option>
+                <option value="Digital Marketing">Digital Marketing Services</option>
               </select>
-              <span className="absolute right-5 top-1/2 translate-y-1/3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="inline dark:hidden">
-                  <path
-                    d="M6 9L12 15L18 9"
-                    stroke="black"
-                    strokeOpacity="0.7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  className="hidden dark:inline"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none">
-                  <path
-                    d="M6 9L12 15L18 9"
-                    stroke="white"
-                    strokeOpacity="0.7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
+              <span className="absolute right-5 top-1/2 translate-y-1/3">{/* Add your SVG icon here */}</span>
             </div>
 
+            {/* How soon you want? */}
+            <div className="relative">
+              <label
+                htmlFor="timeline"
+                className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
+                How soon you want?
+              </label>
+              <select
+                id="timeline"
+                name="timeline"
+                value={formData.timeline}
+                onChange={handleChange}
+                className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+                required>
+                <option value="">Select timeline</option>
+                <option value="Immediate">Immediate</option>
+                <option value="Week">Within a week</option>
+                <option value="7-14 days">7 to 14 days</option>
+                <option value="15-30 days">15 to 30 days</option>
+              </select>
+              <span className="absolute right-5 top-1/2 translate-y-1/3">{/* Add your SVG icon here */}</span>
+            </div>
+
+            {/* Budget */}
             <div className="relative">
               <label
                 htmlFor="budget"
                 className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
-                Project Budget*
+                Budget (if any)
               </label>
               <select
                 id="budget"
                 name="budget"
                 value={formData.budget}
                 onChange={handleChange}
-                className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
-                required>
-                <option value="40k">$10k - $25k</option>
-                <option value="55k">$25k - $50k</option>
-                <option value="90k">$50k - $100k</option>
-                <option value="100k+">$100k+</option>
+                className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark">
+                <option value="">Select budget</option>
+                <option value="100-500">100 - 500 USD</option>
+                <option value="500-750">500 to 750 USD</option>
+                <option value="750-1500">750 - 1500 USD</option>
+                <option value="1500+">1500 USD +</option>
               </select>
-              <span className="absolute right-5 top-1/2 inline translate-y-1/3 dark:hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M6 9L12 15L18 9"
-                    stroke="black"
-                    strokeOpacity="0.7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-              <span className="absolute right-5 top-1/2 hidden translate-y-1/3 dark:inline">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M6 9L12 15L18 9"
-                    stroke="white"
-                    strokeOpacity="0.7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
+              <span className="absolute right-5 top-1/2 translate-y-1/3">{/* Add your SVG icon here */}</span>
             </div>
 
+            {/* About the project description */}
             <div className="md:col-span-full">
               <label
-                htmlFor="message"
+                htmlFor="description"
                 className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
-                Project Brief*
+                About the project description
               </label>
               <textarea
-                id="message"
-                name="message"
-                value={formData.message}
+                id="description"
+                name="description"
+                value={formData.description}
                 onChange={handleChange}
-                placeholder="Tell us about your project goals and timeline"
+                placeholder="Describe your project goals and timeline"
                 className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
                 required></textarea>
             </div>
 
+            {/* Any other message (optional) */}
+            <div className="md:col-span-full">
+              <label
+                htmlFor="otherMessage"
+                className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
+                Any other message (optional)
+              </label>
+              <textarea
+                id="otherMessage"
+                name="otherMessage"
+                value={formData.otherMessage}
+                onChange={handleChange}
+                placeholder="Any additional notes?"
+                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"></textarea>
+            </div>
+
+            {/* Submit */}
             <div className="col-span-full sm:mt-14 md:mx-auto">
               <button type="submit" className="rv-button rv-button-primary block w-full md:inline-block md:w-auto">
                 <div className="rv-button-top">

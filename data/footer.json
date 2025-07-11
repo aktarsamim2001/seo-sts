@@ -14,21 +14,21 @@
   {
     "title": "WHAT WE DO",
     "links": [
-      { "href": "/about", "label": "Brand Identity Design" },
-      { "href": "/services/illustration", "label": "Illustration & Custom Graphics" },
-      { "href": "/services/packaging", "label": "Packaging & Print Design" },
-      { "href": "/services/photo", "label": "Photo & Image Production" },
-      { "href": "/services/video", "label": "Video & Motion Services" },
-      { "href": "/services/social-media", "label": "Social Media Content Design" },
-      { "href": "/services/copywriting", "label": "Copywriting & Content Strategy" },
-      { "href": "/services/digital-marketing", "label": "Digital Marketing Services" }
+      { "href": "/services/media", "label": "Brand Identity Design" },
+      { "href": "/services/media", "label": "Illustration & Custom Graphics" },
+      { "href": "/services/media", "label": "Packaging & Print Design" },
+      { "href": "/services/media", "label": "Photo & Image Production" },
+      { "href": "/services/media", "label": "Video & Motion Services" },
+      { "href": "/services/media", "label": "Social Media Content Design" },
+      { "href": "/services/media", "label": "Copywriting & Content Strategy" },
+      { "href": "/services/media", "label": "Digital Marketing Services" }
     ]
   },
   {
     "title": "Important Link",
     "links": [
       { "href": "/terms", "label": "Terms of Service" },
-      { "href": "/privacy-policy", "label": "Privacy Policy" }
+      { "href": "/policy", "label": "Privacy Policy" }
     ],
     "socials": [
       {
