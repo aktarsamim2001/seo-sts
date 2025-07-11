@@ -61,7 +61,7 @@ const Page = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Enter your full name"
-                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark"
                 required
               />
             </div>
@@ -80,7 +80,7 @@ const Page = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="name@company.com"
-                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark"
                 required
               />
             </div>
@@ -99,7 +99,7 @@ const Page = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Your phone number"
-                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark"
               />
             </div>
 
@@ -115,7 +115,7 @@ const Page = () => {
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
-                className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+                className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark"
                 required>
                 <option value="">Select a service</option>
                 <option value="Brand Identity">Brand Identity</option>
@@ -153,7 +153,7 @@ const Page = () => {
                 name="timeline"
                 value={formData.timeline}
                 onChange={handleChange}
-                className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+                className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark"
                 required>
                 <option value="">Select timeline</option>
                 <option value="Immediate">Immediate</option>
@@ -186,7 +186,7 @@ const Page = () => {
                 name="budget"
                 value={formData.budget}
                 onChange={handleChange}
-                className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark">
+                className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark">
                 <option value="">Select budget</option>
                 <option value="100-500">100 - 500 USD</option>
                 <option value="500-750">500 to 750 USD</option>
@@ -219,7 +219,7 @@ const Page = () => {
                 value={formData.description}
                 onChange={handleChange}
                 placeholder="Describe your project goals and timeline"
-                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
+                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark"
                 required></textarea>
             </div>
 
@@ -236,7 +236,7 @@ const Page = () => {
                 value={formData.otherMessage}
                 onChange={handleChange}
                 placeholder="Any additional notes?"
-                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"></textarea>
+                className="mt-3 w-full border bg-backgroundBody py-4 pl-5 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark"></textarea>
             </div>
 
             {/* Submit */}
