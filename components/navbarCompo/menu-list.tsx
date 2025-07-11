@@ -227,7 +227,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
                     onClick={() => {
                       onItemClick && onItemClick()
                     }}
-                    className={`menu-list-item-dropdown-list block w-full pb-1 pl-3 text-base leading-8 text-white hover:text-[#9BCB4B] focus:text-[#9BCB4B] md:text-2xl md:leading-[50px]`}
+                    className={`menu-list-item-dropdown-list flex w-full items-center pb-1 pl-3 text-base leading-8 text-white transition-colors duration-150 hover:text-[#9BCB4B] focus:text-[#9BCB4B] md:text-2xl md:leading-[50px]`}
                     tabIndex={0}>
                     {subItem.title.includes('-') ? (
                       <>
