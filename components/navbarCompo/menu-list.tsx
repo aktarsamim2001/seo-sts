@@ -8,8 +8,7 @@ import { forwardRef, useEffect, useRef, useState } from 'react'
 interface MenuItemProps {
   title: string
   url: string
-  items?: { title: string; url: string; isActive?: boolean }[]
-  isActive?: boolean
+  items?: { title: string; url: string }[]
 }
 
 const menuItems: MenuItemProps[] = [
@@ -59,7 +58,6 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
   const pathname = usePathname()
   const [activeItems, setActiveItems] = useState<string[]>([])
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
-  const [initialLoad, setInitialLoad] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
   const dropdownRefsMap = useRef(new Map<string, HTMLUListElement | null>())
 
@@ -71,11 +69,10 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
 
     checkMobile()
     window.addEventListener('resize', checkMobile)
-
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // Set initial active item based on current path
+  // Set initial active based on pathname
   useEffect(() => {
     let foundParent = false
 
@@ -92,7 +89,6 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
       }
     })
 
-    // If no parent found but we're on a top-level path
     if (!foundParent) {
       const topLevelMatch = menuItems.find(
         (item) => pathname === item.url || (item.url !== '#' && pathname.startsWith(item.url + '/')),
@@ -106,11 +102,9 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
     if (pathname === '/') {
       setActiveItems(['Home'])
     }
-
-    setInitialLoad(false)
   }, [pathname])
 
-  // Handle dropdown animations
+  // Animate dropdowns
   useEffect(() => {
     menuItems.forEach((item) => {
       const dropdownRef = dropdownRefsMap.current.get(item.title)
@@ -120,28 +114,21 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
           : hoveredItem === item.title || activeItems.includes(item.title)
 
         if (shouldShow) {
-          // Show dropdown
           gsap.set(dropdownRef, { display: 'block', autoAlpha: 0, x: 10 })
           gsap.to(dropdownRef, {
             autoAlpha: 1,
             x: 0,
             duration: 0.2,
             ease: 'power3.in',
-            stagger: {
-              amount: 0.1,
-              ease: 'back.out(1.7)',
-            },
+            stagger: { amount: 0.1, ease: 'back.out(1.7)' },
           })
         } else {
-          // Hide dropdown
           gsap.to(dropdownRef, {
             autoAlpha: 0,
             x: 10,
             duration: 0.1,
             ease: 'power3.out',
-            onComplete: () => {
-              gsap.set(dropdownRef, { display: 'none' })
-            },
+            onComplete: () => gsap.set(dropdownRef, { display: 'none' }),
           })
         }
       }
@@ -155,30 +142,22 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
   }
 
   const handleMouseEnter = (title: string) => {
-    if (!isMobile) {
-      setHoveredItem(title)
-    }
+    if (!isMobile) setHoveredItem(title)
   }
 
   const handleMouseLeave = () => {
-    if (!isMobile) {
-      setHoveredItem(null)
-    }
+    if (!isMobile) setHoveredItem(null)
   }
 
   const setDropdownRef = (el: HTMLUListElement | null, title: string) => {
-    if (el) {
-      dropdownRefsMap.current.set(title, el)
-    }
+    dropdownRefsMap.current.set(title, el)
   }
 
   const isItemActive = (item: MenuItemProps) => {
     if (pathname === item.url) return true
-
     if (item.items) {
       return item.items.some((subItem) => pathname === subItem.url || pathname.startsWith(subItem.url + '/'))
     }
-
     return pathname.startsWith(item.url + '/')
   }
 
@@ -200,16 +179,14 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
               <div className="group relative flex items-center">
                 <Link
                   href={item.url}
-                  onClick={() => {
-                    if (onItemClick) onItemClick()
-                  }}
+                  onClick={() => onItemClick?.()}
                   className={`menu-list-item-text text-[28px] leading-[70px] transition-colors duration-200 md:text-[42px] xl:text-[56px] xl:leading-[90px] ${
                     isActive ? 'text-[#F54BB4]' : 'text-white hover:text-[#9BCB4B]'
                   }`}>
                   {item.title}
                 </Link>
 
-                {/* Dropdown toggle button, only visible on mobile */}
+                {/* Mobile dropdown toggle */}
                 <button
                   type="button"
                   aria-label="Open submenu"
@@ -219,8 +196,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
                   }}
                   className={`z-10 ml-2 block p-2 transition-transform duration-200 md:hidden ${
                     isDropdownOpen ? 'rotate-180' : ''
-                  }`}
-                  tabIndex={0}>
+                  }`}>
                   <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M6 8L10 12L14 8"
@@ -235,9 +211,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
             ) : (
               <Link
                 href={item.url}
-                onClick={() => {
-                  if (onItemClick) onItemClick()
-                }}
+                onClick={() => onItemClick?.()}
                 className={`menu-list-item-text text-[28px] leading-[70px] transition-colors duration-200 md:text-[42px] xl:text-[56px] xl:leading-[90px] ${
                   isActive ? 'text-[#F54BB4]' : 'text-white hover:text-[#9BCB4B]'
                 }`}>
@@ -245,7 +219,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
               </Link>
             )}
 
-            {/* Dropdown content */}
+            {/* Dropdown */}
             {item.items && (
               <ul
                 ref={(el) => setDropdownRef(el, item.title)}
@@ -261,14 +235,10 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
                     <li key={subItem.title} className="group cursor-pointer">
                       <Link
                         href={subItem.url}
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          if (onItemClick) onItemClick()
-                        }}
+                        onClick={() => onItemClick?.()}
                         className={`menu-list-item-dropdown-list flex w-full items-center pb-1 pl-3 text-base leading-8 transition-colors duration-150 md:text-2xl md:leading-[50px] ${
                           isSubItemActive ? 'text-[#F54BB4]' : 'text-white hover:text-[#9BCB4B] focus:text-[#9BCB4B]'
-                        }`}
-                        tabIndex={0}>
+                        }`}>
                         {subItem.title.includes('-') ? (
                           <>
                             {subItem.title.split('-')[0]}-
