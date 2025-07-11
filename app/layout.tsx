@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   title: 'SmartTask Studios Template',
   description: 'Your description here',
   icons: {
-    icon: '/favicon.png', // Default favicon
-    shortcut: '/favicon.png', // Shortcut icon
-    apple: '/favicon.png', // For iOS home screen (optional)
+    icon: '/favicon (2).ico', // Default favicon
+    shortcut: '/favicon (2).ico', // Shortcut icon
+    apple: '/favicon (2).ico', // For iOS home screen (optional)
   },
 }
 
