@@ -193,12 +193,11 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
         return (
           <li
             key={item.title}
-            className={`menu-list-item menu-list-item-anchor menu-text-hover hover:!text-[#9BCB4B] ${isActive ? 'active' : ''}`}>
+            className="menu-list-item menu-list-item-anchor"
+            onMouseEnter={() => handleMouseEnter(item.title)}
+            onMouseLeave={handleMouseLeave}>
             {item.items ? (
-              <div
-                className="group relative flex items-center"
-                onMouseEnter={() => handleMouseEnter(item.title)}
-                onMouseLeave={handleMouseLeave}>
+              <div className="group relative flex items-center">
                 <Link
                   href={item.url}
                   onClick={() => {
@@ -209,6 +208,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
                   }`}>
                   {item.title}
                 </Link>
+
                 {/* Dropdown toggle button, only visible on mobile */}
                 <button
                   type="button"
@@ -244,6 +244,8 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
                 {item.title}
               </Link>
             )}
+
+            {/* Dropdown content */}
             {item.items && (
               <ul
                 ref={(el) => setDropdownRef(el, item.title)}
