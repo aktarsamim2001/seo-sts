@@ -218,13 +218,14 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
               ref={(el) => setDropdownRef(el, item.title)}
               className={`menu-list-item-dropdown relative left-0 h-fit max-h-[60vh] w-full gap-x-4 overflow-y-auto md:absolute md:left-[48%] md:max-h-none md:w-[350px] md:overflow-visible md:pb-0 lg:left-[33%] lg:w-[650px] xl:left-[44%] ${item.title === 'Home' ? '!grid !grid-cols-1 lg:-mt-[70px] lg:!grid-cols-2' : '!grid !grid-cols-1 lg:top-5'} ${activeItems.includes(item.title) || (item.title === 'Home' && pathname === '/' && initialLoad) ? 'block' : 'hidden'}`}>
               {item.items.map((subItem) => (
-                <li key={subItem.title}>
+                <li key={subItem.title} className="group cursor-pointer">
                   <Link
                     href={subItem.url}
                     onClick={() => {
                       onItemClick && onItemClick()
                     }}
-                    className={`menu-list-item-dropdown-list inline-block pb-1 pl-3 text-base leading-8 text-white hover:text-[#9BCB4B] md:text-2xl md:leading-[50px]`}>
+                    className={`menu-list-item-dropdown-list block w-full pb-1 pl-3 text-base leading-8 text-white transition-colors duration-150 hover:text-[#9BCB4B] md:text-2xl md:leading-[50px]`}
+                    tabIndex={0}>
                     {subItem.title.includes('-') ? (
                       <>
                         {subItem.title.split('-')[0]}-
