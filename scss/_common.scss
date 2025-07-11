@@ -630,6 +630,10 @@ html.lenis {
   @apply bg-primary/80 text-secondary hover:bg-primary dark:hover:bg-primary;
 }
 
+.radio-wrapper {
+  @apply h-full; /* ensures each wrapper fills its grid cell height */
+}
+
 .service-card:hover .content {
   transform: translateY(0);
   transition: transform 0.5s ease-in-out;

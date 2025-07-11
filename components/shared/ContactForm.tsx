@@ -47,7 +47,7 @@ const ContactForm = () => {
 
         <div className="mt-3 grid h-full grid-cols-1 gap-6 md:grid-cols-3">
           {interestData.map((item) => (
-            <div key={item.id} className="radio-wrapper">
+            <div key={item.id} className="radio-wrapper h-full">
               <input
                 type="radio"
                 id={item.id}
@@ -66,7 +66,7 @@ const ContactForm = () => {
       </div>
 
       {/* Budget Section */}
-      <div className="md:col-span-full">
+      <div className="mt-8 md:col-span-full">
         <label className="mt-3 text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
           Budget in USD:
         </label>
