@@ -128,7 +128,17 @@ const Page = () => {
                 <option value="Copywriting">Copywriting & Content Strategy</option>
                 <option value="Digital Marketing">Digital Marketing Services</option>
               </select>
-              <span className="absolute right-5 top-1/2 translate-y-1/3">{/* Add your SVG icon here */}</span>
+              <span className="absolute right-5 top-1/2 translate-y-1/3">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M6 8L10 12L14 8"
+                    stroke="#F54BB4"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
             </div>
 
             {/* How soon you want? */}
@@ -151,7 +161,17 @@ const Page = () => {
                 <option value="7-14 days">7 to 14 days</option>
                 <option value="15-30 days">15 to 30 days</option>
               </select>
-              <span className="absolute right-5 top-1/2 translate-y-1/3">{/* Add your SVG icon here */}</span>
+              <span className="absolute right-5 top-1/2 translate-y-1/3">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M6 8L10 12L14 8"
+                    stroke="#F54BB4"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
             </div>
 
             {/* Budget */}
@@ -173,7 +193,17 @@ const Page = () => {
                 <option value="750-1500">750 - 1500 USD</option>
                 <option value="1500+">1500 USD +</option>
               </select>
-              <span className="absolute right-5 top-1/2 translate-y-1/3">{/* Add your SVG icon here */}</span>
+              <span className="absolute right-5 top-1/2 translate-y-1/3">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M6 8L10 12L14 8"
+                    stroke="#F54BB4"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
             </div>
 
             {/* About the project description */}
