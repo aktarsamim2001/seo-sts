@@ -1,21 +1,16 @@
 'use client'
-import { BlogType } from '@/app/ai-blog/page'
 import { aiDrivenPersonalizationInMarketing } from '@/data/blogsV2/ai-driven-personalization-in-marketing'
 import topArrowDark from '@/public/images/icons/top-arrow-dark.svg'
 import topArrow from '@/public/images/icons/top-arrow.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import RevealWrapper from '../animation/RevealWrapper'
 import Pagination from './Pagination'
 
 const brandPink = '#F54BB4' // border
 
-interface BlogsProps {
-  Blogs: BlogType[]
-}
-
-const BlogPostV5: FC<BlogsProps> = ({ Blogs }) => {
+const BlogPostV5 = ({ Blogs }) => {
   const allBlogs = [...Blogs, ...aiDrivenPersonalizationInMarketing]
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 7

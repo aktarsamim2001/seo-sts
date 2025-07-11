@@ -1,11 +1,12 @@
 'use client'
+
 import React, { useState } from 'react'
 import RevealWrapper from '../../components/animation/RevealWrapper'
 import ContactForm from '../../components/contactpage/ContactForm'
 import PageHero from '../../components/shared/PageHero'
 import LayoutOne from '../..//components/shared/LayoutOne'
 
-const page = () => {
+const Page = () => {
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -222,4 +223,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

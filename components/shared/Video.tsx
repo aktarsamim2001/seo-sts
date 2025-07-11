@@ -51,7 +51,7 @@ const Video = () => {
         <Image
           width={1920}
           height={1080}
-          src="/images/about_us.AVIF"
+          src="/images/about_us.avif"
           alt="Video Placeholder"
           className="h-full w-full object-cover"
           style={{ transition: 'transform 0.5s, opacity 0.5s' }}

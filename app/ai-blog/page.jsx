@@ -6,23 +6,10 @@ import PageHero from '@/components/shared/PageHero'
 import getMarkDownData from '@/utils/GetMarkDownData'
 import { aiDrivenPersonalizationInMarketing } from '@/data/blogsV2/ai-driven-personalization-in-marketing'
 
-export const metadata = {
-  title: 'Blog',
-}
-
-export interface BlogType {
-  slug: string
-  content: string
-  [key: string]: any
-}
-
-const allBlogs: BlogType[] = aiDrivenPersonalizationInMarketing.map((blog, idx) => {
-  const { slug: _remove, ...rest } = blog
-  return {
-    ...rest,
-    _uniqueKey: `blog-${idx}`,
-  }
-})
+const allBlogs = aiDrivenPersonalizationInMarketing.map((blog, idx) => ({
+  ...blog,
+  _uniqueKey: `blog-${idx}`,
+}))
 
 const BlogPage = () => {
   return (
