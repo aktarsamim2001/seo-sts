@@ -8,7 +8,7 @@ import { ReactNode, Suspense } from 'react'
 import '../scss/main.scss'
 
 export const metadata: Metadata = {
-  title: 'SmartTask Studios Template',
+  title: 'SmartTask Studios',
   description: 'Your description here',
   icons: {
     icon: '/favicon (2).ico', // Default favicon

@@ -445,7 +445,7 @@ html.lenis {
 
   &.active {
     .menu-list-item-text {
-      @apply text-primary;
+      @apply text-primary hover:!text-[#9BCB4B];
 
       &::before {
         @apply scale-100;
@@ -620,7 +620,7 @@ html.lenis {
 
 // --------------------
 .interest-btn {
-  @apply inline-block cursor-pointer border px-3 py-2 text-center text-base font-medium transition-all duration-300 ease-in-out hover:bg-gray-100 dark:border-dark dark:hover:bg-slate-900 md:px-[42px] md:py-5;
+  @apply flex cursor-pointer items-center justify-center border px-3 py-2 text-center text-base font-medium transition-all duration-300 ease-in-out hover:bg-gray-100 dark:border-dark dark:hover:bg-slate-900 md:px-[42px] md:py-5;
 }
 
 .checkbox-wrapper input[type='checkbox']:checked + .interest-btn {

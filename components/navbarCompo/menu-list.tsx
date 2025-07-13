@@ -8,7 +8,8 @@ import { forwardRef, useEffect, useRef, useState } from 'react'
 interface MenuItemProps {
   title: string
   url: string
-  items?: { title: string; url: string; isActive?: boolean }[]
+  id: string
+  items?: { title: string; url: string; id: string; isActive?: boolean }[]
   isActive?: boolean
 }
 
@@ -16,37 +17,43 @@ const menuItems: MenuItemProps[] = [
   {
     title: 'Home',
     url: '/',
+    id: 'home',
   },
   {
     title: 'About Us',
     url: '/about',
+    id: 'about',
   },
   {
     title: 'Services',
     url: '/services', // Changed from '#' to '/services'
+    id: 'services',
     items: [
-      { title: 'Brand Identity Design', url: '/services/media' },
-      { title: 'Illustration & Custom Graphics', url: '/services/media' },
-      { title: 'Packaging & Print Design', url: '/services/media' },
-      { title: 'Photo & Image Production', url: '/services/media' },
-      { title: 'Video & Motion Services', url: '/services/media' },
-      { title: 'Web & Digital Design', url: '/services/media' },
-      { title: 'Social Media Content Design', url: '/services/media' },
-      { title: 'Copywriting & Content Strategy', url: '/services/media' },
-      { title: 'Digital Marketing Services', url: '/services/media' },
+      { id: 'brand-identity', title: 'Brand Identity Design', url: '/services/brand-identity' },
+      { id: 'illustration', title: 'Illustration & Custom Graphics', url: '/services/illustration' },
+      { id: 'packaging', title: 'Packaging & Print Design', url: '/services/packaging' },
+      { id: 'photo', title: 'Photo & Image Production', url: '/services/photo' },
+      { id: 'video', title: 'Video & Motion Services', url: '/services/video' },
+      { id: 'web-digital', title: 'Web & Digital Design', url: '/services/web-digital' },
+      { id: 'social-media', title: 'Social Media Content Design', url: '/services/social-media' },
+      { id: 'copywriting', title: 'Copywriting & Content Strategy', url: '/services/copywriting' },
+      { id: 'digital-marketing', title: 'Digital Marketing Services', url: '/services/digital-marketing' },
     ],
   },
   {
     title: 'Portfolio',
     url: '/portfolio-agency/case-study',
+    id: 'portfolio',
   },
   {
     title: 'Blog',
     url: '/ai-blog',
+    id: 'blog',
   },
   {
     title: 'Contact Us',
     url: '/contact',
+    id: 'contact',
   },
 ]
 
@@ -170,7 +177,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
     <ul ref={ref} className="menu-list">
       {menuItems.map((item) => (
         <li
-          key={item.title}
+          key={item.id}
           className={`menu-list-item menu-list-item-anchor menu-text-hover hover:!text-[#9BCB4B] ${activeItems.includes(item.title) ? 'active' : ''}`}
           onMouseEnter={() => setActiveItems([item.title])}
           onMouseLeave={() => setActiveItems([])}>
@@ -181,7 +188,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
                 onClick={() => {
                   if (onItemClick) onItemClick()
                 }}
-                className={`menu-list-item-text text-[28px] leading-[70px] md:text-[42px] xl:text-[56px] xl:leading-[90px] ${activeItems.includes(item.title) ? 'text-[#F54BB4]' : 'text-white hover:text-[#9BCB4B]'}`}>
+                className={`menu-list-item-text text-[28px] leading-[70px] md:text-[42px] xl:text-[56px] xl:leading-[90px] ${activeItems.includes(item.title) ? 'text-[#F54BB4]' : 'text-white hover:!text-[#9BCB4B]'}`}>
                 {item.title}
               </Link>
               {/* Dropdown toggle button, only visible on mobile */}
@@ -220,13 +227,13 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
               ref={(el) => setDropdownRef(el, item.title)}
               className={`menu-list-item-dropdown relative left-0 h-fit max-h-[60vh] w-full gap-x-4 overflow-y-auto md:absolute md:left-[48%] md:max-h-none md:w-[350px] md:overflow-visible md:pb-0 lg:left-[33%] lg:w-[650px] xl:left-[44%] ${item.title === 'Home' ? '!grid !grid-cols-1 lg:-mt-[70px] lg:!grid-cols-2' : '!grid !grid-cols-1 lg:top-5'} ${activeItems.includes(item.title) || (item.title === 'Home' && pathname === '/' && initialLoad) ? 'block' : 'hidden'}`}>
               {item.items.map((subItem) => (
-                <li key={subItem.title} className="group cursor-pointer">
+                <li key={subItem.id + '-' + subItem.url} className="group cursor-pointer">
                   <Link
-                    href={subItem.url}
+                    href={'/services/media'}
                     onClick={() => {
                       onItemClick && onItemClick()
                     }}
-                    className={`menu-list-item-dropdown-list block w-full pb-1 pl-3 text-base leading-8 text-white transition-colors duration-150 hover:text-[#9BCB4B] md:text-2xl md:leading-[50px]`}
+                    className={`menu-list-item-dropdown-list block w-full pb-1 pl-3 text-base leading-8 text-white transition-colors duration-150 hover:!text-[#9BCB4B] md:text-2xl md:leading-[50px]`}
                     tabIndex={0}>
                     {subItem.title.includes('-') ? (
                       <>

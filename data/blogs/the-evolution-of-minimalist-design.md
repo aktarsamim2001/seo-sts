@@ -1,5 +1,5 @@
 ---
-thumbnail: '/images/blog-img/blog-img-9.png'
+thumbnail: '/images/blog-img/blog-img-9.webp'
 featureImage: '/images/blog-img/blog-details-img-1.png'
 title: 'The Evolution of Minimalist Design Balancing Aesthetics with Functionality'
 description: 'Explore the rise of minimalist design and how it transforms user experiences across digital platforms.'

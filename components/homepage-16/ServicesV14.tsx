@@ -28,7 +28,7 @@ const services: WorkType[] = brandStrategy.map((service, idx) => ({
 
 const ServicesV14 = () => {
   return (
-    <section className="container overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="mb-8 text-center md:mb-16">
         <RevealWrapperV2 className="rv-badge reveal-me mb-3">
           <span className="rv-badge-text">Services</span>
@@ -51,7 +51,7 @@ const ServicesV14 = () => {
           <RevealWrapper
             key={service.slug || idx}
             className="reveal-me group border border-[#F54BB4] px-6 py-9 lg:px-[30px] lg:py-[50px]">
-            <Link href={`services/media`}>
+            <div>
               <figure>
                 <Image
                   src={service.logo}
@@ -86,7 +86,7 @@ const ServicesV14 = () => {
                   />
                 </svg>
               </div>
-            </Link>
+            </div>
           </RevealWrapper>
         ))}
       </div>
