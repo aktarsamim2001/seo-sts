@@ -1,41 +1,59 @@
+// src/app/services.tsx
+'use client'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/store/store'
+import { fetchServicesDetails } from '@/store/slice/servicesSlice'
+import LayoutOne from '@/components/shared/LayoutOne'
+import PageHero from '@/components/shared/PageHero'
 import ServicesV14 from '@/components/homepage-16/ServicesV14'
 import Process from '@/components/services-page/Process'
 import CTA from '@/components/shared/CTA'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
-import LayoutOne from '@/components/shared/LayoutOne'
-import PageHero from '@/components/shared/PageHero'
 
-export const metadata = {
-  title: 'Services ',
-}
+// export const metadata = {
+//   title: 'Services',
+// }
 
 const ServicesPage = () => {
+  const dispatch = useDispatch()
+  const servicesDetails = useSelector((state: RootState) => state.services)
+  console.log('Services details:', servicesDetails) // Debugging line to check services details
+
+  useEffect(() => {
+    dispatch(fetchServicesDetails())
+  }, [dispatch])
+
+  if (servicesDetails.status) {
+    return <p>Loading...</p>
+  }
+
+  if (servicesDetails.error) {
+    return <p>Error: {servicesDetails.error}</p>
+  }
+
   return (
     <LayoutOne>
       <PageHero
-        badgeTitle="Services"
-        title="Services "
-        italicTitle=""
-        scale
-        description="Explore our innovative cutting-edge no-code websites designed to captivate and engage your visitors effortlessly"
-        spacing="max-md:pt-44 max-sm:pb-10 max-md:pb-16 md:py-44 lg:py-[200px] relative overflow-hidden"
+        badgeTitle={servicesDetails.page_content.banner.title}
+        title={servicesDetails.page_content.banner.sub_title}
+        description={servicesDetails.page_content.banner.content}
       />
-      <ServicesV14 />
-      <Process />
+      <ServicesV14 services={servicesDetails.page_content.section_content.services} />
+      <Process processSteps={servicesDetails.page_content.process.progrress_timeline} />
       <CTA>
-        Let's chat!
+        {servicesDetails.page_content.enquiry_data.title_one}
         <CtaImageSlider
-          slides={[
-            { id: '1', img: '/images/agent/11.webp' },
-            { id: '2', img: '/images/agent/16.webp' },
-            { id: '3', img: '/images/agent/17.webp' },
-          ]}
+          slides={servicesDetails.page_content.enquiry_data.title_images.map((img, index) => ({
+            id: String(index + 1),
+            img: img,
+          }))}
         />
-        with us.
+        {servicesDetails.page_content.enquiry_data.title_two}
         <i className="block font-instrument italic text-[#F54BB4] max-md:inline-block max-sm:pl-2 sm:mt-10">
-          A virtual coffee?
+          {servicesDetails.page_content.enquiry_data.title_three}
         </i>
-      </CTA>{' '}
+      </CTA>
     </LayoutOne>
   )
 }

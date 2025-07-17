@@ -1,11 +1,20 @@
 // src/app/store.ts
 import { configureStore } from '@reduxjs/toolkit'
 import menusReducer from '../store/slice/menuSlice'
+import pageDetailsReducer from '../store/slice/homeSlice'
+import aboutUsReducer from '../store/slice/aboutUsSlice'
+import portfolioReducer from '../store/slice/portfolioSlice'
+import servicesReducer from '../store/slice/servicesSlice'
+import blogsReducer from '../store/slice/blogsSlice'
 
 export const store = configureStore({
   reducer: {
     menus: menusReducer,
-    // Add other slices here...
+    pageDetails: pageDetailsReducer,
+    aboutUs: aboutUsReducer,
+    portfolio: portfolioReducer,
+    services: servicesReducer,
+    blogs: blogsReducer,
   },
 })
 

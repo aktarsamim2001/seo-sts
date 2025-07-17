@@ -57,11 +57,8 @@ export const fetchMenus = () => {
     try {
       const response = await fetchMenusApi()
       console.log('API response:', response)
-      if (response?.data?.data) {
-        console.log('Fetched menu data:', response.data.data)
-        dispatch(setMenus(response.data.data))
-      } else {
-        dispatch(setMenusError('No menus found'))
+      if (response?.data) {
+        dispatch(setMenus(response.data))
       }
     } catch (error: any) {
       dispatch(setMenusError(error.message || 'Something went wrong'))

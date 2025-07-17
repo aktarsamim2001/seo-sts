@@ -1,25 +1,46 @@
-import AwardsV2 from '@/components/aboutpage/AwardsV2'
-import Team from '@/components/aboutpage/Team'
-import About from '@/components/shared/About'
-import CTA from '@/components/shared/CTA'
-import CtaImageSlider from '@/components/shared/CtaImageSlider'
+// src/app/about.tsx
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/store/store'
+import { fetchAboutUsDetails } from '@/store/slice/aboutUsSlice'
 import LayoutOne from '@/components/shared/LayoutOne'
-import Marquee from '@/components/shared/Marquee'
 import PageHero from '@/components/shared/PageHero'
 import Video from '@/components/shared/Video'
+import About from '@/components/shared/About'
+import Team from '@/components/aboutpage/Team'
+import Marquee from '@/components/shared/Marquee'
+import AwardsV2 from '@/components/aboutpage/AwardsV2'
+import CTA from '@/components/shared/CTA'
+import CtaImageSlider from '@/components/shared/CtaImageSlider'
 
 export const metadata = {
-  title: 'About- SmartTask Studios',
+  title: 'About - SmartTask Studios',
 }
 
 const AboutPage = () => {
+  const dispatch = useDispatch()
+  const aboutUsDetails = useSelector((state: RootState) => state.aboutUs)
+  console.log('About Us details:', aboutUsDetails) // Debugging line to check about us details
+
+  useEffect(() => {
+    dispatch(fetchAboutUsDetails())
+  }, [dispatch])
+
+  if (aboutUsDetails.status) {
+    return <p>Loading...</p>
+  }
+
+  if (aboutUsDetails.error) {
+    return <p>Error: {aboutUsDetails.error}</p>
+  }
+
   return (
     <LayoutOne>
       <PageHero
-        badgeTitle="About"
-        title="SmartTask "
-        italicTitle="Studios"
-        description="At SmartTask Studios, we transform ideas into powerful visual stories. From brand identity and custom graphics to digital marketing and motion design, we craft compelling content and experiences that elevate brands across print, web, and social platforms."
+        badgeTitle={aboutUsDetails.page_content.banner.title}
+        title={aboutUsDetails.page_content.banner.sub_title_one}
+        italicTitle={aboutUsDetails.page_content.banner.sub_title_two}
+        description={aboutUsDetails.page_content.banner.content}
       />
       <Video />
       <About />
@@ -27,17 +48,16 @@ const AboutPage = () => {
       <Marquee withBorder={true} />
       <AwardsV2 />
       <CTA>
-        Let's chat!
+        {aboutUsDetails.page_content.enquiry_data.title_one}
         <CtaImageSlider
-          slides={[
-            { id: '1', img: '/images/about/11.webp' },
-            { id: '2', img: '/images/about/12.webp' },
-            { id: '3', img: '/images/about/13.webp' },
-          ]}
+          slides={aboutUsDetails.page_content.enquiry_data.title_images.map((img, index) => ({
+            id: String(index + 1),
+            img: img,
+          }))}
         />
-        with us.
+        {aboutUsDetails.page_content.enquiry_data.title_two}
         <i className="block font-instrument italic text-[#F54BB4] max-md:inline-block max-sm:pl-2 sm:mt-10">
-          A virtual coffee?
+          {aboutUsDetails.page_content.enquiry_data.title_three}
         </i>
       </CTA>
     </LayoutOne>

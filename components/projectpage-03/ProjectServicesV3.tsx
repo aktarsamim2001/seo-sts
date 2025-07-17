@@ -1,4 +1,3 @@
-import getMarkDownData from '@/utils/GetMarkDownData'
 import Image from 'next/image'
 import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
@@ -16,8 +15,6 @@ interface projectType {
   content: string
   [key: string]: any
 }
-
-const projects: projectType[] = getMarkDownData('data/portfolio-agency/case-studies')
 
 const ProjectServicesV3 = () => {
   return (
