@@ -4,8 +4,9 @@ import ThemeSwitcher from '@/components/theme/ThemeSwitcher'
 import { satoshi } from '@/utils/fonts'
 import { ThemeModeProvider } from '@/utils/Providers'
 import type { Metadata } from 'next'
-import { ReactNode, Suspense } from 'react'
+import React, { ReactNode, Suspense } from 'react'
 import '../scss/main.scss'
+import { Providers } from './providers'
 
 export const metadata: Metadata = {
   title: 'SmartTask Studios',
@@ -17,23 +18,21 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={`${satoshi.variable} antialiased`}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <SmoothScrollProvider>
-            <ThemeModeProvider>
-              <ThemeSwitcher />
-              <CursorPointer />
-              {children}
-            </ThemeModeProvider>
-          </SmoothScrollProvider>
-        </Suspense>
+        <Providers>
+          <Suspense fallback={<div>Loading...</div>}>
+            <SmoothScrollProvider>
+              <ThemeModeProvider>
+                <ThemeSwitcher />
+                <CursorPointer />
+                {children}
+              </ThemeModeProvider>
+            </SmoothScrollProvider>
+          </Suspense>
+        </Providers>
       </body>
     </html>
   )
