@@ -1,22 +1,13 @@
+'use client'
 import BlogContent from '@/components/blogpage/BlogContent'
 import CTA from '@/components/shared/CTA'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import LayoutOne from '@/components/shared/LayoutOne'
 import PageHero from '@/components/shared/PageHero'
 import getMarkDownContent from '@/utils/GetMarkDownContent'
-import getMarkDownData from '@/utils/GetMarkDownData'
-
-export async function generateStaticParams() {
-  const blogs = getMarkDownData('data/blogsV2')
-
-  return blogs.map((post) => ({
-    slug: post.slug,
-  }))
-}
 
 const BlogDetails = async ({ params }) => {
   const slug = params.slug
-  const blog = getMarkDownContent('data/blogsV2/', slug)
   const postBlog = blog.data
 
   return (
