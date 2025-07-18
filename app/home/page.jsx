@@ -73,7 +73,7 @@ const Page = () => {
         processSteps={pageDetails.page_content.process_data.process_data}
       />
       {/* <PricingCard showHeader={true} /> */}
-      <CTA enquiryData={pageDetails.page_content.enquiry_data}>
+      <CTA enquiryData={pageDetails.page_content.enquiry_data} form>
         Let’s
         <CtaImageSlider
           slides={pageDetails.page_content.enquiry_data.title_images.map((img, index) => ({
