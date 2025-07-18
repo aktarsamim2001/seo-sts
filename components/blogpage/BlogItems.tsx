@@ -1,6 +1,5 @@
 'use client'
 
-import { Blog2Type } from '@/app/seo-blog/page'
 import topArrowDark from '@/public/images/icons/top-arrow-dark.svg'
 import topArrow from '@/public/images/icons/top-arrow.svg'
 import Image from 'next/image'
@@ -9,16 +8,28 @@ import { FC, useState } from 'react'
 import RevealWrapper from '../animation/RevealWrapper'
 import Pagination from './Pagination'
 
-interface BlogsProps {
-  loadedBlogs: Blog2Type[]
+interface Blog {
+  slug: string
+  thumbnail: string
+  title: string
+  description: string
 }
 
-const BlogItems: FC<BlogsProps> = ({ loadedBlogs }) => {
+interface PaginateFunction {
+  totalPage: number
+  currentPage: number
+  setCurrentPage: (page: number | ((prevPage: number) => number)) => void
+  goToNextPage: () => void
+  goToPreviousPage: () => void
+}
+
+const BlogItems: FC = () => {
+  const [loadedBlogs] = useState<Blog[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 6
   const totalPage = Math.ceil(loadedBlogs.length / itemsPerPage)
 
-  const paginateData = () => {
+  const paginateData = (): Blog[] => {
     const startIndex = (currentPage - 1) * itemsPerPage
     const endIndex = startIndex + itemsPerPage
     return loadedBlogs.slice(startIndex, endIndex)
@@ -31,7 +42,7 @@ const BlogItems: FC<BlogsProps> = ({ loadedBlogs }) => {
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => prevPage - 1)
   }
-  const paginateFunction = {
+  const paginateFunction: PaginateFunction = {
     totalPage,
     currentPage,
     setCurrentPage,
