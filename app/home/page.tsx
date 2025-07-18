@@ -26,7 +26,7 @@ const Page = () => {
   console.log('Page details:', pageDetails) // Debugging line to check page details
 
   useEffect(() => {
-    dispatch(fetchPageDetails())
+    dispatch(fetchPageDetails({ slug: 'home' }))
   }, [dispatch])
 
   if (pageDetails.status) {
@@ -73,7 +73,7 @@ const Page = () => {
         processSteps={pageDetails.page_content.process_data.process_data}
       />
       {/* <PricingCard showHeader={true} /> */}
-      <CTA showContactForm>
+      <CTA enquiryData={pageDetails.page_content.enquiry_data}>
         Let’s
         <CtaImageSlider
           slides={pageDetails.page_content.enquiry_data.title_images.map((img, index) => ({

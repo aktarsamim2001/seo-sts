@@ -1,90 +1,48 @@
-'use client'
-import gradientBg from '@/public/images/services-gradient-bg-2.png'
+// src/components/shared/ServicesV6.tsx
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 
-const servicesData = [
-  {
-    id: 1,
-    title: 'Brand Identity Design',
-    subtitle: 'Understanding users to design intuitive solutions',
-    items: [
-      'Conducting User Surveys & Interviews',
-      'Behavioral Analysis & Heatmaps',
-      'Wireframe and Prototype Creation',
-      'Design Thinking Workshops',
-      'A/B Testing and Performance Metrics',
-      'Continuous User Feedback Integration',
-    ],
-  },
-  {
-    id: 2,
-    title: 'Illustration & Custom Graphics',
-    subtitle: 'Transforming ideas into high-performing websites',
-    items: [
-      'Custom Web Applications',
-      'Database Design & Management',
-      'Integration with Third-Party Tools',
-      'Scalable and Secure Solutions',
-      'Advanced Debugging Techniques',
-      'Server-Side Rendering Implementation',
-    ],
-  },
-  {
-    id: 3,
-    title: 'Packaging & Print Design',
-    subtitle: 'Innovative designs that captivate and engage',
-    items: [
-      'Visual Identity and Branding',
-      'Pixel-Perfect Layout Design',
-      'Mobile-First Design Strategies',
-      'Interactive Components & Animations',
-      'High-Fidelity Mockups',
-      'Ensuring Cross-Browser Compatibility',
-    ],
-  },
-  {
-    id: 4,
-    title: 'Photo & Image Production',
-    subtitle: 'Simplifying web management with WordPress expertise',
-    items: [
-      'Bespoke Theme Development',
-      'Content-Driven Website Solutions',
-      'SEO-Ready Page Structures',
-      'Speed Optimization for WordPress',
-      'Multi-Language Site Implementation',
-      'Regular Backups & Updates',
-    ],
-  },
-]
+interface Service {
+  id: number
+  title: string
+  subtitle: string
+  items: string[]
+}
 
-const ServicesV6 = () => {
+interface ServicesV6Props {
+  title: string
+  subtitle: string
+  button: string
+  buttonUrl: string
+  services: Service[]
+}
+
+const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, buttonUrl, services }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
   }
+  console.log('ServicesV6 props:', { title, subtitle, button, buttonUrl, services }) // Debugging line to check props
+
   return (
     <section className="relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="absolute left-1/2 top-[47%] -z-40 -translate-x-1/2 -translate-y-[45%] scale-x-[2.7] scale-y-[3.8] sm:scale-y-[3.3] md:scale-y-[3.2] lg:scale-y-[2.4] xl:scale-x-[2.4] xl:scale-y-[1.2]">
-        <Image src={gradientBg} alt="gradient-bg" />
-      </div>
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <RevealWrapper className="rv-badge reveal-me mb-5 md:mb-8">
-            <span className="rv-badge-text">Services</span>
+            <span className="rv-badge-text">{title}</span>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">There is a lot we can do. Here is a few.</h2>
+            <h2 className="text-appear mx-auto max-w-[770px]">{subtitle}</h2>
           </TextAppearAnimation>
         </div>
         <RevealWrapper className="mx-auto w-full max-w-[1170px] [&>*:not(:last-child)]:mb-6">
-          {servicesData.map((service, index) => (
+          {services.map((service, index) => (
             <div
-              key={service.id}
+              key={service.service_id}
               className="faq-body-transition overflow-hidden border border-[#F54BB4] bg-backgroundBody duration-300 dark:border-[#F54BB4] dark:bg-dark">
               <div
                 className={`group relative flex cursor-pointer items-center justify-between px-5 py-5 md:px-10 ${
@@ -94,7 +52,7 @@ const ServicesV6 = () => {
                 <h3 className="flex flex-col items-start gap-x-10 gap-y-3 text-[25px] font-normal leading-[25.2px] text-secondary dark:text-white md:flex-row md:items-center md:text-5xl md:leading-[1.2]">
                   <span className="max-w-sm text-inherit">{service.title}</span>
                   <span className="flex items-start pr-[2px] text-base text-secondary/70 dark:text-white/70 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
-                    {service.subtitle}
+                    {service.short_desc}
                   </span>
                 </h3>
                 <div className="accordion-header-iconV5 transition-all duration-300 group-hover:bg-[#F54BB4]">
@@ -121,22 +79,26 @@ const ServicesV6 = () => {
                 <div className="overflow-hidden">
                   <div className="accordion-body flex flex-col justify-start px-10 pb-10 duration-300 sm:ml-2.5 sm:flex-row sm:gap-10 md:ml-6 lg:gap-x-[73px]">
                     <ul className="[&>*:not(:last-child)]:mb-1">
-                      {service.items.slice(0, Math.ceil(service.items.length / 2)).map((item, idx) => (
-                        <li
-                          key={idx}
-                          className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70">
-                          {item}
-                        </li>
-                      ))}
+                      {(service.features ?? [])
+                        .slice(0, Math.ceil((service.features ?? []).length / 2))
+                        .map((item, idx) => (
+                          <li
+                            key={`first-${service.service_id}-${item}`}
+                            className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70">
+                            {item}
+                          </li>
+                        ))}
                     </ul>
                     <ul className="[&>*:not(:last-child)]:mb-1">
-                      {service.items.slice(Math.ceil(service.items.length / 2)).map((item, idx) => (
-                        <li
-                          key={idx}
-                          className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70">
-                          {item}
-                        </li>
-                      ))}
+                      {(service.features ?? [])
+                        .slice(Math.ceil((service.features ?? []).length / 2))
+                        .map((item, idx) => (
+                          <li
+                            key={`second-${service.service_id}-${item}`}
+                            className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70">
+                            {item}
+                          </li>
+                        ))}
                     </ul>
                   </div>
                 </div>
@@ -147,13 +109,13 @@ const ServicesV6 = () => {
         <RevealWrapper as="ul" className="reveal-me mt-14 flex justify-center">
           <li className="max-md:w-full">
             <Link
-              href="/services"
+              href={buttonUrl}
               className="rv-button rv-button-primary block w-full text-center md:inline-block md:w-auto">
               <div className="rv-button-top">
-                <span>Explore Services</span>
+                <span>{button}</span>
               </div>
               <div className="rv-button-bottom">
-                <span>Explore Services</span>
+                <span>{button}</span>
               </div>
             </Link>
           </li>

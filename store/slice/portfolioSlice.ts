@@ -1,6 +1,6 @@
 // src/store/slice/portfolioSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { fetchPageDetailsApi } from '../api_services/pageDetailsApi'
+import { service } from '../api_services/api_service'
 
 export interface PortfolioContent {
   banner: {
@@ -75,8 +75,8 @@ export const fetchPortfolioDetails = (slug: string) => {
   return async (dispatch: any) => {
     dispatch(setPortfolioLoading(true))
     try {
-      const response = await fetchPageDetailsApi(slug)
-      dispatch(setPortfolioDetails(response))
+      const response = await service.fetchPageDetailsApi(slug)
+      dispatch(setPortfolioDetails(response.data.data))
     } catch (error: any) {
       dispatch(setPortfolioError(error.message || 'Something went wrong'))
     } finally {

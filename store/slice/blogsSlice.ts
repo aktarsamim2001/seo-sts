@@ -1,6 +1,6 @@
 // src/store/slice/blogsSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { fetchPageDetailsApi } from '../api_services/pageDetailsApi'
+import { service } from '../api_services/api_service'
 
 export interface BlogsContent {
   banner: {
@@ -76,8 +76,8 @@ export const fetchBlogsDetails = (slug: string) => {
   return async (dispatch: any) => {
     dispatch(setBlogsLoading(true))
     try {
-      const response = await fetchPageDetailsApi(slug)
-      dispatch(setBlogsDetails(response))
+      const response = await service.fetchPageDetailsApi(slug)
+      dispatch(setBlogsDetails(response.data.data))
     } catch (error: any) {
       dispatch(setBlogsError(error.message || 'Something went wrong'))
     } finally {

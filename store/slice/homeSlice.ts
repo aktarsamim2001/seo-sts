@@ -1,6 +1,6 @@
 // src/store/slice/homeSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { fetchPageDetailsApi } from '../api_services/pageDetailsApi'
+import { service } from '../api_services/api_service'
 
 export interface PageContent {
   banner: {
@@ -123,6 +123,7 @@ const homeSlice = createSlice({
   initialState,
   reducers: {
     setPageDetails(state, action: PayloadAction<PageDetailsState>) {
+      console.log('-------------------->', action.payload)
       state.page_title = action.payload.page_title
       state.page_slug = action.payload.page_slug
       state.page_content = action.payload.page_content
@@ -146,8 +147,10 @@ export const fetchPageDetails = (slug: string) => {
   return async (dispatch: any) => {
     dispatch(setPageDetailsLoading(true))
     try {
-      const response = await fetchPageDetailsApi(slug)
-      dispatch(setPageDetails(response))
+      const response = await service.fetchPageDetailsApi(slug)
+      if (response) {
+        dispatch(setPageDetails(response.data.data))
+      }
     } catch (error: any) {
       dispatch(setPageDetailsError(error.message || 'Something went wrong'))
     } finally {

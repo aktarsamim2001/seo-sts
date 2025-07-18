@@ -15,10 +15,10 @@ import CtaV2 from '@/components/shared/CtaV2'
 const CaseStudy = () => {
   const dispatch = useDispatch()
   const portfolioDetails = useSelector((state: RootState) => state.portfolio)
-  console.log('Portfolio details:', portfolioDetails) // Debugging line to check portfolio details
+  console.log('Portfolio details:', portfolioDetails)
 
   useEffect(() => {
-    dispatch(fetchPortfolioDetails())
+    dispatch(fetchPortfolioDetails({ slug: 'portfolio' }))
   }, [dispatch])
 
   if (portfolioDetails.status) {
@@ -31,8 +31,8 @@ const CaseStudy = () => {
 
   return (
     <LayoutOne>
-      <ProjectServicesV3 portfolio={portfolioDetails.page_content.portfolio} />
-      <CtaV2 />
+      <ProjectServicesV3 portfolio={portfolioDetails.page_content} />
+      <CtaV2 enquiryData={portfolioDetails.page_content.enquiry_data} />
     </LayoutOne>
   )
 }

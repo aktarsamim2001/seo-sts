@@ -6,6 +6,7 @@ import aboutUsReducer from '../store/slice/aboutUsSlice'
 import portfolioReducer from '../store/slice/portfolioSlice'
 import servicesReducer from '../store/slice/servicesSlice'
 import blogsReducer from '../store/slice/blogsSlice'
+import privacyPolicyReducer from '../store/slice/privacyPolicySlice'
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     portfolio: portfolioReducer,
     services: servicesReducer,
     blogs: blogsReducer,
+    privacyPolicy: privacyPolicyReducer,
   },
 })
 

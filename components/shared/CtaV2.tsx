@@ -4,19 +4,21 @@ import Image from 'next/image'
 import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
 
-const CtaV2 = () => {
+const CtaV2 = ({ enquiryData }) => {
   return (
     <section className="mt-14 bg-backgroundBody pb-20 pt-16 dark:bg-secondary md:mt-16 md:pb-36 lg:mt-[88px] lg:pt-[100px] xl:mt-[100px]">
       <div className="container flex flex-col justify-center gap-y-10 max-md:items-center sm:justify-between md:flex-row">
         <RevealWrapper
           as="h2"
           className="reveal-me text-[46px] font-normal leading-[1.1] max-lg:leading-[1.33] lg:text-[96px] lg:tracking-[-2.88px]">
-          <span className="font-instrument italic !text-[#F54BB4] max-md:mr-4 lg:text-[100px]">New</span>
+          <span className="font-instrument italic !text-[#F54BB4] max-md:mr-4 lg:text-[100px]">
+            {enquiryData?.title_one}
+          </span>
           <br className="hidden md:block" />
-          Project?
+          {enquiryData?.title_two}
         </RevealWrapper>
 
-        <Link href="/contact">
+        <Link href={enquiryData?.button_url} className="relative">
           <RevealWrapper className="reveal-me group h-44 w-44 bg-secondary p-5 dark:bg-primary lg:h-[230px] lg:w-[230px]">
             <figure className="relative h-full w-full bg-primary dark:bg-secondary">
               <Image

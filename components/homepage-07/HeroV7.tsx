@@ -36,14 +36,18 @@ const HeroV7: React.FC<HeroV7Props> = ({
       <RevealWrapper className="mx-auto max-w-screen-xl px-5">
         <div>
           <h1 className="font-normal max-lg:text-center xl:text-[96px] xl:leading-[1.3] xl:tracking-[-2.88px]">
-            {titleOne}
-            <CtaImageSlider
-              slides={titleImages.map((img, index) => ({
-                id: String(index + 1),
-                img: img,
-              }))}
-            />
-            {titleTwo}
+            <span className="inline-flex items-center gap-2">
+              {titleOne}
+              <span className="inline-block align-middle">
+                <CtaImageSlider
+                  slides={titleImages.map((img, index) => ({
+                    id: String(index + 1),
+                    img: img,
+                  }))}
+                />
+              </span>
+              {titleTwo}
+            </span>
             <span style={{ color: '#F54BB4' }}>{titleThree}</span> <span style={{ color: '#53B9FF' }}>{titleFour}</span>
           </h1>
         </div>
@@ -53,7 +57,7 @@ const HeroV7: React.FC<HeroV7Props> = ({
         </p>
       </RevealWrapper>
 
-      <SkewMarquee />
+      <SkewMarquee marqueeItems={sliderImages.map((img, idx) => ({ id: idx + 1, src: img }))} />
 
       <HeroAbout />
     </section>

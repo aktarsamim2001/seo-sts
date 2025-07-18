@@ -1,5 +1,4 @@
-'use client'
-
+// src/components/MenuList.tsx
 import { gsap } from 'gsap'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -7,6 +6,19 @@ import { forwardRef, useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from '@/store/store'
 import { fetchMenus } from '@/store/slice/menuSlice'
+
+interface MenuItem {
+  menu_item_id: number
+  menu_item_title: string
+  menu_item_slug: string
+  sub_menues?: MenuItem[]
+}
+
+interface Menu {
+  menu_id: number
+  menu_name: string
+  menu_items: MenuItem[]
+}
 
 interface MenuListProps {
   onItemClick?: () => void
@@ -21,7 +33,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>(({ onItemCli
   const menuItems = menuData?.menu_items ?? []
   const loading = useSelector((s: RootState) => s.menus.status)
   const error = useSelector((s: RootState) => s.menus.error)
-  console.log('Menu items:', menuItems) // Debugging line to check menu items
+
   /* ------------- Local state ------------- */
   const [activeParents, setActiveParents] = useState<string[]>([])
   const [initialLoad, setInitialLoad] = useState(true)

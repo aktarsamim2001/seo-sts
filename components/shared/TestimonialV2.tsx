@@ -1,21 +1,35 @@
-import reviewsData from '@/data/testimonials/testimonialV3.json'
-import testimonialLogoDark from '@/public/images/icons/testimonial-dark-logo.png'
-import testimonialLogo from '@/public/images/icons/testimonial-logo.png'
+// src/components/shared/TestimonialV2.tsx
+import React from 'react'
 import Image from 'next/image'
 import Marquee from 'react-fast-marquee'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 
-const TestimonialV2 = () => {
+interface Testimonial {
+  id: number
+  name: string
+  position: string
+  avatar: string
+  quote: string
+  date: string
+}
+
+interface TestimonialV2Props {
+  title: string
+  subtitle: string
+  testimonials: Testimonial[]
+}
+
+const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimonials }) => {
   return (
     <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <RevealWrapper className="rv-badge reveal-me mb-5 md:mb-8">
-            <span className="rv-badge-text">User Review</span>
+            <span className="rv-badge-text">{title}</span>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">What Our Clients Say</h2>
+            <h2 className="text-appear mx-auto max-w-[770px]">{subtitle}</h2>
           </TextAppearAnimation>
         </div>
       </div>
@@ -25,7 +39,7 @@ const TestimonialV2 = () => {
         <RevealWrapper>
           <Marquee speed={60}>
             <div className="flex justify-center gap-6">
-              {reviewsData.map((review, idx) => {
+              {testimonials.map((review, idx) => {
                 // Cycle through 3 border colors: pink, blue, green
                 let borderColor = '#F54BB4'
                 if (idx % 3 === 1) borderColor = '#53B9FF'
@@ -38,7 +52,7 @@ const TestimonialV2 = () => {
                     <div className="flex items-center space-x-4 pb-4">
                       <Image
                         src={review.avatar}
-                        alt="Wade Warren"
+                        alt={review.name}
                         width={70}
                         height={70}
                         quality={100}
@@ -80,8 +94,12 @@ const TestimonialV2 = () => {
 
                     <div className="flex items-center justify-between pt-4">
                       <div className="flex items-center space-x-1">
-                        <Image src={testimonialLogo} alt="Logo" className="inline dark:hidden" />
-                        <Image src={testimonialLogoDark} alt="Logo" className="hidden dark:inline" />
+                        <Image src="/images/icons/testimonial-logo.png" alt="Logo" className="inline dark:hidden" />
+                        <Image
+                          src="/images/icons/testimonial-dark-logo.png"
+                          alt="Logo"
+                          className="hidden dark:inline"
+                        />
                       </div>
                       <span className="text-sm font-light leading-5 text-colorText">{review.date}</span>
                     </div>
@@ -99,7 +117,7 @@ const TestimonialV2 = () => {
           <div className="absolute right-0 top-0 z-40 h-full w-[25%] bg-gradient-to-l from-backgroundBody to-transparent dark:from-dark-gradient"></div>
           <Marquee speed={60} direction="right">
             <div className="flex justify-center gap-6">
-              {reviewsData.toReversed()?.map((review, idx) => {
+              {testimonials.toReversed().map((review, idx) => {
                 let borderColor = '#F54BB4'
                 if (idx % 3 === 1) borderColor = '#53B9FF'
                 if (idx % 3 === 2) borderColor = '#9BCB4B'
@@ -111,7 +129,7 @@ const TestimonialV2 = () => {
                     <div className="flex items-center space-x-4 pb-4">
                       <Image
                         src={review.avatar}
-                        alt="Wade Warren"
+                        alt={review.name}
                         width={70}
                         height={70}
                         quality={100}
@@ -153,8 +171,12 @@ const TestimonialV2 = () => {
 
                     <div className="flex items-center justify-between pt-4">
                       <div className="flex items-center space-x-1">
-                        <Image src={testimonialLogo} alt="Logo" className="inline dark:hidden" />
-                        <Image src={testimonialLogoDark} alt="Logo" className="hidden dark:inline" />
+                        <Image src="/images/icons/testimonial-logo.png" alt="Logo" className="inline dark:hidden" />
+                        <Image
+                          src="/images/icons/testimonial-dark-logo.png"
+                          alt="Logo"
+                          className="hidden dark:inline"
+                        />
                       </div>
                       <span className="text-sm font-light leading-5 text-colorText">{review.date}</span>
                     </div>

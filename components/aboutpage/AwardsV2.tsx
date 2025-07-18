@@ -1,5 +1,5 @@
-'use client'
-
+// src/components/aboutpage/AwardsV2.tsx
+import React, { useState } from 'react'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 import AwardItem from './AwardItem'
@@ -7,87 +7,38 @@ import ServicesV6 from '@/components/shared/ServicesV6'
 import gradientBg from '@/public/images/services-gradient-bg-2.png'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
 
-// const awards = [
-//   { year: '2024', title: 'Site of the Year', organization: 'Awwwards', achievement: 'Gold Winner' },
-//   { year: '2023', title: 'Design Excellence', organization: 'CSS Design Awards', achievement: 'Best UI Design' },
-//   { year: '2022', title: 'Innovation Award', organization: 'Adobe Design', achievement: 'Grand Prize' },
-//   { year: '2021', title: 'Best Portfolio', organization: 'Webby Awards', achievement: "People's Choice" },
-// ]
+interface Service {
+  id: number
+  title: string
+  subtitle: string
+  items: string[]
+}
 
-const servicesData = [
-  {
-    id: 1,
-    title: 'Brand Identity Design',
-    subtitle: 'Understanding users to design intuitive solutions',
-    items: [
-      'Conducting User Surveys & Interviews',
-      'Behavioral Analysis & Heatmaps',
-      'Wireframe and Prototype Creation',
-      'Design Thinking Workshops',
-      'A/B Testing and Performance Metrics',
-      'Continuous User Feedback Integration',
-    ],
-  },
-  {
-    id: 2,
-    title: 'Illustration & Custom Graphics',
-    subtitle: 'Transforming ideas into high-performing websites',
-    items: [
-      'Custom Web Applications',
-      'Database Design & Management',
-      'Integration with Third-Party Tools',
-      'Scalable and Secure Solutions',
-      'Advanced Debugging Techniques',
-      'Server-Side Rendering Implementation',
-    ],
-  },
-  {
-    id: 3,
-    title: 'Packaging & Print Design',
-    subtitle: 'Innovative designs that captivate and engage',
-    items: [
-      'Visual Identity and Branding',
-      'Pixel-Perfect Layout Design',
-      'Mobile-First Design Strategies',
-      'Interactive Components & Animations',
-      'High-Fidelity Mockups',
-      'Ensuring Cross-Browser Compatibility',
-    ],
-  },
-  {
-    id: 4,
-    title: 'Photo & Image Production',
-    subtitle: 'Simplifying web management with WordPress expertise',
-    items: [
-      'Bespoke Theme Development',
-      'Content-Driven Website Solutions',
-      'SEO-Ready Page Structures',
-      'Speed Optimization for WordPress',
-      'Multi-Language Site Implementation',
-      'Regular Backups & Updates',
-    ],
-  },
-]
+interface AwardsV2Props {
+  title: string
+  subtitle: string
+  button: string
+  buttonUrl: string
+  services: Service[]
+}
 
-const AwardsV2 = () => {
+const AwardsV2: React.FC<AwardsV2Props> = ({ title, subtitle, button, buttonUrl, services }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
   }
+
   return (
     <section className="container relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="mb-8 flex flex-col gap-x-8 gap-y-4 md:mb-20 lg:flex-row lg:justify-between">
         <div>
           <RevealWrapper className="rv-badge">
-            <span className="rv-badge-text">Our Services</span>
+            <span className="rv-badge-text">{title}</span>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mt-3 lg:mt-5">
-              Expertise Areas, <span className="block">That We Work</span>
-            </h2>
+            <h2 className="text-appear mt-3 lg:mt-5">{subtitle}</h2>
           </TextAppearAnimation>
         </div>
         <TextAppearAnimation>
@@ -97,9 +48,9 @@ const AwardsV2 = () => {
         </TextAppearAnimation>
       </div>
       <RevealWrapper className="mx-auto w-full max-w-[1170px] [&>*:not(:last-child)]:mb-6">
-        {servicesData.map((service, index) => (
+        {services.map((service, index) => (
           <div
-            key={service.id}
+            key={service.service_id}
             className="faq-body-transition overflow-hidden border border-[#F54BB4] bg-backgroundBody duration-300 dark:border-[#F54BB4] dark:bg-dark">
             <div
               className={`group relative flex cursor-pointer items-center justify-between px-5 py-5 md:px-10 ${
@@ -108,8 +59,8 @@ const AwardsV2 = () => {
               onClick={() => toggleAccordion(index)}>
               <h3 className="flex flex-col items-start gap-x-10 gap-y-3 text-[25px] font-normal leading-[25.2px] text-secondary dark:text-white md:flex-row md:items-center md:text-5xl md:leading-[1.2]">
                 <span className="max-w-sm text-inherit">{service.title}</span>
-                <span className="pr-[2px] text-base text-secondary/70 dark:text-white/70 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
-                  {service.subtitle}
+                <span className="flex items-start pr-[2px] text-base text-secondary/70 dark:text-white/70 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
+                  {service.short_desc}
                 </span>
               </h3>
               <div className="accordion-header-iconV5 transition-all duration-300 group-hover:bg-[#F54BB4]">
@@ -136,18 +87,20 @@ const AwardsV2 = () => {
               <div className="overflow-hidden">
                 <div className="accordion-body flex flex-col justify-start px-10 pb-10 duration-300 sm:ml-2.5 sm:flex-row sm:gap-10 md:ml-6 lg:gap-x-[73px]">
                   <ul className="[&>*:not(:last-child)]:mb-1">
-                    {service.items.slice(0, Math.ceil(service.items.length / 2)).map((item, idx) => (
-                      <li
-                        key={idx}
-                        className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70">
-                        {item}
-                      </li>
-                    ))}
+                    {(service.features ?? [])
+                      .slice(0, Math.ceil((service.features ?? []).length / 2))
+                      .map((item, idx) => (
+                        <li
+                          key={`first-${service.service_id}-${item}`}
+                          className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70">
+                          {item}
+                        </li>
+                      ))}
                   </ul>
                   <ul className="[&>*:not(:last-child)]:mb-1">
-                    {service.items.slice(Math.ceil(service.items.length / 2)).map((item, idx) => (
+                    {(service.features ?? []).slice(Math.ceil((service.features ?? []).length / 2)).map((item, idx) => (
                       <li
-                        key={idx}
+                        key={`second-${service.service_id}-${item}`}
                         className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70">
                         {item}
                       </li>
@@ -162,23 +115,17 @@ const AwardsV2 = () => {
       <RevealWrapper as="ul" className="reveal-me mt-14 flex justify-center">
         <li className="max-md:w-full">
           <Link
-            href="/services"
+            href={buttonUrl}
             className="rv-button rv-button-primary block w-full text-center md:inline-block md:w-auto">
             <div className="rv-button-top">
-              <span>Explore Services</span>
+              <span>{button}</span>
             </div>
             <div className="rv-button-bottom">
-              <span>Explore Services</span>
+              <span>{button}</span>
             </div>
           </Link>
         </li>
       </RevealWrapper>
-
-      {/* <RevealWrapper className="divide-y-[1px] dark:divide-dark dark:last:border-dark max-md:last:border-b [&>*:first-child]:border-t dark:[&>*:first-child]:border-dark">
-        {awards.map((award) => (
-          <AwardItem key={award.year} {...award} />
-        ))}
-      </RevealWrapper> */}
     </section>
   )
 }

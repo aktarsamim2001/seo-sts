@@ -1,5 +1,5 @@
 'use client'
-import { aiDrivenPersonalizationInMarketing } from '@/data/blogsV2/ai-driven-personalization-in-marketing'
+
 import topArrowDark from '@/public/images/icons/top-arrow-dark.svg'
 import topArrow from '@/public/images/icons/top-arrow.svg'
 import Image from 'next/image'
@@ -11,15 +11,14 @@ import Pagination from './Pagination'
 const brandPink = '#F54BB4' // border
 
 const BlogPostV5 = ({ Blogs }) => {
-  const allBlogs = [...Blogs, ...aiDrivenPersonalizationInMarketing]
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 7
-  const totalPage = Math.ceil(allBlogs.length / itemsPerPage)
+  const totalPage = Math.ceil(Blogs?.length / itemsPerPage)
 
   const paginateData = () => {
     const startIndex = (currentPage - 1) * itemsPerPage
     const endIndex = startIndex + itemsPerPage
-    return allBlogs.slice(startIndex, endIndex)
+    return Blogs?.slice(startIndex, endIndex)
   }
   const currentPageData = paginateData()
 

@@ -21,7 +21,7 @@ const ServicesPage = () => {
   console.log('Services details:', servicesDetails) // Debugging line to check services details
 
   useEffect(() => {
-    dispatch(fetchServicesDetails())
+    dispatch(fetchServicesDetails({ slug: 'services' }))
   }, [dispatch])
 
   if (servicesDetails.status) {
@@ -39,9 +39,9 @@ const ServicesPage = () => {
         title={servicesDetails.page_content.banner.sub_title}
         description={servicesDetails.page_content.banner.content}
       />
-      <ServicesV14 services={servicesDetails.page_content.section_content.services} />
-      <Process processSteps={servicesDetails.page_content.process.progrress_timeline} />
-      <CTA>
+      <ServicesV14 services={servicesDetails.page_content.section_content} />
+      <Process processSteps={servicesDetails.page_content.process} />
+      <CTA enquiryData={servicesDetails.page_content.enquiry_data}>
         {servicesDetails.page_content.enquiry_data.title_one}
         <CtaImageSlider
           slides={servicesDetails.page_content.enquiry_data.title_images.map((img, index) => ({

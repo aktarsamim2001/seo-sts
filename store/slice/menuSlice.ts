@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { fetchMenusApi } from '../api_services/menusApi'
+import { service } from '../api_services/api_service'
 
 export interface SubMenu {
   menu_item_id: number
@@ -55,10 +55,10 @@ export const fetchMenus = () => {
   return async (dispatch: any) => {
     dispatch(setMenusLoading(true))
     try {
-      const response = await fetchMenusApi()
+      const response = await service.fetchMenusApi()
       console.log('API response:', response)
-      if (response?.data) {
-        dispatch(setMenus(response.data))
+      if (response?.data?.data) {
+        dispatch(setMenus(response.data.data))
       }
     } catch (error: any) {
       dispatch(setMenusError(error.message || 'Something went wrong'))

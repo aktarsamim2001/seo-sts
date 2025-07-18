@@ -1,4 +1,3 @@
-// src/app/blogs.tsx
 'use client'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,7 +19,7 @@ const BlogPage = () => {
   console.log('Blogs details:', blogsDetails) // Debugging line to check blogs details
 
   useEffect(() => {
-    dispatch(fetchBlogsDetails())
+    dispatch(fetchBlogsDetails({ slug: 'blogs' }))
   }, [dispatch])
 
   if (blogsDetails.status) {
@@ -38,8 +37,8 @@ const BlogPage = () => {
         title={blogsDetails.page_content.banner.sub_title}
         description={blogsDetails.page_content.banner.content}
       />
-      {/* <BlogPostV5 blogs={blogsDetails.page_content.portfolio} /> */}
-      <CTA>
+      <BlogPostV5 blogs={blogsDetails.page_content.portfolio} />
+      <CTA enquiryData={blogsDetails.page_content.enquiry_data}>
         {blogsDetails.page_content.enquiry_data.title_one}
         <CtaImageSlider
           slides={blogsDetails.page_content.enquiry_data.title_images.map((img, index) => ({

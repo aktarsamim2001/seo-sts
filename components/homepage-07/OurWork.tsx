@@ -1,30 +1,17 @@
-import image01 from '@/public/images/marquee-img/our-work-01.webp'
-import image02 from '@/public/images/marquee-img/our-work-02.webp'
-import image03 from '@/public/images/marquee-img/our-work-03.webp'
-import image04 from '@/public/images/marquee-img/our-work-02.webp'
-import image05 from '@/public/images/marquee-img/our-work-05.webp'
-import image06 from '@/public/images/marquee-img/our-work-01.webp'
-import image07 from '@/public/images/marquee-img/our-work-03.webp'
-import image08 from '@/public/images/marquee-img/our-work-05.webp'
-import image09 from '@/public/images/marquee-img/our-work-01.webp'
+// src/components/homepage-07/OurWork.tsx
+import React from 'react'
 import Image from 'next/image'
 import Marquee from 'react-fast-marquee'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 
-const WORK_IMAGES = [
-  { id: 1, src: image01, alt: 'Client Logo 1' },
-  { id: 2, src: image02, alt: 'Client Logo 2' },
-  { id: 3, src: image03, alt: 'Client Logo 3' },
-  { id: 4, src: image04, alt: 'Client Logo 4' },
-  { id: 5, src: image05, alt: 'Client Logo 5' },
-  { id: 6, src: image06, alt: 'Client Logo 6' },
-  { id: 7, src: image07, alt: 'Client Logo 7' },
-  { id: 8, src: image08, alt: 'Client Logo 8' },
-  { id: 9, src: image09, alt: 'Client Logo 9' },
-]
+interface OurWorkProps {
+  title: string
+  subtitle: string
+  workImages: string[]
+}
 
-const OurWork = () => {
+const OurWork: React.FC<OurWorkProps> = ({ title, subtitle, workImages }) => {
   return (
     <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="container">
@@ -33,7 +20,7 @@ const OurWork = () => {
             <span className="rv-badge-text">Our Work</span>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">We Craft Brands For Global Reach</h2>
+            <h2 className="text-appear mx-auto max-w-[770px]">{subtitle}</h2>
           </TextAppearAnimation>
         </div>
       </div>
@@ -41,9 +28,9 @@ const OurWork = () => {
       <RevealWrapper>
         <Marquee speed={70} pauseOnHover>
           <div className="flex items-center gap-4 md:gap-[30px]">
-            {WORK_IMAGES.slice(0, 5).map(({ src, alt, id }) => (
-              <div key={id} className="h-72 max-w-60 first:ml-4 md:h-[470px] md:max-w-[370px] md:first:ml-[30px]">
-                <Image src={src} alt={alt} />
+            {workImages.slice(0, 5).map((src) => (
+              <div key={src} className="h-72 max-w-60 first:ml-4 md:h-[470px] md:max-w-[370px] md:first:ml-[30px]">
+                <Image src={src} alt="Client Logo" width={370} height={470} />
               </div>
             ))}
           </div>
@@ -53,9 +40,9 @@ const OurWork = () => {
       <RevealWrapper>
         <Marquee speed={70} pauseOnHover direction="right">
           <div className="flex items-center justify-around gap-4 pt-[30px] md:gap-[30px]">
-            {WORK_IMAGES.toReversed().map(({ src, alt, id }) => (
-              <div key={id} className="h-72 max-w-60 first:ml-4 md:h-[470px] md:max-w-[370px] md:first:ml-[30px]">
-                <Image src={src} alt={alt} />
+            {workImages.toReversed().map((src) => (
+              <div key={src} className="h-72 max-w-60 first:ml-4 md:h-[470px] md:max-w-[370px] md:first:ml-[30px]">
+                <Image src={src} alt="Client Logo" width={370} height={470} />
               </div>
             ))}
           </div>

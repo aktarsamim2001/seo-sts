@@ -8,22 +8,22 @@ import { useRef } from 'react'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const MARQUEE_IMAGES = [
-  { id: 1, src: '/images/marquee-img/hero-marquee-01.webp' },
-  { id: 2, src: '/images/marquee-img/hero-marquee-02.webp' },
-  { id: 3, src: '/images/marquee-img/hero-marquee-03.webp' },
-  { id: 4, src: '/images/marquee-img/hero-marquee-04.webp' },
-  { id: 5, src: '/images/marquee-img/hero-marquee-02.webp' },
-  { id: 6, src: '/images/marquee-img/hero-marquee-06.webp' },
-  { id: 7, src: '/images/marquee-img/hero-marquee-01.webp' },
-  { id: 8, src: '/images/marquee-img/hero-marquee-02.webp' },
-  { id: 9, src: '/images/marquee-img/hero-marquee-03.webp' },
-  { id: 10, src: '/images/marquee-img/hero-marquee-04.webp' },
-  { id: 11, src: '/images/marquee-img/hero-marquee-01.webp' },
-  { id: 12, src: '/images/marquee-img/hero-marquee-06.webp' },
-]
+// const MARQUEE_IMAGES = [
+//   { id: 1, src: '/images/marquee-img/hero-marquee-01.webp' },
+//   { id: 2, src: '/images/marquee-img/hero-marquee-02.webp' },
+//   { id: 3, src: '/images/marquee-img/hero-marquee-03.webp' },
+//   { id: 4, src: '/images/marquee-img/hero-marquee-04.webp' },
+//   { id: 5, src: '/images/marquee-img/hero-marquee-02.webp' },
+//   { id: 6, src: '/images/marquee-img/hero-marquee-06.webp' },
+//   { id: 7, src: '/images/marquee-img/hero-marquee-01.webp' },
+//   { id: 8, src: '/images/marquee-img/hero-marquee-02.webp' },
+//   { id: 9, src: '/images/marquee-img/hero-marquee-03.webp' },
+//   { id: 10, src: '/images/marquee-img/hero-marquee-04.webp' },
+//   { id: 11, src: '/images/marquee-img/hero-marquee-01.webp' },
+//   { id: 12, src: '/images/marquee-img/hero-marquee-06.webp' },
+// ]
 
-const SkewMarquee = () => {
+const SkewMarquee = ({ marqueeItems }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const marqueeRef = useRef<HTMLDivElement>(null)
 
@@ -77,7 +77,7 @@ const SkewMarquee = () => {
           transformStyle: 'preserve-3d',
         }}>
         <div ref={marqueeRef} className="flex flex-nowrap gap-5">
-          {MARQUEE_IMAGES.map((img) => (
+          {marqueeItems.map((img) => (
             <figure key={img.id} className="marquee-part z-50 flex flex-shrink-0 items-center justify-center">
               <Image width={370} height={400} src={img.src} alt={`Marquee ${img.id}`} />
             </figure>

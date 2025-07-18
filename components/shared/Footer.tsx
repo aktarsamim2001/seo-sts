@@ -1,9 +1,12 @@
-import footerData from '@/data/footer.json'
+'use client'
+
 import arrowIcon from '@/public/images/icons/arrow-Icon.svg'
 import logo from '@/public/images/logo-black.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import FooterProvider from './FooterProvider'
+import { useSelector } from 'react-redux'
+import type { RootState } from '@/store/store'
 
 // ✅ Strong type for each section
 type FooterSection = {
@@ -14,6 +17,22 @@ type FooterSection = {
 }
 
 const Footer = () => {
+  // Get footer menu from Redux
+  const menus = useSelector((state: RootState) => state.menus.data)
+  const footerMenu = menus.find((menu) => menu.menu_name.toLowerCase().includes('footer'))
+  // Map menu_items to FooterSection format
+  const footerSections: FooterSection[] = footerMenu
+    ? [
+        {
+          title: footerMenu.menu_name,
+          links: footerMenu.menu_items.map((item) => ({
+            href: `/${item.menu_item_slug}`,
+            label: item.menu_item_title,
+          })),
+        },
+      ]
+    : []
+
   return (
     <FooterProvider>
       <div className="container">
@@ -45,7 +64,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {footerData.map((section: FooterSection, index) => (
+          {footerSections.map((section: FooterSection, index) => (
             <div key={`Id_${index}`}>
               <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
                 {section.title}

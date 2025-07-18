@@ -1,4 +1,3 @@
-import { brandStrategy } from '@/data/servicesV3/brand-strategy'
 import Image from 'next/image'
 import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
@@ -6,62 +5,57 @@ import RevealWrapperV2 from '../animation/RevealWrapperV2'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 import TextAppearAnimation02 from '../animation/TextAppearAnimation02'
 
-interface WorkType {
+interface ServiceType {
   slug: string
   content: string
+  logo: string
+  logoDark: string
+  title: string
+  description: string
   [key: string]: any
 }
 
-// Replace getMarkDownData with direct array import
-const services: WorkType[] = brandStrategy.map((service, idx) => ({
-  ...service,
-  slug:
-    (service as any).slug ||
-    (typeof service.title === 'string' &&
-      service.title
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^a-z0-9-]/g, '')) ||
-    `service-${idx}`,
-  content: (service as any).content || '',
-}))
+interface ServicesV14Props {
+  services: ServiceType[]
+}
 
-const ServicesV14 = () => {
+const ServicesV14 = ({ services }: ServicesV14Props) => {
   return (
     <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="mb-8 text-center md:mb-16">
         <RevealWrapperV2 className="rv-badge reveal-me mb-3">
-          <span className="rv-badge-text">Services</span>
+          <span className="rv-badge-text">{services?.title}</span>
         </RevealWrapperV2>
         <TextAppearAnimation02>
           <h2 className="text-appear mb-3">
-            Digital solutions designed for <br />
-            <i className="font-instrument text-[#F54BB4]"> maximum impact</i>
+            {services?.sub_title_one}
+            <br />
+            <i className="font-instrument text-[#F54BB4]">{services?.sub_title_two} </i>
           </h2>
         </TextAppearAnimation02>
         <TextAppearAnimation>
           <p className="text-appear mx-auto lg:max-w-[770px]">
-            Our marketing solutions boost engagement and ROI with targeted campaigns, improving brand visibility through
-            SEO and social media.
+            {services?.content ||
+              'Our marketing solutions boost engagement and ROI with targeted campaigns, improving brand visibility through SEO and social media.'}
           </p>
         </TextAppearAnimation>
       </div>
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px] 2xl:grid-cols-3">
-        {services.map((service, idx) => (
+        {services?.services?.map((service) => (
           <RevealWrapper
-            key={service.slug || idx}
+            key={service.service_id}
             className="reveal-me group border border-[#F54BB4] px-6 py-9 lg:px-[30px] lg:py-[50px]">
             <div>
               <figure>
                 <Image
-                  src={service.logo}
+                  src={service.list_image}
                   alt="Light Logo"
                   className="inline-block dark:hidden"
                   width={60}
                   height={60}
                 />
                 <Image
-                  src={service.logoDark}
+                  src={service.list_image}
                   alt="Light Logo"
                   className="hidden dark:inline-block"
                   width={60}
@@ -69,7 +63,7 @@ const ServicesV14 = () => {
                 />
               </figure>
               <h5 className="mb-2 mt-4 lg:mb-3 lg:mt-6">{service.title}</h5>
-              <p className="mb-20 lg:mb-[106px]">{service.description}</p>
+              <p className="mb-20 lg:mb-[106px]">{service.short_desc}</p>
               <div className="accordion-header-iconV5 transition-all duration-300 group-hover:bg-[#F54BB4]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
