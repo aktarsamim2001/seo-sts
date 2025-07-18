@@ -1,4 +1,5 @@
 'use client'
+
 import { Blog2Type } from '@/app/seo-blog/page'
 import topArrowDark from '@/public/images/icons/top-arrow-dark.svg'
 import topArrow from '@/public/images/icons/top-arrow.svg'

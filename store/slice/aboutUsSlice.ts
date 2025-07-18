@@ -110,9 +110,11 @@ export const { setAboutUsDetails, setAboutUsLoading, setAboutUsError } = aboutUs
 
 export default aboutUsSlice.reducer
 
+import type { AppDispatch } from '../store'
+
 // Thunk
 export const fetchAboutUsDetails = (slug: string) => {
-  return async (dispatch: any) => {
+  return async (dispatch: AppDispatch) => {
     dispatch(setAboutUsLoading(true))
     try {
       const response = await service.fetchPageDetailsApi(slug)

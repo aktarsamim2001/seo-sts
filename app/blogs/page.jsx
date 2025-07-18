@@ -16,7 +16,6 @@ import CtaImageSlider from '@/components/shared/CtaImageSlider'
 const BlogPage = () => {
   const dispatch = useDispatch()
   const blogsDetails = useSelector((state) => state.blogs)
-  console.log('Blogs details:', blogsDetails) // Debugging line to check blogs details
 
   useEffect(() => {
     dispatch(fetchBlogsDetails({ slug: 'blogs' }))
@@ -37,7 +36,7 @@ const BlogPage = () => {
         title={blogsDetails.page_content.banner.sub_title}
         description={blogsDetails.page_content.banner.content}
       />
-      <BlogPostV5 blogs={blogsDetails.page_content.portfolio} />
+      <BlogPostV5 />
       <CTA enquiryData={blogsDetails.page_content.enquiry_data}>
         {blogsDetails.page_content.enquiry_data.title_one}
         <CtaImageSlider

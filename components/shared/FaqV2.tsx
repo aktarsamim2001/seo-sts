@@ -1,5 +1,5 @@
 'use client'
-import faqV2Data from '@/data/faqV2.json'
+
 import { FC, useState } from 'react'
 import RevealWrapper from '../animation/RevealWrapper'
 import SectionHeader from './SectionHeader'
@@ -8,12 +8,42 @@ interface PropsType {
   titleChange?: boolean
 }
 
-const FaqV2: FC<PropsType> = ({ titleChange = false }) => {
+const FaqV2: FC<PropsType> = ({ titleChange = false, faq }) => {
   const [activeAccordion, setActiveAccordion] = useState(null)
+
+  console.log('FAQ Data:', faq) // Debugging line to check FAQ data
 
   const toggleAccordion = (id: any) => {
     setActiveAccordion((prevActive) => (prevActive === id ? null : id))
   }
+
+  // Dummy FAQ data
+  const faqV2Data = [
+    [
+      { id: 1, question: 'What is your return policy?', answer: 'You can return any item within 30 days of purchase.' },
+      {
+        id: 2,
+        question: 'How do I track my order?',
+        answer: 'You can track your order using the tracking link sent to your email.',
+      },
+    ],
+    [
+      { id: 3, question: 'Do you offer international shipping?', answer: 'Yes, we ship to most countries worldwide.' },
+      {
+        id: 4,
+        question: 'How can I contact support?',
+        answer: 'You can contact our support team via the contact form on our website.',
+      },
+    ],
+    [
+      { id: 5, question: 'Can I change my order?', answer: 'Yes, you can change your order before it is shipped.' },
+      {
+        id: 6,
+        question: 'Are there any discounts available?',
+        answer: 'Subscribe to our newsletter to get the latest discounts.',
+      },
+    ],
+  ]
 
   return (
     <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">

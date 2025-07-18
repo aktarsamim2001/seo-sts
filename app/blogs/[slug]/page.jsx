@@ -1,14 +1,23 @@
 'use client'
+
 import BlogContent from '@/components/blogpage/BlogContent'
 import CTA from '@/components/shared/CTA'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import LayoutOne from '@/components/shared/LayoutOne'
 import PageHero from '@/components/shared/PageHero'
-import getMarkDownContent from '@/utils/GetMarkDownContent'
 
-const BlogDetails = async ({ params }) => {
-  const slug = params.slug
-  const postBlog = blog.data
+const BlogDetails = ({ params }) => {
+  // Dummy data for local development
+  const postBlog = {
+    title: 'How to Build a Blog with Next.js',
+    description: 'A step-by-step guide to building a modern blog using Next.js and React.',
+  }
+  const blog = {
+    content: '### Introduction\nThis is a dummy blog post.\n### Details\nHere are some details about the blog.',
+    data: {
+      thumbnail: '/images/dummy-blog.jpg',
+    },
+  }
 
   return (
     <LayoutOne>

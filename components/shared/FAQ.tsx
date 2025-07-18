@@ -1,5 +1,5 @@
 'use client'
-import faqData from '@/data/faq.json'
+
 import gradientBg from '@/public/images/gradient-bg.png'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -17,6 +17,35 @@ const FAQ = ({ bigTitleWithBadge = false }: FaqProps) => {
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
   }
+
+  // Dummy FAQ data
+  const faqData = [
+    {
+      id: 1,
+      question: 'What is SmartTask Studios?',
+      answer: 'SmartTask Studios is a creative agency specializing in branding, design, and digital solutions.',
+    },
+    {
+      id: 2,
+      question: 'How can I contact you?',
+      answer: 'You can contact us via our website contact form or email us at hello@smarttaskstudios.com.',
+    },
+    {
+      id: 3,
+      question: 'Do you offer custom packages?',
+      answer: 'Yes, we offer custom packages tailored to your business needs.',
+    },
+    {
+      id: 4,
+      question: 'What is your project turnaround time?',
+      answer: 'Project turnaround time depends on the scope, but most projects are completed within 2-6 weeks.',
+    },
+    {
+      id: 5,
+      question: 'Can I see your portfolio?',
+      answer: 'Absolutely! Please visit our portfolio page to see our recent work.',
+    },
+  ]
 
   return (
     <section

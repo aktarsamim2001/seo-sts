@@ -7,6 +7,8 @@ import portfolioReducer from '../store/slice/portfolioSlice'
 import servicesReducer from '../store/slice/servicesSlice'
 import blogsReducer from '../store/slice/blogsSlice'
 import privacyPolicyReducer from '../store/slice/privacyPolicySlice'
+import blogListReducer from '../store/slice/blogListSlice'
+import serviceDetailsReducer from '../store/slice/serviceDetailsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +18,8 @@ export const store = configureStore({
     portfolio: portfolioReducer,
     services: servicesReducer,
     blogs: blogsReducer,
+    blogList: blogListReducer,
+    serviceDetails: serviceDetailsReducer,
     privacyPolicy: privacyPolicyReducer,
   },
 })

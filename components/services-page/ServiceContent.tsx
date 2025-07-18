@@ -4,8 +4,17 @@ import rehypeSlug from 'rehype-slug'
 import RevealWrapper from '../animation/RevealWrapper'
 import TableOfContent from '../shared/TableOfContent'
 
-const ServiceContent = ({ service }: any) => {
-  const headings = service.content.match(/### .+/g) ?? []
+interface ServiceContentProps {
+  service: {
+    content_data?: string[]
+    content_list?: any[]
+  }
+}
+
+const ServiceContent = ({ service }: ServiceContentProps) => {
+  // Join all markdown content_data into a single string for rendering
+  const markdownContent = Array.isArray(service?.content_data) ? service.content_data.join('\n\n') : ''
+  const headings = markdownContent.match(/### .+/g) ?? []
   const tableOfContents = headings.map((heading: string) => heading.replace('### ', ''))
   return (
     <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
@@ -28,7 +37,11 @@ const ServiceContent = ({ service }: any) => {
               />
             </RevealWrapper>
             <RevealWrapper>
-              <ReactMarkdown rehypePlugins={[[rehypeSlug]]}>{service.content}</ReactMarkdown>
+              {markdownContent ? (
+                <ReactMarkdown rehypePlugins={[[rehypeSlug]]}>{markdownContent}</ReactMarkdown>
+              ) : (
+                <div className="text-gray-400">No content available.</div>
+              )}
             </RevealWrapper>
           </article>
         </div>

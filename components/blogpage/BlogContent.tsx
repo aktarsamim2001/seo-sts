@@ -1,4 +1,3 @@
-import getMarkDownData from '@/utils/GetMarkDownData'
 import Image from 'next/image'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
@@ -13,7 +12,36 @@ interface RestOfTheBlogType {
   [key: string]: any
 }
 
-const blogs: RestOfTheBlogType[] = getMarkDownData('data/blogs')
+const blogs: RestOfTheBlogType[] = [
+  {
+    slug: 'dummy-blog-1',
+    content:
+      '### Introduction\nThis is the introduction for dummy blog 1.\n### Details\nSome more details about dummy blog 1.',
+    data: {
+      thumbnail: '/images/dummy1.jpg',
+      featured: false,
+    },
+    featured: false,
+  },
+  {
+    slug: 'dummy-blog-2',
+    content: '### Overview\nOverview of dummy blog 2.\n### More Info\nAdditional info for dummy blog 2.',
+    data: {
+      thumbnail: '/images/dummy2.jpg',
+      featured: false,
+    },
+    featured: false,
+  },
+  {
+    slug: 'dummy-blog-3',
+    content: '### Start\nDummy blog 3 start section.\n### End\nDummy blog 3 end section.',
+    data: {
+      thumbnail: '/images/dummy3.jpg',
+      featured: false,
+    },
+    featured: false,
+  },
+]
 const RestBlogData = blogs.filter((blog) => blog.featured === false).slice(0, 3)
 
 const BlogContent = ({ blog }: any) => {

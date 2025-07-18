@@ -19,6 +19,40 @@ interface WithBorderProps {
 }
 
 const Marquee: React.FC<WithBorderProps> = ({ withBorder }) => {
+  // Dummy data for marquee logos
+  const data = [
+    {
+      id: 1,
+      logo: '/images/logo1-light.png',
+      darkLogo: '/images/logo1-dark.png',
+      alt: 'Logo 1',
+    },
+    {
+      id: 2,
+      logo: '/images/logo2-light.png',
+      darkLogo: '/images/logo2-dark.png',
+      alt: 'Logo 2',
+    },
+    {
+      id: 3,
+      logo: '/images/logo3-light.png',
+      darkLogo: '/images/logo3-dark.png',
+      alt: 'Logo 3',
+    },
+    {
+      id: 4,
+      logo: '/images/logo4-light.png',
+      darkLogo: '/images/logo4-dark.png',
+      alt: 'Logo 4',
+    },
+    {
+      id: 5,
+      logo: '/images/logo5-light.png',
+      darkLogo: '/images/logo5-dark.png',
+      alt: 'Logo 5',
+    },
+  ]
+
   const { marqueeRef, pauseMarquee, resumeMarquee } = useScrollingMarquee()
 
   const handleMouseEnter = () => {

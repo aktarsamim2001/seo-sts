@@ -15,9 +15,15 @@ async function fetchPageDetailsApi(payload) {
 }
 
 async function fetchBlogsApi(payload) {
-  return axios.get(rootUrl + 'api/cms/blogs', payload, {
+  return axios.post(rootUrl + 'api/cms/blogs', payload, {
     headers: await authHeader(),
   })
 }
 
-export const service = { fetchMenusApi, fetchPageDetailsApi, fetchBlogsApi }
+async function fetchServiceDetailsApi(payload) {
+  return await axios.post(rootUrl + 'api/cms/service-details', payload, {
+    headers: await authHeader(),
+  })
+}
+
+export const service = { fetchMenusApi, fetchPageDetailsApi, fetchBlogsApi, fetchServiceDetailsApi }

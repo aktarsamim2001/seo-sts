@@ -60,7 +60,7 @@ export const fetchPrivacyPolicyDetails = (slug: string) => {
     try {
       const response = await service.fetchPageDetailsApi(slug)
       console.log('API response2:', response)
-      dispatch(setPrivacyPolicyDetails(response))
+      dispatch(setPrivacyPolicyDetails(response.data))
     } catch (error: any) {
       dispatch(setPrivacyPolicyError(error.message || 'Something went wrong'))
     } finally {

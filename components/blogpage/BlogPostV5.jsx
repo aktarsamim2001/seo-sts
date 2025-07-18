@@ -4,21 +4,34 @@ import topArrowDark from '@/public/images/icons/top-arrow-dark.svg'
 import topArrow from '@/public/images/icons/top-arrow.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import RevealWrapper from '../animation/RevealWrapper'
 import Pagination from './Pagination'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/store/store'
+import { fetchBlogs } from '@/store/slice/blogListSlice'
 
 const brandPink = '#F54BB4' // border
 
-const BlogPostV5 = ({ Blogs }) => {
+const BlogPostV5 = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 7
-  const totalPage = Math.ceil(Blogs?.length / itemsPerPage)
+  const dispatch = useDispatch()
+
+  const blogList = useSelector((state) => state.blogList.data)
+  const blogs = blogList.blogs || []
+  console.log('Blogs details2:', blogList)
+
+  useEffect(() => {
+    dispatch(fetchBlogs({ page_no: '01' }))
+  }, [dispatch])
+
+  const itemsPerPage = blogList.per_page || 7
+  const totalPage = Math.ceil(blogs.length / itemsPerPage)
 
   const paginateData = () => {
     const startIndex = (currentPage - 1) * itemsPerPage
     const endIndex = startIndex + itemsPerPage
-    return Blogs?.slice(startIndex, endIndex)
+    return blogs.slice(startIndex, endIndex)
   }
   const currentPageData = paginateData()
 
@@ -39,59 +52,62 @@ const BlogPostV5 = ({ Blogs }) => {
     <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
       <div className="container">
         <RevealWrapper className="grid grid-cols-1 items-center justify-items-center gap-x-6 gap-y-[60px] md:grid-cols-2 md:items-start xl:grid-cols-3">
-          {currentPageData?.slice(0, 3)?.map((blog, idx) => (
-            <div
-              key={'slug' in blog && blog.slug ? blog.slug + '-' + idx : blog.title ? blog.title + '-' + idx : idx}
-              className="underline-hover-effect group max-w-[370px]"
-              style={{ borderColor: brandPink }}>
-              <Link href="/seo-blog/the-evolution-of-minimalist-design" className="block">
-                <figure className="h-[388px] overflow-hidden xl:min-w-[360px]">
-                  <Image
-                    width={360}
-                    height={388}
-                    src={blog.thumbnail || blog.featureImage || '/images/placeholder.png'}
-                    className="h-full w-full object-cover transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
-                    alt={blog.title || 'Blog Images'}
-                  />
-                </figure>
-              </Link>
-              <p className="font-poppins mb-5 mt-[30px] text-sm font-normal uppercase leading-[1.1] tracking-[1.12px]">
-                {blog.date}
-              </p>
-              <Link href="/seo-blog/the-evolution-of-minimalist-design">
-                <div className="blog-title mb-9">
-                  <h3 className="text[25px] md:text-3xl lg:text-4xl lg:leading-[1.2] lg:tracking-[-0.72px]">
-                    {blog.title}
-                  </h3>
-                </div>
-              </Link>
-
-              <Link
-                href="/seo-blog/the-evolution-of-minimalist-design"
-                className="rv-button rv-button-primary2 block w-full md:inline-block md:w-auto">
-                <div className="rv-button-top flex items-center text-center">
-                  <span className="pr-2">3 minute read</span>
-                  <Image className="hidden dark:inline" src={topArrowDark} alt="Arrow Icon" />
-                  <Image className="inline dark:hidden" src={topArrow} alt="Arrow Icon" />
-                </div>
-                <div className="rv-button-bottom flex items-center text-center">
-                  <span className="pr-2">3 minute read</span>
-                  <Image className="inline" src={topArrow} alt="Arrow Icon" />
-                </div>
-              </Link>
-            </div>
-          ))}
+          {currentPageData.length === 0 ? (
+            <div className="col-span-full py-10 text-center text-gray-500">No blogs found.</div>
+          ) : (
+            currentPageData.slice(0, 3).map((blog, idx) => (
+              <div
+                key={blog.slug ? blog.slug + '-' + idx : blog.title ? blog.title + '-' + idx : idx}
+                className="underline-hover-effect group max-w-[370px]"
+                style={{ borderColor: brandPink }}>
+                <Link href="/seo-blog/the-evolution-of-minimalist-design" className="block">
+                  <figure className="h-[388px] overflow-hidden xl:min-w-[360px]">
+                    <Image
+                      width={360}
+                      height={388}
+                      src={blog.list_image || '/images/placeholder.png'}
+                      className="h-full w-full object-cover transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
+                      alt={blog.title || 'Blog Images'}
+                    />
+                  </figure>
+                </Link>
+                <p className="font-poppins mb-5 mt-[30px] text-sm font-normal uppercase leading-[1.1] tracking-[1.12px]">
+                  {blog.posted_on}
+                </p>
+                <Link href="/seo-blog/the-evolution-of-minimalist-design">
+                  <div className="blog-title mb-9">
+                    <h3 className="text[25px] md:text-3xl lg:text-4xl lg:leading-[1.2] lg:tracking-[-0.72px]">
+                      {blog.title}
+                    </h3>
+                  </div>
+                </Link>
+                <Link
+                  href="/seo-blog/the-evolution-of-minimalist-design"
+                  className="rv-button rv-button-primary2 block w-full md:inline-block md:w-auto">
+                  <div className="rv-button-top flex items-center text-center">
+                    <span className="pr-2">{blog.read_time || '3 minute read'}</span>
+                    <Image className="hidden dark:inline" src={topArrowDark} alt="Arrow Icon" />
+                    <Image className="inline dark:hidden" src={topArrow} alt="Arrow Icon" />
+                  </div>
+                  <div className="rv-button-bottom flex items-center text-center">
+                    <span className="pr-2">{blog.read_time || '3 minute read'}</span>
+                    <Image className="inline" src={topArrow} alt="Arrow Icon" />
+                  </div>
+                </Link>
+              </div>
+            ))
+          )}
         </RevealWrapper>
 
         <article className="mt-12 md:mt-[70px] [&>*:not(last-child)]:mb-10">
-          {currentPageData?.slice(3)?.map((blog, idx) => (
+          {currentPageData.slice(3).map((blog, idx) => (
             <RevealWrapper
-              key={'slug' in blog && blog.slug ? blog.slug + '-' + idx : blog.title ? blog.title + '-' + idx : idx}
+              key={blog.slug ? blog.slug + '-' + idx : blog.title ? blog.title + '-' + idx : idx}
               className="underline-hover-effect group flex flex-col-reverse items-center justify-center gap-x-6 gap-y-10 border dark:border-dark md:justify-normal lg:flex-row lg:p-10"
               style={{ borderColor: brandPink }}>
               <div className="flex-1 max-lg:self-center max-lg:px-7 max-lg:pb-7">
                 <p className="font-poppins text-sm font-normal uppercase leading-[1.1] tracking-[1.12px]">
-                  {blog.date}
+                  {blog.posted_on}
                 </p>
                 <Link href="/seo-blog/the-evolution-of-minimalist-design">
                   <div className="blog-title mb-6 mt-5 lg:mb-10">
@@ -100,12 +116,12 @@ const BlogPostV5 = ({ Blogs }) => {
                 </Link>
                 <Link href="/seo-blog/the-evolution-of-minimalist-design" className="rv-button rv-button-primary2">
                   <div className="rv-button-top flex items-center text-center">
-                    <span className="pr-2">3 minute read</span>
+                    <span className="pr-2">{blog.read_time || '3 minute read'}</span>
                     <Image className="inline dark:hidden" src={topArrow} alt="Arrow Icon" />
                     <Image className="hidden dark:inline" src={topArrowDark} alt="Arrow Icon" />
                   </div>
                   <div className="rv-button-bottom flex items-center text-center">
-                    <span className="pr-2">3 minute read</span>
+                    <span className="pr-2">{blog.read_time || '3 minute read'}</span>
                     <Image className="inline" src={topArrow} alt="Arrow Icon" />
                   </div>
                 </Link>
@@ -113,7 +129,7 @@ const BlogPostV5 = ({ Blogs }) => {
               <Link href="/seo-blog/the-evolution-of-minimalist-design" className="max-lg:w-full">
                 <figure className="h-96 w-full overflow-hidden lg:h-[190px] lg:w-[464px] lg:flex-1">
                   <Image
-                    src={blog.thumbnail || blog.featureImage || '/images/placeholder.png'}
+                    src={blog.list_image || '/images/placeholder.png'}
                     width={464}
                     height={190}
                     className="h-full w-full object-cover transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"

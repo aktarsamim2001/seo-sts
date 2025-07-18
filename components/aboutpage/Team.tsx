@@ -1,7 +1,6 @@
 'use client'
 import Image from 'next/image'
 import { useState } from 'react'
-import teamMembers from '@/data/teamMemberData.json'
 import twiterLogo from '@/public/images/icons/x-twitter.svg'
 import twiterDarkLogo from '@/public/images/icons/x-twitter-dark.svg'
 import youtubeLogo from '@/public/images/icons/youtube.svg'
@@ -23,6 +22,43 @@ interface TeamMember {
     youtube?: string
   }
 }
+
+// Dummy data for team members
+const teamMembers: TeamMember[] = [
+  {
+    id: '1',
+    name: 'Alice Johnson',
+    role: 'Lead Designer',
+    image: '/images/team/alice.jpg',
+    bio: 'Alice is a creative lead with 10+ years of experience in UI/UX design.',
+    socialLinks: {
+      twitter: 'https://twitter.com/alicejohnson',
+      facebook: 'https://facebook.com/alicejohnson',
+      youtube: 'https://youtube.com/alicejohnson',
+    },
+  },
+  {
+    id: '2',
+    name: 'Bob Smith',
+    role: 'Frontend Developer',
+    image: '/images/team/bob.jpg',
+    bio: 'Bob specializes in React and modern frontend technologies.',
+    socialLinks: {
+      twitter: 'https://twitter.com/bobsmith',
+      facebook: 'https://facebook.com/bobsmith',
+    },
+  },
+  {
+    id: '3',
+    name: 'Carol Lee',
+    role: 'Project Manager',
+    image: '/images/team/carol.jpg',
+    bio: 'Carol ensures projects are delivered on time and on budget.',
+    socialLinks: {
+      youtube: 'https://youtube.com/carollee',
+    },
+  },
+]
 
 const Team = () => {
   const [selectedMember, setSelectedMember] = useState<TeamMember>(teamMembers[0])

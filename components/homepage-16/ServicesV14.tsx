@@ -45,57 +45,47 @@ const ServicesV14 = ({ services }: ServicesV14Props) => {
           <RevealWrapper
             key={service.service_id}
             className="reveal-me group border border-[#F54BB4] px-6 py-9 lg:px-[30px] lg:py-[50px]">
-            <div>
-              <figure>
-                <Image
-                  src={service.list_image}
-                  alt="Light Logo"
-                  className="inline-block dark:hidden"
-                  width={60}
-                  height={60}
-                />
-                <Image
-                  src={service.list_image}
-                  alt="Light Logo"
-                  className="hidden dark:inline-block"
-                  width={60}
-                  height={60}
-                />
-              </figure>
-              <h5 className="mb-2 mt-4 lg:mb-3 lg:mt-6">{service.title}</h5>
-              <p className="mb-20 lg:mb-[106px]">{service.short_desc}</p>
-              <div className="accordion-header-iconV5 transition-all duration-300 group-hover:bg-[#F54BB4]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  className="absolute left-1/2 top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-team-bezier group-hover:rotate-90 md:size-8">
-                  <path d="M5 16H27" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  <path
-                    d="M18 7L27 16L18 25"
-                    stroke="black"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+            <Link href={`/services/${service.slug}`}>
+              <div className="flex flex-col items-start">
+                <figure>
+                  <Image
+                    src={service.list_image}
+                    alt="Light Logo"
+                    className="inline-block dark:hidden"
+                    width={60}
+                    height={60}
                   />
-                </svg>
+                  <Image
+                    src={service.list_image}
+                    alt="Light Logo"
+                    className="hidden dark:inline-block"
+                    width={60}
+                    height={60}
+                  />
+                </figure>
+                <h5 className="mb-2 mt-4 lg:mb-3 lg:mt-6">{service.title}</h5>
+                <p className="mb-20 lg:mb-[106px]">{service.short_desc}</p>
+                <div className="accordion-header-iconV5 transition-all duration-300 group-hover:bg-[#F54BB4]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    className="absolute left-1/2 top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-team-bezier group-hover:rotate-90 md:size-8">
+                    <path d="M5 16H27" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M18 7L27 16L18 25"
+                      stroke="black"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
               </div>
-            </div>
+            </Link>
           </RevealWrapper>
         ))}
       </div>
-      {/* <RevealWrapper as="ul" className="mx-auto mt-7 flex justify-center max-md:w-full max-md:px-4 md:mt-14">
-        <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-          <Link href="/services" className="rv-button rv-button-primary block md:inline-block">
-            <div className="rv-button-top">
-              <span>Explore Our Services</span>
-            </div>
-            <div className="rv-button-bottom">
-              <span>Explore Our Services</span>
-            </div>
-          </Link>
-        </li>
-      </RevealWrapper> */}
     </section>
   )
 }
