@@ -4,9 +4,10 @@ import RevealWrapper from '../animation/RevealWrapper'
 
 interface PropsTypes {
   spacingTop?: string
+  contentTwo?: string
 }
 
-const HeroAbout = ({ spacingTop }: PropsTypes) => {
+const HeroAbout = ({ spacingTop, contentTwo }: PropsTypes) => {
   const { revealRef } = useReveal()
 
   return spacingTop ? (
@@ -18,7 +19,7 @@ const HeroAbout = ({ spacingTop }: PropsTypes) => {
     </RevealWrapper>
   ) : (
     <RevealWrapper as="section" className="container">
-      <h3 ref={revealRef}>We build innovative digital experiences where creativity meets advanced technology.</h3>
+      <h3 ref={revealRef}>{contentTwo}</h3>
     </RevealWrapper>
   )
 }

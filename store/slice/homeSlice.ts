@@ -123,7 +123,6 @@ const homeSlice = createSlice({
   initialState,
   reducers: {
     setPageDetails(state, action: PayloadAction<PageDetailsState>) {
-      console.log('-------------------->', action.payload)
       state.page_title = action.payload.page_title
       state.page_slug = action.payload.page_slug
       state.page_content = action.payload.page_content

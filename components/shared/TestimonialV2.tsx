@@ -8,10 +8,11 @@ import TextAppearAnimation from '../animation/TextAppearAnimation'
 interface Testimonial {
   id: number
   name: string
-  position: string
-  avatar: string
-  quote: string
-  date: string
+  designation: string
+  avatar_url: string
+  message: string
+  posted_at: string
+  logo: string
 }
 
 interface TestimonialV2Props {
@@ -21,6 +22,8 @@ interface TestimonialV2Props {
 }
 
 const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimonials }) => {
+  console.log(testimonials)
+
   return (
     <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="container">
@@ -39,28 +42,27 @@ const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimon
         <RevealWrapper>
           <Marquee speed={60}>
             <div className="flex justify-center gap-6">
-              {testimonials.map((review, idx) => {
-                // Cycle through 3 border colors: pink, blue, green
+              {testimonials?.map((review, idx) => {
                 let borderColor = '#F54BB4'
                 if (idx % 3 === 1) borderColor = '#53B9FF'
                 if (idx % 3 === 2) borderColor = '#9BCB4B'
                 return (
                   <div
                     className="max-w-[388px] border p-5 first:ml-6 dark:border-backgroundBody/10 md:max-w-[408px]"
-                    key={review.id}
+                    key={idx}
                     style={{ borderColor }}>
                     <div className="flex items-center space-x-4 pb-4">
                       <Image
-                        src={review.avatar}
-                        alt={review.name}
+                        src={review?.avatar_url}
+                        alt={review?.name}
                         width={70}
                         height={70}
                         quality={100}
                         className="h-16 w-16 rounded-full"
                       />
                       <div>
-                        <h3 className="text-[22px] leading-[28.8px] tracking-wide">{review.name}</h3>
-                        <p className="mt-[2px] text-[15px] font-light leading-6">{review.position}</p>
+                        <h3 className="text-[22px] leading-[28.8px] tracking-wide">{review?.name}</h3>
+                        <p className="mt-[2px] text-[15px] font-light leading-6">{review?.designation}</p>
                       </div>
                     </div>
                     <span className="block w-full">
@@ -79,7 +81,7 @@ const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimon
                       </svg>
                     </span>
                     <blockquote className="py-4 text-base text-colorText dark:text-backgroundBody/70 md:text-xl md:leading-7 md:tracking-[0.4px]">
-                      {review.quote}
+                      {review?.message}
                     </blockquote>
                     <div>
                       <svg xmlns="http://www.w3.org/2000/svg" height="2" viewBox="0 0 362 2" fill="none">
@@ -94,14 +96,10 @@ const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimon
 
                     <div className="flex items-center justify-between pt-4">
                       <div className="flex items-center space-x-1">
-                        <Image src="/images/icons/testimonial-logo.png" alt="Logo" className="inline dark:hidden" />
-                        <Image
-                          src="/images/icons/testimonial-dark-logo.png"
-                          alt="Logo"
-                          className="hidden dark:inline"
-                        />
+                        <Image width={70} height={70} src={review?.logo} alt="Logo" className="inline dark:hidden" />
+                        <Image width={70} height={70} src={review?.logo} alt="Logo" className="hidden dark:inline" />
                       </div>
-                      <span className="text-sm font-light leading-5 text-colorText">{review.date}</span>
+                      <span className="text-sm font-light leading-5 text-colorText">{review?.posted_at}</span>
                     </div>
                   </div>
                 )
@@ -117,19 +115,19 @@ const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimon
           <div className="absolute right-0 top-0 z-40 h-full w-[25%] bg-gradient-to-l from-backgroundBody to-transparent dark:from-dark-gradient"></div>
           <Marquee speed={60} direction="right">
             <div className="flex justify-center gap-6">
-              {testimonials.toReversed().map((review, idx) => {
+              {testimonials?.toReversed()?.map((review, idx) => {
                 let borderColor = '#F54BB4'
                 if (idx % 3 === 1) borderColor = '#53B9FF'
                 if (idx % 3 === 2) borderColor = '#9BCB4B'
                 return (
                   <div
                     className="max-w-[388px] border p-5 first:ml-6 dark:border-backgroundBody/10 md:max-w-[408px]"
-                    key={review.id}
+                    key={idx}
                     style={{ borderColor }}>
                     <div className="flex items-center space-x-4 pb-4">
                       <Image
-                        src={review.avatar}
-                        alt={review.name}
+                        src={review?.avatar_url}
+                        alt={review?.name}
                         width={70}
                         height={70}
                         quality={100}
@@ -137,7 +135,7 @@ const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimon
                       />
                       <div>
                         <h3 className="text-[22px] leading-[28.8px] tracking-wide">{review.name}</h3>
-                        <p className="mt-[2px] text-[15px] font-light leading-6">{review.position}</p>
+                        <p className="mt-[2px] text-[15px] font-light leading-6">{review?.designation}</p>
                       </div>
                     </div>
                     <span className="block w-full">
@@ -156,7 +154,7 @@ const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimon
                       </svg>
                     </span>
                     <blockquote className="py-4 text-base text-colorText dark:text-backgroundBody/70 md:text-xl md:leading-7 md:tracking-[0.4px]">
-                      {review.quote}
+                      {review?.message}
                     </blockquote>
                     <div>
                       <svg xmlns="http://www.w3.org/2000/svg" height="2" viewBox="0 0 362 2" fill="none">
@@ -171,14 +169,10 @@ const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimon
 
                     <div className="flex items-center justify-between pt-4">
                       <div className="flex items-center space-x-1">
-                        <Image src="/images/icons/testimonial-logo.png" alt="Logo" className="inline dark:hidden" />
-                        <Image
-                          src="/images/icons/testimonial-dark-logo.png"
-                          alt="Logo"
-                          className="hidden dark:inline"
-                        />
+                        <Image width={70} height={70} src={review?.logo} alt="Logo" className="inline dark:hidden" />
+                        <Image width={70} height={70} src={review?.logo} alt="Logo" className="hidden dark:inline" />
                       </div>
-                      <span className="text-sm font-light leading-5 text-colorText">{review.date}</span>
+                      <span className="text-sm font-light leading-5 text-colorText">{review?.posted_at}</span>
                     </div>
                   </div>
                 )

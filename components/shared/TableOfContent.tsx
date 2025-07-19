@@ -24,7 +24,7 @@ const TableOfContent = ({ tableOfContents, children }: TableOfContentProps) => {
       },
     )
 
-    tableOfContents.forEach((content) => {
+    tableOfContents?.forEach((content) => {
       const element = document.getElementById(slugify(content))
       if (element) {
         observer.observe(element)
@@ -40,7 +40,7 @@ const TableOfContent = ({ tableOfContents, children }: TableOfContentProps) => {
     <div>
       <h3 className="text-3xl md:text-4xl">Table of contents</h3>
       <ul className="mt-3.5 md:mt-5 lg:mt-10 [&>*:not(:last-child)]:mb-2 md:[&>*:not(:last-child)]:mb-5">
-        {tableOfContents.map((content) => {
+        {tableOfContents?.map((content) => {
           const slug = slugify(content)
           return (
             <li key={content}>

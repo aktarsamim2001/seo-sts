@@ -8,30 +8,33 @@ import FooterProvider from './FooterProvider'
 import { useSelector } from 'react-redux'
 import type { RootState } from '@/store/store'
 
-// ✅ Strong type for each section
-type FooterSection = {
-  title: string
-  links: { href: string; label: string }[]
-  socials?: { href: string; icon: string; label: string }[]
-  logo?: { src: string; alt: string }
+type MenuItem = {
+  menu_item_title: string
+  menu_item_slug: string
+}
+
+type MenuSection = {
+  menu_item_title: string
+  logo?: {
+    src: string
+    alt: string
+  }
+  sub_menues?: MenuItem[]
+  socials?: Array<{
+    href: string
+    label: string
+    icon: string
+  }>
+}
+
+type Menu = {
+  menu_name: string
+  menu_items?: MenuSection[]
 }
 
 const Footer = () => {
-  // Get footer menu from Redux
-  const menus = useSelector((state: RootState) => state.menus.data)
+  const menus = useSelector((state: RootState) => state.menus.data as Menu[])
   const footerMenu = menus.find((menu) => menu.menu_name.toLowerCase().includes('footer'))
-  // Map menu_items to FooterSection format
-  const footerSections: FooterSection[] = footerMenu
-    ? [
-        {
-          title: footerMenu.menu_name,
-          links: footerMenu.menu_items.map((item) => ({
-            href: `/${item.menu_item_slug}`,
-            label: item.menu_item_title,
-          })),
-        },
-      ]
-    : []
 
   return (
     <FooterProvider>
@@ -64,33 +67,31 @@ const Footer = () => {
             </div>
           </div>
 
-          {footerSections.map((section: FooterSection, index) => (
+          {footerMenu?.menu_items?.map((section, index) => (
             <div key={`Id_${index}`}>
               <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
-                {section.title}
+                {section?.menu_item_title}
               </h5>
 
-              {/* ✅ Optional logo */}
-              {section.logo && (
+              {section?.logo && (
                 <div className="mb-4">
                   <Image src={section.logo.src} alt={section.logo.alt} width={120} height={40} />
                 </div>
               )}
 
               <ul>
-                {section.links.map(({ href, label }) => (
-                  <li className="mb-4" key={href}>
+                {section?.sub_menues?.map((item, i) => (
+                  <li className="mb-4" key={i}>
                     <Link
-                      href={href}
+                      href={`/${item.menu_item_slug}`}
                       className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary">
-                      {label}
+                      {item.menu_item_title}
                     </Link>
                   </li>
                 ))}
               </ul>
 
-              {/* ✅ Optional socials */}
-              {section.socials && (
+              {section?.socials && (
                 <div className="mt-6 flex items-center gap-4">
                   {section.socials.map((social) => (
                     <Link

@@ -19,6 +19,7 @@ export interface BlogsContent {
 }
 
 export interface BlogsState {
+  blogsDetailsData: unknown
   page_title: string
   page_slug: string
   page_content: BlogsContent
@@ -27,6 +28,7 @@ export interface BlogsState {
 }
 
 const initialState: BlogsState = {
+  blogsDetailsData: null,
   page_title: '',
   page_slug: '',
   page_content: {
@@ -52,6 +54,10 @@ const blogsSlice = createSlice({
   name: 'blogs',
   initialState,
   reducers: {
+    setBlogsDetailsData(state, action) {
+      state.blogsDetailsData = action.payload
+    },
+
     setBlogsDetails(state, action: PayloadAction<BlogsState>) {
       state.page_title = action.payload.page_title
       state.page_slug = action.payload.page_slug
@@ -67,7 +73,7 @@ const blogsSlice = createSlice({
   },
 })
 
-export const { setBlogsDetails, setBlogsLoading, setBlogsError } = blogsSlice.actions
+export const { setBlogsDetails, setBlogsDetailsData, setBlogsLoading, setBlogsError } = blogsSlice.actions
 
 export default blogsSlice.reducer
 
@@ -78,6 +84,22 @@ export const fetchBlogsDetails = (slug: string) => {
     try {
       const response = await service.fetchPageDetailsApi({ slug })
       dispatch(setBlogsDetails(response.data.data))
+    } catch (error: any) {
+      dispatch(setBlogsError(error.message || 'Something went wrong'))
+    } finally {
+      dispatch(setBlogsLoading(false))
+    }
+  }
+}
+
+export const fetchBlogsDetailsData = (slug: string) => {
+  return async (dispatch: any) => {
+    dispatch(setBlogsLoading(true))
+    try {
+      const response = await service.fetchBlogsDetails({ slug })
+      if (response) {
+        dispatch(setBlogsDetailsData(response.data.data))
+      }
     } catch (error: any) {
       dispatch(setBlogsError(error.message || 'Something went wrong'))
     } finally {

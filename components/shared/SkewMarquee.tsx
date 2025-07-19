@@ -77,8 +77,8 @@ const SkewMarquee = ({ marqueeItems }: { marqueeItems: { id: number; src: string
           transformStyle: 'preserve-3d',
         }}>
         <div ref={marqueeRef} className="flex flex-nowrap gap-5">
-          {marqueeItems.map((img) => (
-            <figure key={img.id} className="marquee-part z-50 flex flex-shrink-0 items-center justify-center">
+          {marqueeItems?.map((img, i) => (
+            <figure key={i} className="marquee-part z-50 flex flex-shrink-0 items-center justify-center">
               <Image width={370} height={400} src={img.src} alt={`Marquee ${img.id}`} />
             </figure>
           ))}

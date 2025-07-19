@@ -42,22 +42,25 @@ const blogs: RestOfTheBlogType[] = [
     featured: false,
   },
 ]
-const RestBlogData = blogs.filter((blog) => blog.featured === false).slice(0, 3)
 
-const BlogContent = ({ blog }: any) => {
-  const headings = blog.content.match(/### .+/g) ?? []
-  const tableOfContents = headings.map((heading: string) => heading.replace('### ', ''))
+const BlogContent = ({ blog, blogList }: any) => {
+  const headings = blog?.content?.match(/### .+/g) ?? []
+
+  const tableOfContents = headings?.map((heading: string) => heading?.replace('### ', ''))
+
   return (
     <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-20">
         <RevealWrapper as="figure" className="reveal-me w-full 2xl:max-h-[523px]">
-          <Image
-            src={blog?.data?.thumbnail}
-            width={1280}
-            height={523}
-            alt="Blog Details"
-            className="w-full object-cover"
-          />
+          {blog?.feature_image && (
+            <Image
+              src={blog.feature_image}
+              width={1280}
+              height={523}
+              alt="Blog Details"
+              className="w-full object-cover"
+            />
+          )}
         </RevealWrapper>
 
         <div className="mt-12 flex flex-col justify-start gap-10 pb-14 md:mt-[60px] md:pb-16 lg:flex-row lg:pb-[88px] xl:pb-[100px]">
@@ -168,12 +171,12 @@ const BlogContent = ({ blog }: any) => {
             </div>
           </aside>
           <article className="career-details-body overflow-hidden">
-            <ReactMarkdown rehypePlugins={[[rehypeSlug]]}>{blog.content}</ReactMarkdown>
+            <ReactMarkdown rehypePlugins={[[rehypeSlug]]}>{blog?.content}</ReactMarkdown>
           </article>
         </div>
       </div>
       <div className="container overflow-hidden pt-14 md:pt-16 lg:pt-[88px] xl:pt-[100px]">
-        <BlogList blogData={RestBlogData} />
+        <BlogList blogData={blogList} />
       </div>
     </section>
   )

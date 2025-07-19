@@ -3,7 +3,7 @@ import { useLenis } from 'lenis/react'
 import { useEffect } from 'react'
 
 const Pagination = ({ paginateFunction }: any) => {
-  const { totalPage, currentPage, setCurrentPage, goToNextPage, goToPreviousPage } = paginateFunction
+  const { totalPages, currentPage, setCurrentPage, goToNextPage, goToPreviousPage } = paginateFunction
   const lenis = useLenis()
 
   const handlePageChange = (pageNumber: number) => {
@@ -51,7 +51,7 @@ const Pagination = ({ paginateFunction }: any) => {
           </button>
         </li>
 
-        {Array.from({ length: totalPage }, (_, index) => (
+        {Array.from({ length: totalPages }, (_, index) => (
           <li className={`group ${index + 1 === currentPage && 'page-active'}`} key={index}>
             <button
               className="flex size-10 items-center justify-center text-sm duration-300 hover:bg-primary hover:text-secondary/70 hover:text-white group-[.page-active]:bg-primary dark:group-[.page-active]:text-secondary lg:size-14"
@@ -65,9 +65,9 @@ const Pagination = ({ paginateFunction }: any) => {
           <button
             onClick={handleNextPage}
             className={`group flex size-10 items-center justify-center border text-sm font-normal duration-300 hover:bg-primary dark:border-colorText lg:size-14 ${
-              currentPage === totalPage ? 'disabled:opacity-7 cursor-not-allowed' : 'cursor-pointer hover:bg-primary'
+              currentPage === totalPages ? 'disabled:opacity-7 cursor-not-allowed' : 'cursor-pointer hover:bg-primary'
             }`}
-            disabled={currentPage === totalPage}>
+            disabled={currentPage === totalPages}>
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

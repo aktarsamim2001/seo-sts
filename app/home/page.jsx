@@ -23,8 +23,6 @@ const Page = () => {
   const dispatch = useDispatch()
   const pageDetails = useSelector((state) => state.pageDetails)
 
-  console.log('Page details:', pageDetails) // Debugging line to check page details
-
   useEffect(() => {
     dispatch(fetchPageDetails({ slug: 'home' }))
   }, [dispatch])
@@ -55,9 +53,9 @@ const Page = () => {
         services={pageDetails?.page_content?.services.services}
       />
       <TestimonialV2
-        title={pageDetails?.page_content?.testimonials.title}
-        subtitle={pageDetails?.page_content?.testimonials.subtitle}
-        testimonials={pageDetails?.page_content?.testimonials.testimonials}
+        title={pageDetails?.page_content?.testimonials?.title}
+        subtitle={pageDetails?.page_content?.testimonials?.subtitle}
+        testimonials={pageDetails?.page_content?.testimonials?.testimonials}
       />
       <ProcessV4
         title={pageDetails?.page_content?.process_data.title}
