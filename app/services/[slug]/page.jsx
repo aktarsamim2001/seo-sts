@@ -12,6 +12,7 @@ import CTA from '@/components/shared/CTA'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
 
 import React from 'react'
+import { fetchServicesDetails } from '@/store/slice/servicesSlice'
 
 const ServiceDetails = ({ params }) => {
   const dispatch = useDispatch()
@@ -20,34 +21,34 @@ const ServiceDetails = ({ params }) => {
   const serviceDetails = useSelector((state) => state?.serviceDetails)
   const servicesDetails = useSelector((state) => state?.services)
 
-  console.log('Service details:', serviceDetails)
-
   useEffect(() => {
+    dispatch(fetchServicesDetails({ slug: 'services' }))
     dispatch(fetchServiceDetails(slug))
   }, [dispatch, slug])
 
-  console.log('Service Details Content:', serviceDetails?.page_content?.faqs)
+  console.log(serviceDetails?.page_content?.data)
+
   return (
     <LayoutOne>
       <ServicesHero
-        title={serviceDetails?.page_content?.banner?.title}
-        description={serviceDetails?.page_content?.banner?.short_desc}
+        title={serviceDetails?.page_content?.data?.banner?.title}
+        description={serviceDetails?.page_content?.data?.banner?.short_desc}
         scale
       />
-      <ServiceContent service={serviceDetails?.page_content?.table_contents} />
-      <WhyChooseUsV6 whyChooseUs={serviceDetails?.page_content?.why_choose_us} />
-      {/* <FaqV2 faqs={serviceDetails?.page_content?.faqs} titleChange /> */}
-      <CTA enquiryData={servicesDetails.page_content.enquiry_data}>
-        {servicesDetails.page_content.enquiry_data.title_one}
+      <ServiceContent service={serviceDetails?.page_content?.data?.table_contents} />
+      <WhyChooseUsV6 whyChooseUs={serviceDetails?.page_content?.data?.why_choose_us} />
+      <FaqV2 faqs={serviceDetails?.page_content?.data?.faqs} titleChange />
+      <CTA enquiryData={servicesDetails.page_content?.data?.enquiry_data}>
+        {servicesDetails?.page_content?.enquiry_data?.data?.title_one}
         <CtaImageSlider
-          slides={servicesDetails.page_content.enquiry_data.title_images.map((img, index) => ({
+          slides={servicesDetails?.page_content?.enquiry_data?.data?.title_images?.map((img, index) => ({
             id: String(index + 1),
             img: img,
           }))}
         />
-        {servicesDetails.page_content.enquiry_data.title_two}
+        {servicesDetails?.page_content?.enquiry_data?.data?.title_two}
         <i className="block font-instrument italic text-[#F54BB4] max-md:inline-block max-sm:pl-2 sm:mt-10">
-          {servicesDetails.page_content.enquiry_data.title_three}
+          {servicesDetails?.page_content?.enquiry_data?.data?.title_three}
         </i>
       </CTA>
     </LayoutOne>

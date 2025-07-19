@@ -1,14 +1,29 @@
 import React from 'react'
 
-function Pagination() {
+interface PaginationProps {
+  currentPage: number
+  totalPages: number
+  paginate: (pageNumber: number) => void
+}
+
+function Pagination({ currentPage, totalPages, paginate }: PaginationProps) {
+  // Generate page numbers
+  const pageNumbers = []
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i)
+  }
+
   return (
     <div className="reveal-me mt-16 md:mt-24">
       <ul className="reveal-me flex flex-wrap items-center justify-center gap-3">
-        {/* Previous Button - disabled */}
+        {/* Previous Button */}
         <li className="group">
           <button
-            className="group flex size-10 cursor-not-allowed items-center justify-center border text-sm font-normal opacity-70 duration-300 dark:border-colorText lg:size-14"
-            disabled>
+            onClick={() => currentPage > 1 && paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`group flex size-10 items-center justify-center border text-sm font-normal duration-300 dark:border-colorText lg:size-14 ${
+              currentPage === 1 ? 'cursor-not-allowed opacity-70' : 'hover:bg-primary hover:text-white'
+            }`}>
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -26,20 +41,25 @@ function Pagination() {
           </button>
         </li>
 
-        {/* Page Numbers - static */}
-        {[1, 2, 3, 4, 5].map((page) => (
-          <li className={`group ${page === 1 ? 'page-active' : ''}`} key={page}>
-            <button className="flex size-10 items-center justify-center text-sm duration-300 hover:bg-primary hover:text-white group-[.page-active]:bg-primary dark:group-[.page-active]:text-secondary lg:size-14">
-              {page}
+        {/* Page Numbers */}
+        {pageNumbers.map((number) => (
+          <li className={`group ${currentPage === number ? 'page-active' : ''}`} key={number}>
+            <button
+              onClick={() => paginate(number)}
+              className="flex size-10 items-center justify-center text-sm duration-300 hover:bg-primary hover:text-white group-[.page-active]:bg-primary dark:group-[.page-active]:text-secondary lg:size-14">
+              {number}
             </button>
           </li>
         ))}
 
-        {/* Next Button - disabled */}
+        {/* Next Button */}
         <li className="group">
           <button
-            className="group flex size-10 cursor-not-allowed items-center justify-center border text-sm font-normal opacity-70 duration-300 dark:border-colorText lg:size-14"
-            disabled>
+            onClick={() => currentPage < totalPages && paginate(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`group flex size-10 items-center justify-center border text-sm font-normal duration-300 dark:border-colorText lg:size-14 ${
+              currentPage === totalPages ? 'cursor-not-allowed opacity-70' : 'hover:bg-primary hover:text-white'
+            }`}>
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

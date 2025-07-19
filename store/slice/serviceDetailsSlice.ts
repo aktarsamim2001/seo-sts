@@ -118,11 +118,11 @@ export const fetchServiceDetails = (slug: string) => {
   return async (dispatch: any) => {
     dispatch(setServiceDetailsLoading(true))
     try {
-      const response = await service.fetchServiceDetailsApi({ slug }) // Remove { slug } since the API expects a string
+      const response = await service.fetchServiceDetailsApi({ slug })
 
       const mappedData: ServiceDetailsState = {
-        page_title: response.data.banner.title || 'Service Details', // Fallback if page_title isn't provided
-        page_slug: slug, // Use the input slug
+        page_title: response?.data?.banner?.title || 'Service Details',
+        page_slug: slug,
         page_content: response.data,
         status: false,
         error: null,

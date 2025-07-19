@@ -1,6 +1,8 @@
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 
 interface headingProps {
+  titleOne: string
+  titleTwo: string
   headingTitle: string
   italicTitle?: string
   description: string
@@ -9,6 +11,8 @@ interface headingProps {
 }
 
 const SectionHeader = ({
+  titleOne,
+  titleTwo,
   headingTitle,
   italicTitle,
   description,
