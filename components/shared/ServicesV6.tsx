@@ -1,6 +1,5 @@
 // src/components/shared/ServicesV6.tsx
 import React, { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
@@ -8,8 +7,9 @@ import TextAppearAnimation from '../animation/TextAppearAnimation'
 interface Service {
   id: number
   title: string
-  subtitle: string
-  items: string[]
+  subtitle?: string
+  short_desc?: string
+  features?: string[]
 }
 
 interface ServicesV6Props {
@@ -26,7 +26,6 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
   }
-  console.log('ServicesV6 props:', { title, subtitle, button, buttonUrl, services }) // Debugging line to check props
 
   return (
     <section className="relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
@@ -39,10 +38,11 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
             <h2 className="text-appear mx-auto max-w-[770px]">{subtitle}</h2>
           </TextAppearAnimation>
         </div>
+
         <RevealWrapper className="mx-auto w-full max-w-[1170px] [&>*:not(:last-child)]:mb-6">
           {services.map((service, index) => (
             <div
-              key={service.service_id}
+              key={service.id}
               className="faq-body-transition overflow-hidden border border-[#F54BB4] bg-backgroundBody duration-300 dark:border-[#F54BB4] dark:bg-dark">
               <div
                 className={`group relative flex cursor-pointer items-center justify-between px-5 py-5 md:px-10 ${
@@ -72,6 +72,7 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
                   </svg>
                 </div>
               </div>
+
               <div
                 className={`grid transition-all duration-300 ease-in-out ${
                   activeIndex === index ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
@@ -83,7 +84,7 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
                         .slice(0, Math.ceil((service.features ?? []).length / 2))
                         .map((item, idx) => (
                           <li
-                            key={`first-${service.service_id}-${item}`}
+                            key={`first-${service.id}-${idx}`}
                             className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70">
                             {item}
                           </li>
@@ -94,7 +95,7 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
                         .slice(Math.ceil((service.features ?? []).length / 2))
                         .map((item, idx) => (
                           <li
-                            key={`second-${service.service_id}-${item}`}
+                            key={`second-${service.id}-${idx}`}
                             className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70">
                             {item}
                           </li>
@@ -106,6 +107,7 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
             </div>
           ))}
         </RevealWrapper>
+
         <RevealWrapper as="ul" className="reveal-me mt-14 flex justify-center">
           <li className="max-md:w-full">
             <Link

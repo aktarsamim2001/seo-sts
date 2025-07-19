@@ -23,7 +23,7 @@ gsap.registerPlugin(ScrollTrigger)
 //   { id: 12, src: '/images/marquee-img/hero-marquee-06.webp' },
 // ]
 
-const SkewMarquee = ({ marqueeItems }) => {
+const SkewMarquee = ({ marqueeItems }: { marqueeItems: { id: number; src: string }[] }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const marqueeRef = useRef<HTMLDivElement>(null)
 

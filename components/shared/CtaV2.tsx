@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
 
-const CtaV2 = ({ enquiryData }) => {
+const CtaV2 = ({ enquiryData }: any) => {
   return (
     <section className="mt-14 bg-backgroundBody pb-20 pt-16 dark:bg-secondary md:mt-16 md:pb-36 lg:mt-[88px] lg:pt-[100px] xl:mt-[100px]">
       <div className="container flex flex-col justify-center gap-y-10 max-md:items-center sm:justify-between md:flex-row">

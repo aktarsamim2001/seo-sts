@@ -1,19 +1,46 @@
-import CTA from '@/components/shared/CTA'
-import CtaImageSlider from '@/components/shared/CtaImageSlider'
+// src/app/terms/page.jsx
+'use client'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchTermsConditionsDetails } from '@/store/slice/termsConditionsSlice'
 import LayoutOne from '@/components/shared/LayoutOne'
 import PageHero from '@/components/shared/PageHero'
+import CTA from '@/components/shared/CTA'
+import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import TermsPolicyBody from '@/components/shared/TermsPolicyBody'
 
-export const metadata = {
-  title: 'Terms & Conditions',
-}
-// const termsData = getMarkDownData('data/policy')
+const Page = () => {
+  const dispatch = useDispatch()
+  const pageDetails = useSelector((state) => state.termsConditions)
+  console.log('Page details:', pageDetails) // Debugging line to check page details
 
-const FAQPage = () => {
+  useEffect(() => {
+    dispatch(fetchTermsConditionsDetails('terms-conditions')) // Pass the slug as a string
+  }, [dispatch])
+
+  if (pageDetails.status) {
+    return <p>Loading...</p>
+  }
+
+  if (pageDetails.error) {
+    return <p>Error: {pageDetails.error}</p>
+  }
+
   return (
     <LayoutOne>
-      <PageHero title="Terms & " italicTitle="Privacy" badgeTitle="Terms" scale />
-      <TermsPolicyBody />
+      <PageHero
+        title={pageDetails.page_content.title}
+        italicTitle={pageDetails.page_content.sub_title_two}
+        badgeTitle="Terms"
+        scale
+      />
+      <TermsPolicyBody
+        termsData={{
+          slug: pageDetails.page_slug,
+          content: pageDetails.page_content.page_content,
+        }}
+        heading={true}
+      />
       <CTA>
         Let's chat!
         <CtaImageSlider
@@ -32,4 +59,4 @@ const FAQPage = () => {
   )
 }
 
-export default FAQPage
+export default Page

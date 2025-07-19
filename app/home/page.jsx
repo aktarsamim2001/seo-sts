@@ -29,14 +29,6 @@ const Page = () => {
     dispatch(fetchPageDetails({ slug: 'home' }))
   }, [dispatch])
 
-  if (pageDetails.status) {
-    return <p>Loading...</p>
-  }
-
-  if (pageDetails.error) {
-    return <p>Error: {pageDetails.error}</p>
-  }
-
   return (
     <LayoutOne>
       <HeroV7
@@ -50,33 +42,34 @@ const Page = () => {
         sliderImages={pageDetails.page_content.banner.slider_images}
       />
       <OurWork
-        title={pageDetails.page_content.our_work.title}
-        subtitle={pageDetails.page_content.our_work.subtitle}
-        workImages={pageDetails.page_content.our_work.work_images}
+        title={pageDetails?.page_content?.our_work.title}
+        subtitle={pageDetails?.page_content?.our_work.subtitle}
+        workImages={pageDetails?.page_content?.our_work?.work_images}
       />
+
       <ServicesV6
-        title={pageDetails.page_content.services.title}
-        subtitle={pageDetails.page_content.services.subtitle}
-        button={pageDetails.page_content.services.button}
-        buttonUrl={pageDetails.page_content.services.button_url}
-        services={pageDetails.page_content.services.services}
+        title={pageDetails?.page_content?.services.title}
+        subtitle={pageDetails?.page_content?.services.subtitle}
+        button={pageDetails?.page_content?.services.button}
+        buttonUrl={pageDetails?.page_content?.services.button_url}
+        services={pageDetails?.page_content?.services.services}
       />
       <TestimonialV2
-        title={pageDetails.page_content.testimonials.title}
-        subtitle={pageDetails.page_content.testimonials.subtitle}
-        testimonials={pageDetails.page_content.testimonials.testimonials}
+        title={pageDetails?.page_content?.testimonials.title}
+        subtitle={pageDetails?.page_content?.testimonials.subtitle}
+        testimonials={pageDetails?.page_content?.testimonials.testimonials}
       />
       <ProcessV4
-        title={pageDetails.page_content.process_data.title}
-        subtitle={pageDetails.page_content.process_data.subtitle}
-        featureImage={pageDetails.page_content.process_data.feature_image}
-        processSteps={pageDetails.page_content.process_data.process_data}
+        title={pageDetails?.page_content?.process_data.title}
+        subtitle={pageDetails?.page_content?.process_data.subtitle}
+        featureImage={pageDetails?.page_content?.process_data.feature_image}
+        processSteps={pageDetails?.page_content?.process_data.process_data}
       />
       {/* <PricingCard showHeader={true} /> */}
-      <CTA enquiryData={pageDetails.page_content.enquiry_data} form>
+      <CTA enquiryData={pageDetails?.page_content?.enquiry_data} form={true}>
         Let’s
         <CtaImageSlider
-          slides={pageDetails.page_content.enquiry_data.title_images.map((img, index) => ({
+          slides={pageDetails?.page_content?.enquiry_data?.title_images.map((img, index) => ({
             id: String(index + 1),
             img: img,
           }))}

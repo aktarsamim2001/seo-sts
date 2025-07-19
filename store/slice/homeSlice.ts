@@ -147,7 +147,7 @@ export const fetchPageDetails = (slug: string) => {
   return async (dispatch: any) => {
     dispatch(setPageDetailsLoading(true))
     try {
-      const response = await service.fetchPageDetailsApi(slug)
+      const response = await service.fetchPageDetailsApi({ slug })
       if (response) {
         dispatch(setPageDetails(response.data.data))
       }

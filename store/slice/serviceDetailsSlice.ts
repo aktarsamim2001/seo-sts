@@ -118,7 +118,7 @@ export const fetchServiceDetails = (slug: string) => {
   return async (dispatch: any) => {
     dispatch(setServiceDetailsLoading(true))
     try {
-      const response = await service.fetchServiceDetailsApi(slug) // Remove { slug } since the API expects a string
+      const response = await service.fetchServiceDetailsApi({ slug }) // Remove { slug } since the API expects a string
       console.log('API response:', response)
       // Map API response to ServiceDetailsState
       const mappedData: ServiceDetailsState = {

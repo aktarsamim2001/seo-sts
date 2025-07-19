@@ -26,13 +26,13 @@ const AboutPage = () => {
     dispatch(fetchAboutUsDetails({ slug: 'about-us' }))
   }, [dispatch])
 
-  if (aboutUsDetails.status) {
-    return <p>Loading...</p>
-  }
+  // if (aboutUsDetails.status) {
+  //   return <p>Loading...</p>
+  // }
 
-  if (aboutUsDetails.error) {
-    return <p>Error: {aboutUsDetails.error}</p>
-  }
+  // if (aboutUsDetails.error) {
+  //   return <p>Error: {aboutUsDetails.error}</p>
+  // }
 
   console.log('About Us page content:', aboutUsDetails.page_content.enquiry_data.title_images) // Debugging line to check page content
   return (
@@ -49,7 +49,7 @@ const AboutPage = () => {
         content_two={aboutUsDetails.page_content.section_content.content_two}
         feature_image={aboutUsDetails.page_content.section_content.feature_image}
       />
-      {/* <Team /> */}
+      <Team />
       {/* <Marquee withBorder={true} /> */}
       <AwardsV2
         title={aboutUsDetails.page_content.services.title}
@@ -58,7 +58,7 @@ const AboutPage = () => {
         buttonUrl={aboutUsDetails.page_content.services.button_url}
         services={aboutUsDetails.page_content.services.services}
       />
-      <CTA enquiryData={aboutUsDetails.page_content.enquiry_data}>
+      <CTA enquiryData={aboutUsDetails.page_content.enquiry_data} form={false}>
         {aboutUsDetails.page_content.enquiry_data.title_one}
         <CtaImageSlider
           slides={aboutUsDetails.page_content.enquiry_data.title_images.map((img, index) => ({

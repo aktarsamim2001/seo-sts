@@ -117,7 +117,7 @@ export const fetchAboutUsDetails = (slug: string) => {
   return async (dispatch: AppDispatch) => {
     dispatch(setAboutUsLoading(true))
     try {
-      const response = await service.fetchPageDetailsApi(slug)
+      const response = await service.fetchPageDetailsApi({ slug })
       console.log('API response:', response.data)
       dispatch(setAboutUsDetails(response.data.data))
     } catch (error: any) {

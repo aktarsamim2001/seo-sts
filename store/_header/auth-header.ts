@@ -1,4 +1,4 @@
-export async function authHeader(type) {
+export async function authHeader(type: any) {
   const token = 'DPxFQi8jwup1ZAbPe21G6dU3JRSbW1jByAkVjl4LyLXFMktKDfpxfKhVRvxy0sDJ'
 
   if (token) {

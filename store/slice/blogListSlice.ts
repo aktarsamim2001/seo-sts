@@ -60,7 +60,7 @@ export const fetchBlogs = (pageNo: number) => {
   return async (dispatch: any) => {
     dispatch(setBlogsLoading(true))
     try {
-      const response = await service.fetchBlogsApi(pageNo)
+      const response = await service.fetchBlogsApi({ pageNo })
       console.log('Fetched blogs:', response) // Debugging line to check fetched blogs
       dispatch(setBlogs(response.data.data))
     } catch (error: any) {

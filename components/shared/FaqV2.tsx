@@ -6,6 +6,11 @@ import SectionHeader from './SectionHeader'
 
 interface PropsType {
   titleChange?: boolean
+  faq: {
+    id: number
+    question: string
+    answer: string
+  }[]
 }
 
 const FaqV2: FC<PropsType> = ({ titleChange = false, faq }) => {

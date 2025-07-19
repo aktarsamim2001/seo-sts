@@ -75,7 +75,7 @@ export const fetchPortfolioDetails = (slug: string) => {
   return async (dispatch: any) => {
     dispatch(setPortfolioLoading(true))
     try {
-      const response = await service.fetchPageDetailsApi(slug)
+      const response = await service.fetchPageDetailsApi({ slug })
       dispatch(setPortfolioDetails(response.data.data))
     } catch (error: any) {
       dispatch(setPortfolioError(error.message || 'Something went wrong'))

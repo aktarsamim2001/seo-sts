@@ -19,9 +19,10 @@ interface EnquiryData {
 interface CTAProps {
   enquiryData: EnquiryData
   headingClass?: string
+  form: boolean
 }
 
-const CTA: FC<CTAProps> = ({ enquiryData, headingClass = '', form = true }) => {
+const CTA: FC<CTAProps> = ({ enquiryData, headingClass = '', form }) => {
   return (
     <section className="relative pb-[70px] pt-14 md:pt-16 lg:pb-[140px] lg:pt-[88px] xl:pt-[100px]">
       <div className="container">

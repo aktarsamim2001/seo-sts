@@ -4,21 +4,26 @@ import Image from 'next/image'
 import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
-// import image1 from '../../public/images/home-3/services-1.webp'
-// import image2 from '../../public/images/home-3/services-2.webp'
-// import image3 from '../../public/images/home-3/services-3.webp'
-// import image4 from '../../public/images/home-3/services-4.webp'
 import Pagination from './Pagination'
 
-// const item = [image1, image2, image3, image4]
+interface ProjectItem {
+  title: string
+  feature_image: string
+  [key: string]: any
+}
 
 interface projectType {
   slug: string
   content: string
-  [key: string]: any
+  banner: {
+    title_one: string
+    title_two: string
+    content: string
+  }
+  portfolio: ProjectItem[]
 }
 
-const ProjectServicesV3 = ({ portfolio }) => {
+const ProjectServicesV3 = ({ portfolio }: { portfolio: projectType }) => {
   return (
     <section className="pb-14 pt-28 sm:pt-36 md:pb-16 md:pt-[157px] lg:pb-[88px] xl:pb-[100px]">
       <div className="container">
@@ -42,7 +47,7 @@ const ProjectServicesV3 = ({ portfolio }) => {
         </div>
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2">
-          {portfolio?.portfolio?.map((item, idx) => (
+          {portfolio?.portfolio?.map((item: ProjectItem, idx: number) => (
             <RevealWrapper key={idx} className="single-project-item underline-hover-effect">
               <div className="block">
                 <figure className="overflow-hidden">

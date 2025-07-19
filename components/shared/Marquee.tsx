@@ -1,4 +1,5 @@
 'use client'
+import { data } from '@/data/logo/logo'
 import useScrollingMarquee from '@/hooks/useScrollingMarquee'
 import gradientBg from '@/public/images/gradient-bg.png'
 import Image from 'next/image'

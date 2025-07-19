@@ -58,7 +58,7 @@ export const fetchPrivacyPolicyDetails = (slug: string) => {
   return async (dispatch: any) => {
     dispatch(setPrivacyPolicyLoading(true))
     try {
-      const response = await service.fetchPageDetailsApi(slug)
+      const response = await service.fetchPageDetailsApi({ slug })
       console.log('API response2:', response)
       dispatch(setPrivacyPolicyDetails(response.data))
     } catch (error: any) {

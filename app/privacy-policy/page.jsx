@@ -39,7 +39,7 @@ const FAQPage = () => {
         badgeTitle="Policy"
         scale
       />
-      {/* <TermsPolicyBody /> */}
+      <TermsPolicyBody />
       {/* <CTA enquiryData={pageDetails.page_content.enquiry_data}>
         {pageDetails.page_content.enquiry_data.title_one}
         <CtaImageSlider

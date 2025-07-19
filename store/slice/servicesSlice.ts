@@ -113,7 +113,7 @@ export const fetchServicesDetails = (slug: string) => {
   return async (dispatch: any) => {
     dispatch(setServicesLoading(true))
     try {
-      const response = await service.fetchPageDetailsApi(slug)
+      const response = await service.fetchPageDetailsApi({ slug })
       dispatch(setServicesDetails(response.data.data))
     } catch (error: any) {
       dispatch(setServicesError(error.message || 'Something went wrong'))

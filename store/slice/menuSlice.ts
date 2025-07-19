@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { service } from '../api_services/api_service'
+import { AppDispatch } from '../store'
 
 export interface SubMenu {
   menu_item_id: number
@@ -52,7 +53,7 @@ export default menusSlice.reducer
 
 // Thunk
 export const fetchMenus = () => {
-  return async (dispatch: any) => {
+  return async (dispatch: AppDispatch) => {
     dispatch(setMenusLoading(true))
     try {
       const response = await service.fetchMenusApi()
