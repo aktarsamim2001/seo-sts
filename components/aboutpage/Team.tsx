@@ -133,12 +133,9 @@ const Team = ({ teamData }: { teamData: TeamMember[] }) => {
               className={`tab-member flex h-auto w-full items-center gap-5 border p-5 dark:border-dark 2xl:max-w-[370px] ${
                 selectedMember?.name === member?.name ? 'tab-active' : ''
               }`}>
-              {/* <figure className="relative h-[130px] w-[130px]">
-                <Image src={member.image} alt={member.name} fill className="object-cover" sizes="130px" />
-              </figure> */}
               <div className="text-left">
                 <h3 className="mb-3 text-nowrap text-2xl leading-[1.2] tracking-[-0.72px]">{member?.name}</h3>
-                <p>{member?.designation}</p>
+                <p className={`tab-member ${selectedMember?.name === member?.name ? 'tab-active' : ''}`}>{member?.designation}</p>
               </div>
             </div>
           ))}

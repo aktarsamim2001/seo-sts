@@ -60,7 +60,8 @@ export const fetchTermsConditionsDetails = (slug: string) => {
     dispatch(setTermsConditionsLoading(true))
     try {
       const response = await service.fetchPageDetailsApi({ slug })
-      dispatch(setTermsConditionsDetails(response.data))
+      console.log('Response from API:', response)
+      dispatch(setTermsConditionsDetails(response.data.data))
     } catch (error: any) {
       dispatch(setTermsConditionsError(error.message || 'Something went wrong'))
     } finally {

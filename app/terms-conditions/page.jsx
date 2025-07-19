@@ -11,33 +11,29 @@ import TermsPolicyBody from '@/components/shared/TermsPolicyBody'
 
 const Page = () => {
   const dispatch = useDispatch()
-  const pageDetails = useSelector((state) => state.termsConditions)
-  console.log('Page details:', pageDetails) // Debugging line to check page details
+  const pageDetails = useSelector((state) => state?.termsConditions)
+  const terms = pageDetails?.page_content?.page_content
+
+  console.log('Page details:', pageDetails) 
 
   useEffect(() => {
-    dispatch(fetchTermsConditionsDetails('terms-conditions')) // Pass the slug as a string
+    dispatch(fetchTermsConditionsDetails({ slug: 'terms-conditions' })) 
   }, [dispatch])
-
-  if (pageDetails.status) {
-    return <p>Loading...</p>
-  }
-
-  if (pageDetails.error) {
-    return <p>Error: {pageDetails.error}</p>
-  }
 
   return (
     <LayoutOne>
       <PageHero
-        title={pageDetails.page_content.title}
-        italicTitle={pageDetails.page_content.sub_title_two}
+        title={pageDetails?.page_content?.title}
+        italicTitle={terms?.page_content?.sub_title_two}
         badgeTitle="Terms"
         scale
       />
-      <TermsPolicyBody
+      <TermsPolicyBody termsData={terms} />
+
+      {/* <TermsPolicyBody
         termsData={{
-          slug: pageDetails.page_slug,
-          content: pageDetails.page_content.page_content,
+          slug: pageDetails?.page_slug,
+          content: pageDetails?.page_content?.page_content,
         }}
         heading={true}
       />
@@ -54,7 +50,7 @@ const Page = () => {
         <i className="block font-instrument italic text-[#F54BB4] max-md:inline-block max-sm:pl-2 sm:mt-10">
           A virtual coffee?
         </i>
-      </CTA>
+      </CTA> */}
     </LayoutOne>
   )
 }

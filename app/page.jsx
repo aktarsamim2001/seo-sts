@@ -3,7 +3,6 @@
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import { RootState } from '@/store/store'
 import { fetchPageDetails } from '@/store/slice/homeSlice'
 import HeroV7 from '@/components/homepage-07/HeroV7'
 import OurWork from '@/components/homepage-07/OurWork'
@@ -15,15 +14,12 @@ import LayoutOne from '@/components/shared/LayoutOne'
 import ServicesV6 from '@/components/shared/ServicesV6'
 import TestimonialV2 from '@/components/shared/TestimonialV2'
 import { fetchMenus } from '@/store/slice/menuSlice'
-// export const metadata = {
-//   title: 'Design Studio - SmartTask Studios',
-// }
 
 const Page = () => {
   const dispatch = useDispatch()
   const pageDetails = useSelector((state) => state.pageDetails)
 
-  console.log('Page details:', pageDetails) // Debugging line to check page details
+  console.log('Page details:', pageDetails)
 
   useEffect(() => {
     dispatch(fetchPageDetails({ slug: 'home' }))
@@ -73,10 +69,10 @@ const Page = () => {
         processSteps={pageDetails.page_content.process_data.process_data}
       />
       {/* <PricingCard showHeader={true} /> */}
-      <CTA enquiryData={pageDetails.page_content.enquiry_data}>
+      <CTA enquiryData={pageDetails?.page_content?.enquiry_data} form={true}>
         Let’s
         <CtaImageSlider
-          slides={pageDetails.page_content.enquiry_data.title_images.map((img, index) => ({
+          slides={pageDetails?.page_content?.enquiry_data?.title_images.map((img, index) => ({
             id: String(index + 1),
             img: img,
           }))}
