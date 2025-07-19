@@ -194,12 +194,12 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
               className={`menu-list-item-dropdown absolute left-1/2 h-fit max-h-[60vh] w-[90vw] -translate-x-1/2 gap-x-4 overflow-y-auto md:w-[350px] md:overflow-visible md:pb-0 lg:w-[650px] xl:w-[700px] ${
                 item.menu_item_title === 'Home'
                   ? '!grid !grid-cols-1 lg:-mt-[70px] lg:!grid-cols-2'
-                  : '!grid !grid-cols-1 items-center lg:-mt-[70px] lg:!grid-cols-2'
+                  : '!grid !grid-cols-1 items-center lg:-mt-[70px]'
               } ${activeItems.includes(item.menu_item_title) || (item.menu_item_title === 'Home' && pathname === '/' && initialLoad) ? 'block' : 'hidden'}`}>
               {item.sub_menues.map((subItem) => (
                 <li key={`${subItem.menu_item_id}-${subItem.menu_item_slug}`} className="group cursor-pointer">
                   <Link
-                    href={`/${subItem.menu_item_slug}`}
+                    href={`/services/${subItem.menu_item_slug}`}
                     onClick={() => onItemClick?.()}
                     className="menu-list-item-dropdown-list block w-full pb-1 pl-3 text-base leading-8 text-white transition-colors duration-150 hover:!text-[#9BCB4B] md:text-2xl md:leading-[50px]"
                     tabIndex={0}>

@@ -40,6 +40,7 @@ const Footer = () => {
     <FooterProvider>
       <div className="container">
         <div className="relative z-10 flex flex-col flex-wrap justify-center gap-y-10 sm:flex-row sm:justify-between sm:gap-y-16">
+          {/* REACH US */}
           <div className="pr-8 max-lg:basis-full">
             <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
               Reach Us
@@ -67,52 +68,125 @@ const Footer = () => {
             </div>
           </div>
 
-          {footerMenu?.menu_items?.map((section, index) => (
-            <div key={`Id_${index}`}>
-              <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
-                {section?.menu_item_title}
-              </h5>
+          {/* FOOTER MENU SECTIONS */}
+          {footerMenu?.menu_items?.map((section, index) => {
+            const sectionTitle = section.menu_item_title.toLowerCase()
 
-              {section?.logo && (
-                <div className="mb-4">
-                  <Image src={section.logo.src} alt={section.logo.alt} width={120} height={40} />
+            // QUICK MENUS
+            if (sectionTitle === 'quick menus') {
+              return (
+                <div key={`Id_${index}`}>
+                  <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
+                    {section.menu_item_title}
+                  </h5>
+                  <ul>
+                    {section.sub_menues
+                      ?.filter((item) =>
+                        [
+                          'home',
+                          'about us',
+                          'services',
+                          'portfolio',
+                          'blogs',
+                          'contact us',
+                          'get a quote'
+                        ].includes(item.menu_item_title.toLowerCase())
+                      )
+                      .map((item, i) => (
+                        <li className="mb-4" key={i}>
+                          <Link
+                            href={`/${item.menu_item_slug}`}
+                            className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary"
+                          >
+                            {item.menu_item_title}
+                          </Link>
+                        </li>
+                      ))}
+                  </ul>
                 </div>
-              )}
+              )
+            }
 
-              <ul>
-                {section?.sub_menues?.map((item, i) => (
-                  <li className="mb-4" key={i}>
-                    <Link
-                      href={`/${item.menu_item_slug}`}
-                      className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary">
-                      {item.menu_item_title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            // WHAT WE DO
+            if (sectionTitle === 'what we do') {
+              return (
+                <div key={`Id_${index}`}>
+                  <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
+                    {section.menu_item_title}
+                  </h5>
+                  <ul>
+                    {section.sub_menues
+                      ?.filter((item) =>
+                        [
+                          'brand identity design',
+                          'illustration & custom graphics'
+                        ].includes(item.menu_item_title.toLowerCase())
+                      )
+                      .map((item, i) => (
+                        <li className="mb-4" key={i}>
+                          <Link
+                            href={`/services/${item.menu_item_slug}`}
+                            className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary"
+                          >
+                            {item.menu_item_title}
+                          </Link>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              )
+            }
 
-              {section?.socials && (
-                <div className="mt-6 flex items-center gap-4">
-                  {section.socials.map((social) => (
-                    <Link
-                      key={social.href}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block">
-                      <Image
-                        src={social.icon}
-                        alt={social.label}
-                        width={18}
-                        height={18}
-                        className="brightness-100 invert hover:opacity-80"
-                      />
-                    </Link>
+            // OTHER SECTIONS (e.g., Important Links)
+            return (
+              <div key={`Id_${index}`}>
+                <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
+                  {section.menu_item_title}
+                </h5>
+
+                {section?.logo && (
+                  <div className="mb-4">
+                    <Image src={section.logo.src} alt={section.logo.alt} width={120} height={40} />
+                  </div>
+                )}
+
+                <ul>
+                  {section.sub_menues?.map((item, i) => (
+                    <li className="mb-4" key={i}>
+                      <Link
+                        href={`/${item.menu_item_slug}`}
+                        className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary"
+                      >
+                        {item.menu_item_title}
+                      </Link>
+                    </li>
                   ))}
-                </div>
-              )}
-            </div>
-          ))}
+                </ul>
+
+                {section?.socials && (
+                  <div className="mt-6 flex items-center gap-4">
+                    {section.socials.map((social) => (
+                      <Link
+                        key={social.href}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
+                        <Image
+                          src={social.icon}
+                          alt={social.label}
+                          width={18}
+                          height={18}
+                          className="brightness-100 invert hover:opacity-80"
+                        />
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          })}
         </div>
       </div>
 
