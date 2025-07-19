@@ -14,10 +14,10 @@ const Page = () => {
   const pageDetails = useSelector((state) => state?.termsConditions)
   const terms = pageDetails?.page_content?.page_content
 
-  console.log('Page details:', pageDetails) 
+  console.log('Page details:', pageDetails)
 
   useEffect(() => {
-    dispatch(fetchTermsConditionsDetails({ slug: 'terms-conditions' })) 
+    dispatch(fetchTermsConditionsDetails({ slug: 'terms-conditions' }))
   }, [dispatch])
 
   return (

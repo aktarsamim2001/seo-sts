@@ -2,7 +2,7 @@ import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 
-const WhyChooseUsV6 = ({ whyChooseUs }) => {
+const WhyChooseUsV6 = ({ whyChooseUs }: any) => {
   console.log(whyChooseUs)
   return (
     <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">

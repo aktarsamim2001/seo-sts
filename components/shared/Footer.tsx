@@ -82,22 +82,15 @@ const Footer = () => {
                   <ul>
                     {section.sub_menues
                       ?.filter((item) =>
-                        [
-                          'home',
-                          'about us',
-                          'services',
-                          'portfolio',
-                          'blogs',
-                          'contact us',
-                          'get a quote'
-                        ].includes(item.menu_item_title.toLowerCase())
+                        ['home', 'about us', 'services', 'portfolio', 'blogs', 'contact us', 'get a quote'].includes(
+                          item.menu_item_title.toLowerCase(),
+                        ),
                       )
                       .map((item, i) => (
                         <li className="mb-4" key={i}>
                           <Link
                             href={`/${item.menu_item_slug}`}
-                            className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary"
-                          >
+                            className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary">
                             {item.menu_item_title}
                           </Link>
                         </li>
@@ -117,17 +110,15 @@ const Footer = () => {
                   <ul>
                     {section.sub_menues
                       ?.filter((item) =>
-                        [
-                          'brand identity design',
-                          'illustration & custom graphics'
-                        ].includes(item.menu_item_title.toLowerCase())
+                        ['brand identity design', 'illustration & custom graphics'].includes(
+                          item.menu_item_title.toLowerCase(),
+                        ),
                       )
                       .map((item, i) => (
                         <li className="mb-4" key={i}>
                           <Link
                             href={`/services/${item.menu_item_slug}`}
-                            className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary"
-                          >
+                            className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary">
                             {item.menu_item_title}
                           </Link>
                         </li>
@@ -155,8 +146,7 @@ const Footer = () => {
                     <li className="mb-4" key={i}>
                       <Link
                         href={`/${item.menu_item_slug}`}
-                        className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary"
-                      >
+                        className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary">
                         {item.menu_item_title}
                       </Link>
                     </li>
@@ -171,8 +161,7 @@ const Footer = () => {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block"
-                      >
+                        className="block">
                         <Image
                           src={social.icon}
                           alt={social.label}

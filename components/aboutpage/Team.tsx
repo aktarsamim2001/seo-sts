@@ -135,7 +135,9 @@ const Team = ({ teamData }: { teamData: TeamMember[] }) => {
               }`}>
               <div className="text-left">
                 <h3 className="mb-3 text-nowrap text-2xl leading-[1.2] tracking-[-0.72px]">{member?.name}</h3>
-                <p className={`tab-member ${selectedMember?.name === member?.name ? 'tab-active' : ''}`}>{member?.designation}</p>
+                <p className={`tab-member ${selectedMember?.name === member?.name ? 'tab-active' : ''}`}>
+                  {member?.designation}
+                </p>
               </div>
             </div>
           ))}
