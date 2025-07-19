@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
+import HeroGradientAnimation from './HeroGradientAnimation'
 
 interface Service {
   id: number
@@ -29,6 +30,9 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
 
   return (
     <section className="relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+      <div className="absolute left-[50%] top-40 -z-10 h-2/6 w-2/6 blur-[35px] md:blur-[60px]">
+        <HeroGradientAnimation />
+      </div>
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <RevealWrapper className="rv-badge reveal-me mb-5 md:mb-8">
@@ -40,9 +44,9 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
         </div>
 
         <RevealWrapper className="mx-auto w-full max-w-[1170px] [&>*:not(:last-child)]:mb-6">
-          {services.map((service, index) => (
+          {services?.map((service, index) => (
             <div
-              key={service.id}
+              key={index}
               className="faq-body-transition overflow-hidden border border-[#F54BB4] bg-backgroundBody duration-300 dark:border-[#F54BB4] dark:bg-dark">
               <div
                 className={`group relative flex cursor-pointer items-center justify-between px-5 py-5 md:px-10 ${

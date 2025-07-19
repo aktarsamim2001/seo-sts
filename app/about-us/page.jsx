@@ -20,21 +20,12 @@ import CtaImageSlider from '@/components/shared/CtaImageSlider'
 const AboutPage = () => {
   const dispatch = useDispatch()
   const aboutUsDetails = useSelector((state) => state.aboutUs)
-  console.log('About Us details:', aboutUsDetails) // Debugging line to check about us details
+  console.log('About Us details:', aboutUsDetails)
 
   useEffect(() => {
     dispatch(fetchAboutUsDetails({ slug: 'about-us' }))
   }, [dispatch])
 
-  // if (aboutUsDetails.status) {
-  //   return <p>Loading...</p>
-  // }
-
-  // if (aboutUsDetails.error) {
-  //   return <p>Error: {aboutUsDetails.error}</p>
-  // }
-
-  console.log('About Us page content:', aboutUsDetails.page_content.enquiry_data.title_images) // Debugging line to check page content
   return (
     <LayoutOne>
       <PageHero
@@ -49,8 +40,8 @@ const AboutPage = () => {
         content_two={aboutUsDetails.page_content.section_content.content_two}
         feature_image={aboutUsDetails.page_content.section_content.feature_image}
       />
-      <Team />
-      {/* <Marquee withBorder={true} /> */}
+      <Team teamData={aboutUsDetails?.page_content?.teams} />
+      <Marquee clientsData={aboutUsDetails?.page_content?.clients} withBorder={true} />
       <AwardsV2
         title={aboutUsDetails.page_content.services.title}
         subtitle={aboutUsDetails.page_content.services.subtitle}

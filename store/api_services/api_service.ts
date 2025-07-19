@@ -23,14 +23,21 @@ async function fetchPageDetailsApi(payload: Record<string, any>) {
   })
 }
 
-async function fetchBlogsApi(payload: Record<string, any>) {
+async function fetchBlogsApi(payload: any) {
   const token = getToken()
   return axios.post(rootUrl + 'api/cms/blogs', payload, {
     headers: await authHeader(token),
   })
 }
 
-async function fetchServiceDetailsApi(payload: Record<string, any>) {
+async function fetchBlogsDetails(payload: any) {
+  const token = getToken()
+  return axios.post(rootUrl + 'api/cms/blog/details', payload, {
+    headers: await authHeader(token),
+  })
+}
+
+async function fetchServiceDetailsApi(payload: any) {
   const token = getToken()
   return axios.post(rootUrl + 'api/cms/service-details', payload, {
     headers: await authHeader(token),
@@ -41,5 +48,6 @@ export const service = {
   fetchMenusApi,
   fetchPageDetailsApi,
   fetchBlogsApi,
+  fetchBlogsDetails,
   fetchServiceDetailsApi,
 }

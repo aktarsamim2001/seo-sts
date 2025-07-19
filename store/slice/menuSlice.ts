@@ -57,8 +57,7 @@ export const fetchMenus = () => {
     dispatch(setMenusLoading(true))
     try {
       const response = await service.fetchMenusApi()
-      console.log('API response:', response)
-      if (response?.data?.data) {
+      if (response) {
         dispatch(setMenus(response.data.data))
       }
     } catch (error: any) {

@@ -5,13 +5,34 @@ import CTA from '@/components/shared/CTA'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import LayoutOne from '@/components/shared/LayoutOne'
 import PageHero from '@/components/shared/PageHero'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchBlogsDetails, fetchBlogsDetailsData } from '../../../store/slice/blogsSlice'
+import { useParams } from 'next/navigation'
+import { fetchBlogList } from '../../../store/slice/blogListSlice'
 
-const BlogDetails = ({ params }) => {
-  // Dummy data for local development
+const BlogDetails = () => {
+  const dispatch = useDispatch()
+  const params = useParams()
+  const slug = params?.slug
+  const blogsDetails = useSelector((state) => state.blogs)
+  const blogData = blogsDetails.blogsDetailsData
+  const blogDataTable = blogsDetails?.setBlogsDetailsData?.table_contents
+  const blogList = useSelector((state) => state.blogList.blogListData)
+
+  useEffect(() => {
+    if (slug) {
+      dispatch(fetchBlogsDetailsData(slug))
+      dispatch(fetchBlogsDetails({ slug: 'blogs' }))
+      dispatch(fetchBlogList({ page_no: 1 }))
+    }
+  }, [dispatch, slug])
+
   const postBlog = {
-    title: 'How to Build a Blog with Next.js',
-    description: 'A step-by-step guide to building a modern blog using Next.js and React.',
+    title: blogData?.title,
+    description: blogData?.short_desc,
   }
+
   const blog = {
     content: '### Introduction\nThis is a dummy blog post.\n### Details\nHere are some details about the blog.',
     data: {
@@ -27,7 +48,7 @@ const BlogDetails = ({ params }) => {
         description={postBlog.description}
         spacing="pt-32 md:pt-44 lg:pt-[200px] pb-10 md:pb-16 lg:pb-[88px] xl:pb-[100px] relative overflow-hidden"
       />
-      <BlogContent blog={blog} />
+      <BlogContent blog={blogData} blogList={blogList?.data} />
       <CTA>
         Let's chat!
         <CtaImageSlider

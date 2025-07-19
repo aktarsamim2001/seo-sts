@@ -187,6 +187,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
               {item.menu_item_title}
             </Link>
           )}
+
           {item.sub_menues && item.sub_menues.length > 0 && (
             <ul
               ref={(el) => setDropdownRef(el, item.menu_item_title)}

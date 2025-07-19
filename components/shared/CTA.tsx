@@ -32,29 +32,29 @@ const CTA: FC<CTAProps> = ({ enquiryData, headingClass = '', form }) => {
               'text-center font-normal xl:text-[96px] xl:leading-[1.1] xl:tracking-[-2.88px]',
               headingClass,
             )}>
-            {enquiryData.title_one}
+            {enquiryData?.title_one}
             <CtaImageSlider
-              slides={enquiryData.title_images.map((img, index) => ({
+              slides={enquiryData?.title_images?.map((img, index) => ({
                 id: String(index + 1),
                 img: img,
               }))}
             />
-            {enquiryData.title_two}
+            {enquiryData?.title_two}
             <span className="block font-instrument italic text-[#F54BB4] max-md:inline-block sm:mt-10">
-              {enquiryData.title_three}
+              {enquiryData?.title_three}
             </span>
           </h2>
         </RevealWrapper>
         <RevealWrapper as="ul" className="mt-14 flex list-none items-center justify-center">
           <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
             <Link
-              href={enquiryData.button_url || '/contact'}
+              href={enquiryData?.button_url || '/contact'}
               className="rv-button rv-button-primary block md:inline-block">
               <div className="rv-button-top">
-                <span>{enquiryData.button}</span>
+                <span>{enquiryData?.button}</span>
               </div>
               <div className="rv-button-bottom">
-                <span className="whitespace-nowrap">{enquiryData.button}</span>
+                <span className="whitespace-nowrap">{enquiryData?.button}</span>
               </div>
             </Link>
           </li>

@@ -17,7 +17,7 @@ import CtaImageSlider from '@/components/shared/CtaImageSlider'
 const FAQPage = () => {
   const dispatch = useDispatch()
   const pageDetails = useSelector((state) => state.privacyPolicy)
-  console.log('Page details:', pageDetails) // Debugging line to check page details
+  const privacyData = pageDetails?.page_content?.page_content
 
   useEffect(() => {
     dispatch(fetchPrivacyPolicyDetails({ slug: 'privacy-policy' }))
@@ -27,19 +27,11 @@ const FAQPage = () => {
     return <p>Loading...</p>
   }
 
-  if (pageDetails.error) {
-    return <p>Error: {pageDetails.error}</p>
-  }
-
   return (
     <LayoutOne>
-      <PageHero
-        title={pageDetails.page_content.title}
-        italicTitle={pageDetails.page_content.sub_title_one}
-        badgeTitle="Policy"
-        scale
-      />
-      <TermsPolicyBody />
+      <PageHero title={privacyData?.sub_title_one} italicTitle={privacyData?.sub_title_two} badgeTitle="Policy" scale />
+      <TermsPolicyBody termsData={privacyData?.page_content} />
+
       {/* <CTA enquiryData={pageDetails.page_content.enquiry_data}>
         {pageDetails.page_content.enquiry_data.title_one}
         <CtaImageSlider

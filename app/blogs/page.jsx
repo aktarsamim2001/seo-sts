@@ -14,8 +14,8 @@ import CtaImageSlider from '@/components/shared/CtaImageSlider'
 // }
 
 const BlogPage = () => {
-  const dispatch = useDispatch()
   const blogsDetails = useSelector((state) => state.blogs)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchBlogsDetails({ slug: 'blogs' }))
@@ -32,22 +32,22 @@ const BlogPage = () => {
   return (
     <LayoutOne>
       <PageHero
-        badgeTitle={blogsDetails.page_content.banner.title}
-        title={blogsDetails.page_content.banner.sub_title}
-        description={blogsDetails.page_content.banner.content}
+        badgeTitle={blogsDetails?.page_content?.banner?.title || 'N/A'}
+        title={blogsDetails?.page_content?.banner?.sub_title}
+        description={blogsDetails?.page_content?.banner?.content}
       />
       <BlogPostV5 />
-      <CTA enquiryData={blogsDetails.page_content.enquiry_data}>
-        {blogsDetails.page_content.enquiry_data.title_one}
+      <CTA enquiryData={blogsDetails?.page_content?.enquiry_data}>
+        {blogsDetails?.page_content?.enquiry_data?.title_one}
         <CtaImageSlider
-          slides={blogsDetails.page_content.enquiry_data.title_images.map((img, index) => ({
+          slides={blogsDetails?.page_content?.enquiry_data?.title_images?.map((img, index) => ({
             id: String(index + 1),
             img: img,
           }))}
         />
-        {blogsDetails.page_content.enquiry_data.title_two}
+        {blogsDetails?.page_content?.enquiry_data?.title_two}
         <i className="block font-instrument italic text-[#F54BB4] max-md:inline-block max-sm:pl-2 sm:mt-10">
-          {blogsDetails.page_content.enquiry_data.title_three}
+          {blogsDetails?.page_content?.enquiry_data?.title_three}
         </i>
       </CTA>
     </LayoutOne>

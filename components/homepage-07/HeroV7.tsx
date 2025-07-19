@@ -5,6 +5,7 @@ import CtaImageSlider from '../shared/CtaImageSlider'
 import HeroGradientAnimation from '../shared/HeroGradientAnimation'
 import SkewMarquee from '../shared/SkewMarquee'
 import HeroAbout from './HeroAbout'
+import SkewMarqueeHome from '../shared/SkewMarqueeHome'
 
 interface HeroV7Props {
   titleOne: string
@@ -43,6 +44,7 @@ const HeroV7: React.FC<HeroV7Props> = ({
                   slides={titleImages.map((img, index) => ({
                     id: String(index + 1),
                     img: img,
+                    key: `marquee-item-${index}`,
                   }))}
                 />
               </span>
@@ -52,14 +54,17 @@ const HeroV7: React.FC<HeroV7Props> = ({
           </h1>
         </div>
 
-        <p className="mt-10 max-w-[770px] font-normal max-lg:mx-auto">
-          {contentOne} {contentTwo}
-        </p>
+        <p className="mt-10 max-w-[770px] font-normal max-lg:mx-auto">{contentOne}</p>
       </RevealWrapper>
+      <SkewMarqueeHome
+        marqueeItems={sliderImages?.map((img, idx) => ({
+          id: idx + 1,
+          src: img,
+          key: `marquee-item-${idx}`,
+        }))}
+      />
 
-      <SkewMarquee marqueeItems={sliderImages.map((img, idx) => ({ id: idx + 1, src: img }))} />
-
-      <HeroAbout />
+      <HeroAbout contentTwo={contentTwo} />
     </section>
   )
 }
