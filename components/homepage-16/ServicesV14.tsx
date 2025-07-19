@@ -26,10 +26,6 @@ interface ServicesData {
   services: ServiceType[]
 }
 
-// interface ServicesV14Props {
-//   services: ServiceType[]
-// }
-
 const ServicesV14 = ({ services }: { services: ServicesData }) => {
   return (
     <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
@@ -60,23 +56,7 @@ const ServicesV14 = ({ services }: { services: ServicesData }) => {
               <div className="flex flex-col items-start">
                 <figure>
                   {service.list_image && (
-                    <Image
-                      src={service.list_image}
-                      alt="Light Logo"
-                      className="inline-block dark:hidden"
-                      width={60}
-                      height={60}
-                    />
-                  )}
-
-                  {service.list_image && (
-                    <Image
-                      src={service.list_image}
-                      alt="Light Logo"
-                      className="inline-block dark:hidden"
-                      width={60}
-                      height={60}
-                    />
+                    <Image src={service.list_image} alt="Light Logo" className="inline-block" width={60} height={60} />
                   )}
                 </figure>
                 <h5 className="mb-2 mt-4 lg:mb-3 lg:mt-6">{service.title}</h5>
