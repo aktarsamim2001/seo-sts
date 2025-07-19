@@ -2,14 +2,15 @@ import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 
-const WhyChooseUsV6 = () => {
+const WhyChooseUsV6 = ({ whyChooseUs }) => {
+  console.log(whyChooseUs)
   return (
     <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="container">
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:flex-row lg:mb-24 lg:justify-between">
           <div className="md:w-[60%] md:self-start">
             <RevealWrapper className="rv-badge mb-2">
-              <span className="rv-badge-text">Why Choose SmartTask Studios</span>
+              <span className="rv-badge-text">{whyChooseUs?.title}</span>
             </RevealWrapper>
             <TextAppearAnimation>
               <h2 className="text-appear lg:leading-[1.1]">

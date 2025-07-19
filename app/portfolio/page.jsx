@@ -15,7 +15,6 @@ import CtaV2 from '@/components/shared/CtaV2'
 const CaseStudy = () => {
   const dispatch = useDispatch()
   const portfolioDetails = useSelector((state) => state.portfolio)
-  console.log('Portfolio details:', portfolioDetails)
 
   useEffect(() => {
     dispatch(fetchPortfolioDetails({ slug: 'portfolio' }))

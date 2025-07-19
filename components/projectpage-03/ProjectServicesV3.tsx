@@ -5,6 +5,7 @@ import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 import Pagination from './Pagination'
+import { useState } from 'react'
 
 interface ProjectItem {
   title: string
@@ -24,6 +25,23 @@ interface projectType {
 }
 
 const ProjectServicesV3 = ({ portfolio }: { portfolio: projectType }) => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 4 // Number of items to show per page
+
+  const portfolioListData = portfolio.portfolio
+  const totalItems = portfolioListData.length
+
+  // Calculate total pages
+  const totalPages = Math.ceil(totalItems / itemsPerPage)
+
+  // Get current items
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const currentItems = portfolioListData.slice(indexOfFirstItem, indexOfLastItem)
+
+  // Change page
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
+
   return (
     <section className="pb-14 pt-28 sm:pt-36 md:pb-16 md:pt-[157px] lg:pb-[88px] xl:pb-[100px]">
       <div className="container">
@@ -47,7 +65,7 @@ const ProjectServicesV3 = ({ portfolio }: { portfolio: projectType }) => {
         </div>
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2">
-          {portfolio?.portfolio?.map((item: ProjectItem, idx: number) => (
+          {currentItems?.map((item: ProjectItem, idx: number) => (
             <RevealWrapper key={idx} className="single-project-item underline-hover-effect">
               <div className="block">
                 <figure className="overflow-hidden">
@@ -66,7 +84,7 @@ const ProjectServicesV3 = ({ portfolio }: { portfolio: projectType }) => {
             </RevealWrapper>
           ))}
         </div>
-        <Pagination />
+        <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
       </div>
     </section>
   )

@@ -1,21 +1,25 @@
 import Image from 'next/image'
-import ReactMarkdown from 'react-markdown'
-import rehypeSlug from 'rehype-slug'
 import RevealWrapper from '../animation/RevealWrapper'
 import TableOfContent from '../shared/TableOfContent'
+import img from '../../public/images/services/services-details2-img.webp'
+
+interface ContentItem {
+  title: string
+  description: string
+}
 
 interface ServiceContentProps {
   service: {
-    content_data?: string[]
+    content_data?: ContentItem[]
     content_list?: any[]
   }
 }
 
 const ServiceContent = ({ service }: ServiceContentProps) => {
-  // Join all markdown content_data into a single string for rendering
-  const markdownContent = Array.isArray(service?.content_data) ? service.content_data.join('\n\n') : ''
-  const headings = markdownContent.match(/### .+/g) ?? []
-  const tableOfContents = headings.map((heading: string) => heading.replace('### ', ''))
+  const contentItems = service?.content_data || []
+  console.log(service)
+  const tableOfContents = service?.content_list || []
+
   return (
     <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
       <div className="mx-auto max-w-[1440px] px-8 md:px-20">
@@ -31,14 +35,25 @@ const ServiceContent = ({ service }: ServiceContentProps) => {
               <Image
                 width={870}
                 height={497}
-                src="/images/services-details2-img.webp"
+                src={img}
                 alt="Services Big Img"
                 className="h-full w-full object-cover object-center"
               />
             </RevealWrapper>
+
             <RevealWrapper>
-              {markdownContent ? (
-                <ReactMarkdown rehypePlugins={[[rehypeSlug]]}>{markdownContent}</ReactMarkdown>
+              {contentItems.length > 0 ? (
+                <div className="space-y-8">
+                  {contentItems.map((item, index) => (
+                    <div key={index} className="content-section">
+                      <h2 className="mb-4 text-2xl font-bold">{item.title}</h2>
+                      <div
+                        className="prose dark:prose-invert max-w-none"
+                        dangerouslySetInnerHTML={{ __html: item.description }}
+                      />
+                    </div>
+                  ))}
+                </div>
               ) : (
                 <div className="text-gray-400">No content available.</div>
               )}
