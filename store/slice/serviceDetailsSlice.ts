@@ -46,12 +46,26 @@ export interface ServiceDetailsContent {
   //   title_three: string
   //   title_images: string[]
   // }
+  seo_data?: {
+    meta_title: string
+    meta_author: string
+    meta_description: string
+    meta_keywords: string[]
+    feature_image: string
+  }
 }
 
 export interface ServiceDetailsState {
   page_title: string
   page_slug: string
   page_content: ServiceDetailsContent
+  seo_data?: {
+    meta_title: string
+    meta_author: string
+    meta_description: string
+    meta_keywords: string[]
+    feature_image: string
+  }
   status: boolean
   error: string | null
 }
@@ -86,6 +100,13 @@ const initialState: ServiceDetailsState = {
       data: [],
     },
   },
+  seo_data: {
+    meta_title: '',
+    meta_author: '',
+    meta_description: '',
+    meta_keywords: [],
+    feature_image: '',
+  },
   status: false,
   error: null,
 }
@@ -98,6 +119,7 @@ const serviceDetailsSlice = createSlice({
       state.page_title = action.payload.page_title
       state.page_slug = action.payload.page_slug
       state.page_content = action.payload.page_content
+      state.seo_data = (action.payload as any).seo_data
     },
     setServiceDetailsLoading(state, action: PayloadAction<boolean>) {
       state.status = action.payload

@@ -39,12 +39,26 @@ export interface AboutUsContent {
     button_url: string
     title_images: string[]
   }
+  page_seo?: {
+    meta_title: string
+    meta_author: string
+    meta_description: string
+    meta_keywords: string
+    feature_image: string
+  }
 }
 
 export interface AboutUsState {
   page_title: string
   page_slug: string
   page_content: AboutUsContent
+  page_seo?: {
+    meta_title: string
+    meta_author: string
+    meta_description: string
+    meta_keywords: string
+    feature_image: string
+  }
   status: boolean
   error: string | null
 }
@@ -83,6 +97,13 @@ const initialState: AboutUsState = {
       title_images: [],
     },
   },
+  page_seo: {
+    meta_title: '',
+    meta_author: '',
+    meta_description: '',
+    meta_keywords: '',
+    feature_image: '',
+  },
   status: false,
   error: null,
 }
@@ -95,6 +116,7 @@ const aboutUsSlice = createSlice({
       state.page_title = action.payload.page_title
       state.page_slug = action.payload.page_slug
       state.page_content = action.payload.page_content
+      state.page_seo = (action.payload as any).page_seo
     },
     setAboutUsLoading(state, action: PayloadAction<boolean>) {
       state.status = action.payload

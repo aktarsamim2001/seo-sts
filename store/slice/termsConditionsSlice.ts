@@ -7,12 +7,26 @@ export interface TermsConditionsContent {
   sub_title_one: string
   sub_title_two: string
   page_content: string
+  page_seo?: {
+    meta_title: string
+    meta_author: string
+    meta_description: string
+    meta_keywords: string
+    feature_image: string
+  }
 }
 
 export interface TermsConditionsState {
   page_title: string
   page_slug: string
   page_content: TermsConditionsContent
+  page_seo?: {
+    meta_title: string
+    meta_author: string
+    meta_description: string
+    meta_keywords: string
+    feature_image: string
+  }
   status: boolean
   error: string | null
 }
@@ -26,6 +40,13 @@ const initialState: TermsConditionsState = {
     sub_title_two: '',
     page_content: '',
   },
+  page_seo: {
+    meta_title: '',
+    meta_author: '',
+    meta_description: '',
+    meta_keywords: '',
+    feature_image: '',
+  },
   status: false,
   error: null,
 }
@@ -38,6 +59,7 @@ const termsConditionsSlice = createSlice({
       state.page_title = action.payload.page_title
       state.page_slug = action.payload.page_slug
       state.page_content = action.payload.page_content
+      state.page_seo = (action.payload as any).page_seo
     },
     setTermsConditionsLoading(state, action: PayloadAction<boolean>) {
       state.status = action.payload

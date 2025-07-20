@@ -10,6 +10,8 @@ import privacyPolicyReducer from '../store/slice/privacyPolicySlice'
 import blogListReducer from '../store/slice/blogListSlice'
 import serviceDetailsReducer from '../store/slice/serviceDetailsSlice'
 import termsConditionsReducer from '../store/slice/termsConditionsSlice'
+import contactPageReducer from '../store/slice/contactSlice'
+import getQuotePageReducer from '../store/slice/quotePageSlice'
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +25,8 @@ export const store = configureStore({
     serviceDetails: serviceDetailsReducer,
     privacyPolicy: privacyPolicyReducer,
     termsConditions: termsConditionsReducer,
+    contactPage: contactPageReducer,
+    getQuotePage: getQuotePageReducer,
   },
 })
 

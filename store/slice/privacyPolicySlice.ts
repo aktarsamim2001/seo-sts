@@ -3,13 +3,31 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { service } from '../api_services/api_service'
 
 export interface PrivacyPolicyState {
-  page_content: unknown
+  page_content: {
+    page_content: unknown
+  } | null
+  page_seo?: {
+    meta_title: string
+    meta_author: string
+    meta_description: string
+    meta_keywords: string
+    feature_image: string
+  }
   status: boolean
   error: string | null
 }
 
 const initialState: PrivacyPolicyState = {
-  page_content: null,
+  page_content: {
+    page_content: null,
+  },
+  page_seo: {
+    meta_title: '',
+    meta_author: '',
+    meta_description: '',
+    meta_keywords: '',
+    feature_image: '',
+  },
   status: false,
   error: null,
 }
@@ -18,7 +36,7 @@ const privacyPolicySlice = createSlice({
   name: 'privacyPolicy',
   initialState,
   reducers: {
-    setPrivacyPolicyDetails(state, action: PayloadAction<unknown>) {
+    setPrivacyPolicyDetails(state, action: PayloadAction<{ page_content: unknown } | null>) {
       state.page_content = action.payload
     },
     setPrivacyPolicyLoading(state, action: PayloadAction<boolean>) {

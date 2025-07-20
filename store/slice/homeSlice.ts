@@ -56,12 +56,26 @@ export interface PageContent {
     form_interests: string[]
     form_budgets: string[]
   }
+  page_seo?: {
+    meta_title: string
+    meta_author: string
+    meta_description: string
+    meta_keywords: string
+    feature_image: string
+  }
 }
 
 export interface PageDetailsState {
   page_title: string
   page_slug: string
   page_content: PageContent
+  page_seo?: {
+    meta_title: string
+    meta_author: string
+    meta_description: string
+    meta_keywords: string
+    feature_image: string
+  }
   status: boolean
   error: string | null
 }
@@ -114,6 +128,13 @@ const initialState: PageDetailsState = {
       form_budgets: [],
     },
   },
+  page_seo: {
+    meta_title: '',
+    meta_author: '',
+    meta_description: '',
+    meta_keywords: '',
+    feature_image: '',
+  },
   status: false,
   error: null,
 }
@@ -126,6 +147,7 @@ const homeSlice = createSlice({
       state.page_title = action.payload.page_title
       state.page_slug = action.payload.page_slug
       state.page_content = action.payload.page_content
+      state.page_seo = (action.payload as any).page_seo
     },
     setPageDetailsLoading(state, action: PayloadAction<boolean>) {
       state.status = action.payload

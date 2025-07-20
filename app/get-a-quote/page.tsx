@@ -1,23 +1,32 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchGetQuotePage } from '@/store/slice/quotePageSlice'
 import RevealWrapper from '../../components/animation/RevealWrapper'
-import ContactForm from '../../components/contactpage/ContactForm'
 import PageHero from '../../components/shared/PageHero'
 import LayoutOne from '../..//components/shared/LayoutOne'
+import type { RootState, AppDispatch } from '@/store/store'
 
 const Page = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const { page_content } = useSelector((state: RootState) => state.getQuotePage)
+
+  useEffect(() => {
+    dispatch(fetchGetQuotePage('get-a-quote'))
+  }, [dispatch])
+
   const [formData, setFormData] = useState({
     name: '',
     company: '',
     email: '',
-    phone: '', // Added phone field
-    service: 'UI/UX',
+    phone: '',
+    service: '',
     description: '',
     timeline: '',
-    budget: '40k',
+    budget: '',
     message: '',
-    otherMessage: '', // Added otherMessage field for textarea
+    otherMessage: '',
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -36,9 +45,12 @@ const Page = () => {
     <LayoutOne>
       <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
         <PageHero
-          title="Happy to Assist You"
-          badgeTitle="Get a Quote"
-          description="Discover our innovative, cutting-edge no-code websites, crafted to effortlessly captivate and engage your visitors."
+          title={page_content?.banner?.title || 'Happy to Assist You'}
+          badgeTitle={page_content?.banner?.sub_title || 'Get a Quote'}
+          description={
+            page_content?.banner?.content ||
+            'Discover our innovative, cutting-edge no-code websites, crafted to effortlessly captivate and engage your visitors.'
+          }
           scale
           spacing="pt-[130px] md:pt-[180px] pb-20 sm:pb-32 md:pb-36 lg:pb-36 xl:pb-[100px] relative overflow-hidden"
         />
@@ -118,15 +130,11 @@ const Page = () => {
                 className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark"
                 required>
                 <option value="">Select a service</option>
-                <option value="Brand Identity">Brand Identity</option>
-                <option value="Illustration">Illustration & Graphics</option>
-                <option value="Packaging">Packaging & Print</option>
-                <option value="Photo Production">Photo & Image Production</option>
-                <option value="Video Motion">Video & Motion</option>
-                <option value="Web Design">Web & Digital Design</option>
-                <option value="Social Media Content">Social Media Content Design</option>
-                <option value="Copywriting">Copywriting & Content Strategy</option>
-                <option value="Digital Marketing">Digital Marketing Services</option>
+                {page_content?.form_options?.service_options?.map((option: any) => (
+                  <option key={option.service_id} value={option.title}>
+                    {option.title}
+                  </option>
+                ))}
               </select>
               <span className="absolute right-5 top-1/2 translate-y-1/3">
                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -156,10 +164,11 @@ const Page = () => {
                 className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark"
                 required>
                 <option value="">Select timeline</option>
-                <option value="Immediate">Immediate</option>
-                <option value="Week">Within a week</option>
-                <option value="7-14 days">7 to 14 days</option>
-                <option value="15-30 days">15 to 30 days</option>
+                {page_content?.form_options?.service_time_options?.map((option: string, idx: number) => (
+                  <option key={idx} value={option}>
+                    {option}
+                  </option>
+                ))}
               </select>
               <span className="absolute right-5 top-1/2 translate-y-1/3">
                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -188,10 +197,11 @@ const Page = () => {
                 onChange={handleChange}
                 className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark">
                 <option value="">Select budget</option>
-                <option value="100-500">100 - 500 USD</option>
-                <option value="500-750">500 to 750 USD</option>
-                <option value="750-1500">750 - 1500 USD</option>
-                <option value="1500+">1500 USD +</option>
+                {page_content?.form_options?.budget_options?.map((option: string, idx: number) => (
+                  <option key={idx} value={option}>
+                    {option}
+                  </option>
+                ))}
               </select>
               <span className="absolute right-5 top-1/2 translate-y-1/3">
                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
