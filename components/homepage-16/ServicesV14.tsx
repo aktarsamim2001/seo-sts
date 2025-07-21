@@ -41,7 +41,7 @@ const ServicesV14 = ({ services }: { services: ServicesData }) => {
           </h2>
         </TextAppearAnimation02>
         <TextAppearAnimation>
-          <p className="text-appear mx-auto lg:max-w-[770px]">
+          <p className="text-appear mx-auto px-4 md:px-0 lg:max-w-[770px]">
             {services?.content ||
               'Our marketing solutions boost engagement and ROI with targeted campaigns, improving brand visibility through SEO and social media.'}
           </p>

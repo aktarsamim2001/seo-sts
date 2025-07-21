@@ -191,7 +191,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
           {item.sub_menues && item.sub_menues.length > 0 && (
             <ul
               ref={(el) => setDropdownRef(el, item.menu_item_title)}
-              className={`menu-list-item-dropdown absolute left-1/2 h-fit max-h-[60vh] w-[90vw] -translate-x-1/2 gap-x-4 overflow-y-auto md:w-[350px] md:overflow-visible md:pb-0 lg:w-[650px] xl:w-[700px] ${
+              className={`menu-list-item-dropdown relative h-fit max-h-[50vh] w-full gap-x-4 overflow-y-auto md:absolute md:left-1/2 md:w-[350px] md:-translate-x-1/2 md:overflow-visible md:pb-0 lg:w-[650px] xl:w-[700px] ${
                 item.menu_item_title === 'Home'
                   ? '!grid !grid-cols-1 lg:-mt-[70px] lg:!grid-cols-2'
                   : '!grid !grid-cols-1 items-center lg:-mt-[70px]'

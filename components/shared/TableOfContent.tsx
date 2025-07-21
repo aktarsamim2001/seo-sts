@@ -40,10 +40,10 @@ const TableOfContent = ({ tableOfContents, children }: TableOfContentProps) => {
     <div>
       <h3 className="text-3xl md:text-4xl">Table of contents</h3>
       <ul className="mt-3.5 md:mt-5 lg:mt-10 [&>*:not(:last-child)]:mb-2 md:[&>*:not(:last-child)]:mb-5">
-        {tableOfContents?.map((content) => {
+        {tableOfContents?.map((content, index) => {
           const slug = slugify(content)
           return (
-            <li key={content}>
+            <li key={`${slug}-${index}`}>
               <a
                 href={`#${slug}`}
                 className={`lenis-scroll-to text-xl font-normal normal-case leading-7 tracking-normal transition-all hover:text-secondary dark:hover:text-backgroundBody ${

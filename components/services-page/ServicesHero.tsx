@@ -5,10 +5,11 @@ interface PropsType {
   badgeTitle?: string
   title: string
   description?: string
+  buttonText?: string
   scale?: boolean
 }
 
-const ServicesHero = ({ title, description, badgeTitle }: PropsType) => {
+const ServicesHero = ({ title, description, badgeTitle, buttonText }: PropsType) => {
   return (
     <section className="relative z-50 overflow-hidden pb-14 pt-28 md:pb-16 md:pt-[155px] lg:pb-[88px] lg:pt-[177px] xl:pb-[100px]">
       <HeroGradientAnimation />
@@ -27,10 +28,10 @@ const ServicesHero = ({ title, description, badgeTitle }: PropsType) => {
           <li className="block w-full text-center md:inline-block md:w-auto">
             <Link href="/contact" className="rv-button rv-button-primary block md:inline-block">
               <div className="rv-button-top">
-                <span>Lets Discuss</span>
+                <span>{buttonText}</span>
               </div>
               <div className="rv-button-bottom">
-                <span className="text-nowrap">Lets Discuss</span>
+                <span className="text-nowrap">{buttonText}</span>
               </div>
             </Link>
           </li>

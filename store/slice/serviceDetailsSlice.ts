@@ -39,13 +39,6 @@ export interface ServiceDetailsContent {
   table_contents: TableContent
   why_choose_us: WhyChooseUs
   faqs: Faqs
-  // Add enquiry_data if needed for CTA
-  // enquiry_data?: {
-  //   title_one: string
-  //   title_two: string
-  //   title_three: string
-  //   title_images: string[]
-  // }
   seo_data?: {
     meta_title: string
     meta_author: string
