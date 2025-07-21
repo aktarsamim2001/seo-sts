@@ -8,9 +8,10 @@ interface PropsType {
   description?: string
   spacing?: string
   scale?: boolean
+  image?: string
 }
 
-const PageHero = ({ badgeTitle, title, description, italicTitle, spacing, scale }: PropsType) => {
+const PageHero = ({ badgeTitle, title, description, italicTitle, spacing, scale, image }: PropsType) => {
   return (
     <section className={`${spacing ?? 'relative overflow-hidden py-32 md:py-40 lg:py-[185px]'} `}>
       <HeroGradientAnimation scale={scale} />
@@ -28,6 +29,11 @@ const PageHero = ({ badgeTitle, title, description, italicTitle, spacing, scale 
             </h1>
           )}
           {description && <p className="text-appear mx-auto max-w-[470px] md:max-w-[750px]">{description}</p>}
+          {image && (
+            <RevealWrapper as="figure" className="mt-8">
+              <img src={image} alt="Page Hero Image" className="mx-auto w-full max-w-[600px] object-cover" />
+            </RevealWrapper>
+          )}
         </RevealWrapper>
       </div>
     </section>

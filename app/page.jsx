@@ -70,16 +70,16 @@ const Page = () => {
       />
       {/* <PricingCard showHeader={true} /> */}
       <CTA enquiryData={pageDetails?.page_content?.enquiry_data} form={true}>
-        Let’s
+        {pageDetails?.page_content?.enquiry_data?.title_one}
         <CtaImageSlider
           slides={pageDetails?.page_content?.enquiry_data?.title_images.map((img, index) => ({
             id: String(index + 1),
             img: img,
           }))}
         />
-        Create
+        {pageDetails?.page_content?.enquiry_data?.title_two}
         <span className="block font-instrument italic text-[#F54BB4] max-md:inline-block sm:mt-10">
-          Something Iconic
+          {pageDetails?.page_content?.enquiry_data?.title_three}
         </span>
       </CTA>
     </LayoutOne>

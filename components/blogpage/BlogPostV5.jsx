@@ -47,9 +47,6 @@ const BlogPostV5 = () => {
     goToPreviousPage,
   }
 
-  if (isLoading) return <div className="container py-10 text-center">Loading blogs...</div>
-  if (error) return <div className="container py-10 text-center text-red-500">Error loading blogs: {error}</div>
-
   return (
     <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
       <div className="container">
@@ -124,6 +121,14 @@ const BlogPostV5 = () => {
                   </div>
                   <div className="rv-button-bottom flex items-center text-center">
                     <span className="pr-2">{blog.read_time || '3 minute read'}</span>
+                    {/* <Link href={`/blogs/${blog.slug || 'default-slug'}`} className="rv-button rv-button-primary block">
+                      <div className="rv-button-top">
+                        <span>{blog.read_time}</span>
+                      </div>
+                      <div className="rv-button-bottom">
+                        <span className="whitespace-nowrap">{blog.read_time}</span>
+                      </div>
+                    </Link> */}
                     <Image className="inline" src={topArrow} alt="Arrow Icon" />
                   </div>
                 </Link>

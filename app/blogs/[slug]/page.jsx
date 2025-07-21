@@ -15,10 +15,11 @@ const BlogDetails = () => {
   const dispatch = useDispatch()
   const params = useParams()
   const slug = params?.slug
-  const blogsDetails = useSelector((state) => state.blogs)
-  const blogData = blogsDetails.blogsDetailsData
-  const blogDataTable = blogsDetails?.setBlogsDetailsData?.table_contents
+  const blogsDetails = useSelector((state) => state?.blogs)
+  const blogData = blogsDetails?.blogsDetailsData
   const blogList = useSelector((state) => state.blogList.blogListData)
+
+  console.log('Blog Details:', blogList?.data)
 
   useEffect(() => {
     if (slug) {
@@ -33,13 +34,6 @@ const BlogDetails = () => {
     description: blogData?.short_desc,
   }
 
-  const blog = {
-    content: '### Introduction\nThis is a dummy blog post.\n### Details\nHere are some details about the blog.',
-    data: {
-      thumbnail: '/images/dummy-blog.jpg',
-    },
-  }
-
   return (
     <LayoutOne>
       <PageHero
@@ -48,19 +42,33 @@ const BlogDetails = () => {
         description={postBlog.description}
         spacing="pt-32 md:pt-44 lg:pt-[200px] pb-10 md:pb-16 lg:pb-[88px] xl:pb-[100px] relative overflow-hidden"
       />
-      <BlogContent blog={blogData} blogList={blogList?.data} />
-      <CTA>
-        Let's chat!
-        <CtaImageSlider
-          slides={[
-            { id: '1', img: '/images/agent/01.jpg' },
-            { id: '3', img: '/images/agent/03.jpg' },
-            { id: '2', img: '/images/agent/11.png' },
-          ]}
-        />
-        with us.
-        <i className="block font-instrument italic max-md:inline-block max-sm:pl-2 sm:mt-10">A virtual coffee?</i>
-      </CTA>
+      <BlogContent blog_content={blogData?.table_contents} blogList={blogList?.data} image={blogData?.feature_image} />
+      {blogsDetails?.page_content?.enquiry_data && (
+        <CTA enquiryData={blogsDetails.page_content.enquiry_data}>
+          {blogsDetails.page_content.enquiry_data?.title_one && (
+            <p>{blogsDetails.page_content.enquiry_data.title_one}</p>
+          )}
+
+          {Array.isArray(blogsDetails.page_content.enquiry_data?.title_images) && (
+            <CtaImageSlider
+              slides={blogsDetails.page_content.enquiry_data.title_images.map((img, index) => ({
+                id: String(index + 1),
+                img,
+              }))}
+            />
+          )}
+
+          {blogsDetails.page_content.enquiry_data?.title_two && (
+            <p>{blogsDetails.page_content.enquiry_data.title_two}</p>
+          )}
+
+          {blogsDetails.page_content.enquiry_data?.title_three && (
+            <i className="block font-instrument italic text-[#F54BB4] max-md:inline-block max-sm:pl-2 sm:mt-10">
+              {blogsDetails.page_content.enquiry_data.title_three}
+            </i>
+          )}
+        </CTA>
+      )}
     </LayoutOne>
   )
 }
