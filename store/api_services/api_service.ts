@@ -44,10 +44,27 @@ async function fetchServiceDetailsApi(payload: any) {
   })
 }
 
+async function fetchGetAQuoteApi(payload: any) {
+  const token = getToken()
+  return axios.post(rootUrl + 'api/enquiry/get-a-quote', payload, {
+    headers: await authHeader(token),
+  })
+}
+
+async function fetchContactEnquiryApi(payload: any) {
+  const token = getToken()
+  return axios.post(rootUrl + 'api/enquiry/contact-enquiry', payload, {
+    headers: await authHeader(token),
+  })
+}
+
 export const service = {
   fetchMenusApi,
   fetchPageDetailsApi,
   fetchBlogsApi,
   fetchBlogsDetails,
   fetchServiceDetailsApi,
+  fetchGetAQuoteApi,
+  submitEnquiryApi: fetchGetAQuoteApi,
+  fetchContactEnquiryApi,
 }

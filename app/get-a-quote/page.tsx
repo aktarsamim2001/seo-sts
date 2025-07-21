@@ -1,8 +1,11 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchGetQuotePage } from '@/store/slice/quotePageSlice'
+import { submitEnquiry, resetEnquiry } from '../../store/slice/enquirySlice'
 import RevealWrapper from '../../components/animation/RevealWrapper'
 import PageHero from '../../components/shared/PageHero'
 import LayoutOne from '../..//components/shared/LayoutOne'
@@ -28,6 +31,34 @@ const Page = () => {
     message: '',
     otherMessage: '',
   })
+  const enquiry = useSelector((state: any) => state.enquiry)
+
+  // Show error toast
+  useEffect(() => {
+    if (enquiry.error) {
+      toast.error(enquiry.error)
+    }
+  }, [enquiry.error])
+
+  // Show thank you message toast and reset form
+  useEffect(() => {
+    if (enquiry.thankYouMessage) {
+      // Prefer API message if available
+      toast.success(enquiry.response?.message || enquiry.thankYouMessage)
+      setFormData({
+        name: '',
+        company: '',
+        email: '',
+        phone: '',
+        service: '',
+        description: '',
+        timeline: '',
+        budget: '',
+        message: '',
+        otherMessage: '',
+      })
+    }
+  }, [enquiry.thankYouMessage, enquiry.response?.message])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -36,10 +67,33 @@ const Page = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('Form Data Submitted:', formData)
-    alert(`${formData.name} Your Data Has Been Submited`)
-    // Add your form submission logic here (e.g., API call)
+    // Find service_id from service_options
+    let service_id = 1
+    if (page_content?.form_options?.service_options) {
+      const found = page_content.form_options.service_options.find((opt: any) => opt.title === formData.service)
+      if (found) service_id = found.service_id
+    }
+    dispatch(
+      submitEnquiry({
+        service_id,
+        name: formData.name,
+        company: formData.company,
+        email: formData.email,
+        mobile: formData.phone,
+        timeline: formData.timeline,
+        budget: formData.budget,
+        about_project: formData.description,
+        additional_message: formData.otherMessage,
+      }),
+    )
   }
+
+  // Reset enquiry message on unmount
+  useEffect(() => {
+    return () => {
+      dispatch(resetEnquiry())
+    }
+  }, [dispatch])
 
   return (
     <LayoutOne>
@@ -55,10 +109,20 @@ const Page = () => {
           spacing="pt-[130px] md:pt-[180px] pb-20 sm:pb-32 md:pb-36 lg:pb-36 xl:pb-[100px] relative overflow-hidden"
         />
         <div className="container">
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            closeOnClick
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <RevealWrapper
             as="form"
             onSubmit={handleSubmit}
             className="reveal-me mx-auto grid max-w-[800px] grid-cols-1 gap-[30px] md:grid-cols-2">
+            {/* Show response message as toast handled in useEffect, not inline */}
             {/* Full Name */}
             <div className="md:col-span-full">
               <label
@@ -251,12 +315,15 @@ const Page = () => {
 
             {/* Submit */}
             <div className="col-span-full sm:mt-14 md:mx-auto">
-              <button type="submit" className="rv-button rv-button-primary block w-full md:inline-block md:w-auto">
+              <button
+                type="submit"
+                className="rv-button rv-button-primary block w-full md:inline-block md:w-auto"
+                disabled={enquiry.loading}>
                 <div className="rv-button-top">
-                  <span>Send Message</span>
+                  <span>{enquiry.loading ? 'Sending...' : 'Send Message'}</span>
                 </div>
                 <div className="rv-button-bottom">
-                  <span className="text-nowrap">Send Message</span>
+                  <span className="text-nowrap">{enquiry.loading ? 'Sending...' : 'Send Message'}</span>
                 </div>
               </button>
             </div>

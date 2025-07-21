@@ -12,6 +12,7 @@ import serviceDetailsReducer from '../store/slice/serviceDetailsSlice'
 import termsConditionsReducer from '../store/slice/termsConditionsSlice'
 import contactPageReducer from '../store/slice/contactSlice'
 import getQuotePageReducer from '../store/slice/quotePageSlice'
+import enquiryReducer from '../store/slice/enquirySlice'
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +28,7 @@ export const store = configureStore({
     termsConditions: termsConditionsReducer,
     contactPage: contactPageReducer,
     getQuotePage: getQuotePageReducer,
+    enquiry: enquiryReducer,
   },
 })
 

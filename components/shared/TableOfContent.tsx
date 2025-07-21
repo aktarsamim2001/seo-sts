@@ -1,4 +1,5 @@
 'use client'
+
 import { slugify } from '@/utils/slugify'
 import { ReactNode, useEffect, useState } from 'react'
 

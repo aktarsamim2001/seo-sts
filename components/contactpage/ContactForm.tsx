@@ -1,14 +1,19 @@
 'use client'
 import React, { useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useDispatch, useSelector } from 'react-redux'
+import type { AppDispatch } from '@/store/store'
 import RevealWrapper from '../animation/RevealWrapper'
+import { submitEnquiry, resetEnquiry } from '../../store/slice/contactEnquirySlice'
 
 const ContactForm = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const { loading, error, thankYouMessage } = useSelector((state: any) => state.enquiry)
   const [formData, setFormData] = useState({
     name: '',
     company: '',
     email: '',
-    service: 'UI/UX',
-    budget: '40k',
     message: '',
   })
 
@@ -19,14 +24,55 @@ const ContactForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('Form Data Submitted:', formData)
-    alert(`${formData.name} Your Data Has Been Submited`)
-    // Add your form submission logic here (e.g., API call)
+    // Prepare payload for submitEnquiry
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      company: formData.company,
+      message: formData.message,
+    }
+    dispatch(submitEnquiry(payload))
   }
+
+  // Optionally reset thank you message on mount/unmount
+  React.useEffect(() => {
+    return () => {
+      dispatch(resetEnquiry())
+    }
+  }, [dispatch])
+
+  React.useEffect(() => {
+    if (error) {
+      toast.error(error)
+    }
+  }, [error])
+
+  React.useEffect(() => {
+    if (thankYouMessage) {
+      toast.success(thankYouMessage)
+      setFormData({
+        name: '',
+        company: '',
+        email: '',
+        message: '',
+      })
+    }
+  }, [thankYouMessage])
 
   return (
     <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
       <div className="container">
+        {/* {thankYouMessage && <div className="mb-4 rounded bg-green-100 p-4 text-green-600">{thankYouMessage}</div>}
+        {error && <div className="mb-4 rounded bg-red-100 p-4 text-red-600">{error}</div>} */}
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <RevealWrapper
           as="form"
           onSubmit={handleSubmit}
@@ -84,100 +130,6 @@ const ContactForm = () => {
             />
           </div>
 
-          {/* <div className="relative">
-            <label
-              htmlFor="service"
-              className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
-              Service Type*
-            </label>
-            <select
-              id="service"
-              name="service"
-              value={formData.service}
-              onChange={handleChange}
-              className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
-              required>
-              <option value="UI/UX">UX Design</option>
-              <option value="Web design">Product Design</option>
-              <option value="Web development">Brand Identity</option>
-              <option value="Web development">Design System</option>
-            </select>
-            <span className="absolute right-5 top-1/2 translate-y-1/3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="inline dark:hidden">
-                <path
-                  d="M6 9L12 15L18 9"
-                  stroke="black"
-                  strokeOpacity="0.7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                className="hidden dark:inline"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none">
-                <path
-                  d="M6 9L12 15L18 9"
-                  stroke="white"
-                  strokeOpacity="0.7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </div>
-
-          <div className="relative">
-            <label
-              htmlFor="budget"
-              className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
-              Project Budget*
-            </label>
-            <select
-              id="budget"
-              name="budget"
-              value={formData.budget}
-              onChange={handleChange}
-              className="mt-3 w-full appearance-none text-ellipsis border bg-backgroundBody px-5 py-4 indent-px text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-primary focus:outline-none dark:border-dark dark:bg-dark"
-              required>
-              <option value="40k">$10k - $25k</option>
-              <option value="55k">$25k - $50k</option>
-              <option value="90k">$50k - $100k</option>
-              <option value="100k+">$100k+</option>
-            </select>
-            <span className="absolute right-5 top-1/2 inline translate-y-1/3 dark:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M6 9L12 15L18 9"
-                  stroke="black"
-                  strokeOpacity="0.7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span className="absolute right-5 top-1/2 hidden translate-y-1/3 dark:inline">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M6 9L12 15L18 9"
-                  stroke="white"
-                  strokeOpacity="0.7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </div>*/}
-
           <div className="md:col-span-full">
             <label
               htmlFor="message"
@@ -195,12 +147,15 @@ const ContactForm = () => {
           </div>
 
           <div className="col-span-full sm:mt-14 md:mx-auto">
-            <button type="submit" className="rv-button rv-button-primary block w-full md:inline-block md:w-auto">
+            <button
+              type="submit"
+              className="rv-button rv-button-primary block w-full md:inline-block md:w-auto"
+              disabled={loading}>
               <div className="rv-button-top">
-                <span>Send Message</span>
+                <span>{loading ? 'Sending...' : 'Send Message'}</span>
               </div>
               <div className="rv-button-bottom">
-                <span className="text-nowrap">Send Message</span>
+                <span className="text-nowrap">{loading ? 'Sending...' : 'Send Message'}</span>
               </div>
             </button>
           </div>
