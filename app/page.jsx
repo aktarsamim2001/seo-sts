@@ -25,14 +25,6 @@ const Page = () => {
     dispatch(fetchPageDetails({ slug: 'home' }))
   }, [dispatch])
 
-  if (pageDetails.status) {
-    return <p>Loading...</p>
-  }
-
-  if (pageDetails.error) {
-    return <p>Error: {pageDetails.error}</p>
-  }
-
   return (
     <LayoutOne>
       <HeroV7
