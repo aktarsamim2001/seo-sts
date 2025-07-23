@@ -11,6 +11,7 @@ import Link from 'next/link'
 import RevealWrapper from '@/components/animation/RevealWrapper'
 import TextAppearAnimation from '@/components/animation/TextAppearAnimation'
 import ClientsV3 from '@/components/shared/ClientsV3'
+import HeroBanner from '@/components/aboutpage/HeroBanner'
 
 const ContactPage = () => {
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ const ContactPage = () => {
   return (
     <LayoutOne>
       {/* Hero Section */}
+      <HeroBanner />
       <div className="container relative overflow-hidden py-32 md:py-40 lg:py-[185px]">
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-6 sm:items-center md:mb-20 md:flex-row lg:justify-start">
           <div className="flex-1">

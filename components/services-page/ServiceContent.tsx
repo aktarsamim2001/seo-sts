@@ -48,7 +48,7 @@ const ServiceContent = ({ service }: ServiceContentProps) => {
           {/* Main Content */}
           <article className="project-details-body">
             {/* Banner Image */}
-            <RevealWrapper as="figure" className="h-[497px] w-full">
+            {/* <RevealWrapper as="figure" className="h-[497px] w-full">
               <Image
                 width={870}
                 height={497}
@@ -56,8 +56,7 @@ const ServiceContent = ({ service }: ServiceContentProps) => {
                 alt={service?.image_alt || 'Services Big Img'}
                 className="h-full w-full object-cover object-center"
               />
-            </RevealWrapper>
-
+            </RevealWrapper> */}
             {/* Markdown Content */}
             <RevealWrapper>
               {contentItems.length > 0 ? (

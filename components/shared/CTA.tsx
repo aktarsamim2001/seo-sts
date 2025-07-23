@@ -32,14 +32,7 @@ const CTA: FC<CTAProps> = ({ enquiryData, headingClass = '', form }) => {
               'text-center font-normal xl:text-[96px] xl:leading-[1.1] xl:tracking-[-2.88px]',
               headingClass,
             )}>
-            {enquiryData?.title_one}
-            <CtaImageSlider
-              slides={enquiryData?.title_images?.map((img, index) => ({
-                id: String(index + 1),
-                img: img,
-              }))}
-            />
-            {enquiryData?.title_two}
+            {enquiryData?.title_one} {enquiryData?.title_two}
             <span className="block font-instrument italic text-[#F54BB4] max-md:inline-block sm:mt-10">
               {enquiryData?.title_three}
             </span>

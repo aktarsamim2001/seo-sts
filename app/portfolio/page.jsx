@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchPortfolioDetails } from '@/store/slice/portfolioSlice'
 import LayoutOne from '@/components/shared/LayoutOne'
 import ProjectServicesV3 from '@/components/projectpage-03/ProjectServicesV3'
-import CtaV2 from '@/components/shared/CtaV2'
+import CTA from '@/components/shared/CTA'
+import HeroBanner from '@/components/aboutpage/HeroBanner'
 
 // export const metadata = {
 //   title: 'Portfolio',
@@ -30,8 +31,19 @@ const CaseStudy = () => {
 
   return (
     <LayoutOne>
+      <HeroBanner />
       <ProjectServicesV3 portfolio={portfolioDetails.page_content} />
-      <CtaV2 enquiryData={portfolioDetails.page_content.enquiry_data} />
+      <CTA
+        enquiryData={{
+          ...portfolioDetails.page_content.enquiry_data,
+          button: portfolioDetails.page_content.enquiry_data.button || 'Contact Us',
+          title_three: portfolioDetails.page_content.enquiry_data.title_three || '',
+          title_images: [],
+          form_budgets: [],
+          form_interests: [],
+        }}
+        form={false}
+      />
     </LayoutOne>
   )
 }

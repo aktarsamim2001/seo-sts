@@ -39,7 +39,7 @@ const TableOfContent = ({ tableOfContents, children }: TableOfContentProps) => {
 
   return (
     <div>
-      <h3 className="text-3xl md:text-4xl">Table of contents</h3>
+      <h3 className="text-3xl md:text-4xl">About The Service</h3>
       <ul className="mt-3.5 md:mt-5 lg:mt-10 [&>*:not(:last-child)]:mb-2 md:[&>*:not(:last-child)]:mb-5">
         {tableOfContents?.map((content, index) => {
           const slug = slugify(content)

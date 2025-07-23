@@ -1,27 +1,33 @@
 import CursorPointer from '@/components/animation/CursorPointer'
 import SmoothScrollProvider from '@/components/shared/SmoothScroll'
 import ThemeSwitcher from '@/components/theme/ThemeSwitcher'
-import { satoshi } from '@/utils/fonts'
 import { ThemeModeProvider } from '@/utils/Providers'
-import type { Metadata } from 'next'
+import { Metadata } from 'next'
 import React, { ReactNode, Suspense } from 'react'
 import '../scss/main.scss'
 import { Providers } from './providers'
+import { Poppins } from 'next/font/google'
 
 export const metadata: Metadata = {
   title: 'SmartTask Studios',
   description: 'Your description here',
   icons: {
-    icon: '/favicon (2).ico', // Default favicon
-    shortcut: '/favicon (2).ico', // Shortcut icon
-    apple: '/favicon (2).ico', // For iOS home screen (optional)
+    icon: '/favicon (2).ico',
+    shortcut: '/favicon (2).ico',
+    apple: '/favicon (2).ico',
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'], // ✅ Add required weights
+  variable: '--font-poppins',
+})
+
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${satoshi.variable} antialiased`}>
+      <body className={`${poppins.variable} antialiased`}>
         <Providers>
           <Suspense fallback={<div>Loading...</div>}>
             <SmoothScrollProvider>

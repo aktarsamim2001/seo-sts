@@ -70,7 +70,7 @@ const BlogPostV5 = () => {
                     />
                   </figure>
                 </Link>
-                <p className="font-poppins mb-5 mt-[30px] text-sm font-normal uppercase leading-[1.1] tracking-[1.12px]">
+                <p className="mb-5 mt-[30px] font-[poppins] text-sm font-[400] uppercase leading-[1.1] tracking-[1.12px]">
                   {blog.posted_on}
                 </p>
                 <Link href={`/blogs/${blog.slug || 'default-slug'}`}>

@@ -2,22 +2,31 @@ import Image from 'next/image'
 import Marquee from 'react-fast-marquee'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
+import PageHero from '@/components/shared/PageHero'
 
-const OurWork = ({ title, subtitle, workImages }: any) => {
+const AboutSection = ({ title, subtitle, workImages }: any) => {
   console.log('Work Images:', workImages)
   return (
-    <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="container">
+    <section className="overflow-hidden`">
+      {/* <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <RevealWrapper className="rv-badge reveal-me mb-5 md:mb-8">
-            <span className="rv-badge-text">{title}</span>
+            <span className="rv-badge-text">Smart Task Studios</span>
           </RevealWrapper>
           <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">{subtitle}</h2>
+            <h2 className="text-appear mx-auto max-w-[770px]">Transforming Business to Digital Platforms</h2>
           </TextAppearAnimation>
         </div>
-      </div>
-
+      </div> */}
+      <PageHero
+        title="Smart Task"
+        italicTitle="Studios"
+        subtitle="Transforming Business to Digital Platforms"
+        description="Transforming brands with memorable logos, stunning websites, and results-driven digital marketing strategies that help businesses stand out, connect with their audience, and grow across every platform and screen."
+        buttonText="Explore Us"
+        buttonUrl="/about-us"
+      />
+      {/* 
       <RevealWrapper>
         <Marquee speed={70} pauseOnHover>
           <div className="flex items-center gap-4 md:gap-[30px]">
@@ -34,9 +43,9 @@ const OurWork = ({ title, subtitle, workImages }: any) => {
             ))}
           </div>
         </Marquee>
-      </RevealWrapper>
+      </RevealWrapper> */}
 
-      <RevealWrapper>
+      {/* <RevealWrapper>
         <Marquee speed={70} pauseOnHover direction="right">
           <div className="flex items-center justify-around gap-4 pt-[30px] md:gap-[30px]">
             {workImages.toReversed().map((imgUrl: string, index: number) => (
@@ -52,9 +61,9 @@ const OurWork = ({ title, subtitle, workImages }: any) => {
             ))}
           </div>
         </Marquee>
-      </RevealWrapper>
+      </RevealWrapper> */}
     </section>
   )
 }
 
-export default OurWork
+export default AboutSection

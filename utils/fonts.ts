@@ -1,19 +1,11 @@
 import localFont from 'next/font/local'
 
-const satoshi = localFont({
+const poppins = localFont({
   src: [
-    {
-      path: '../public/fonts/Satoshi-Regular.woff',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../public/fonts/Satoshi-Medium.woff',
-      weight: '500',
-      style: 'normal',
-    },
+    { path: '../fonts/Poppins-Regular.woff', weight: '400', style: 'normal' },
+    { path: '../fonts/Poppins-Medium.woff', weight: '500', style: 'normal' },
   ],
-  variable: '--font-satoshi',
+  variable: '--font-poppins',
 })
 
-export { satoshi }
+export { poppins }

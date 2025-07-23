@@ -1,18 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
 @font-face {
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
-  src:
-    url('../public/fonts/Satoshi-Regular.woff2') format('woff2'),
-    url('../public/fonts/Satoshi-Regular.woff') format('woff'),
-    url('../public/fonts/Satoshi-Medium.woff') format('woff'),
-    url('../public/fonts/Satoshi-Medium.woff2') format('woff2'),
-    url('../public/fonts/Satoshi-Regular.ttf') format('truetype'),
-    url('../public/fonts/Satoshi-Light.woff') format('truetype');
-  font-family: 'Satoshi';
   font-display: swap;
+  src:
+    url('/fonts/Poppins-Regular.woff2') format('woff2'),
+    url('/fonts/Poppins-Regular.woff') format('woff'),
+    url('/fonts/Poppins-Regular.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    url('/fonts/Poppins-Medium.woff2') format('woff2'),
+    url('/fonts/Poppins-Medium.woff') format('woff'),
+    url('/fonts/Poppins-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    url('/fonts/Poppins-Bold.woff2') format('woff2'),
+    url('/fonts/Poppins-Bold.woff') format('woff'),
+    url('/fonts/Poppins-Bold.ttf') format('truetype');
+}
+
 
 p {
   div {

@@ -30,20 +30,16 @@ const ServicesV14 = ({ services }: { services: ServicesData }) => {
   return (
     <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="mb-8 text-center md:mb-16">
-        <RevealWrapperV2 className="rv-badge reveal-me mb-3">
-          <span className="rv-badge-text">{services?.title}</span>
-        </RevealWrapperV2>
         <TextAppearAnimation02>
           <h2 className="text-appear mb-3">
-            {services?.sub_title_one}
+            Digital solutions designed for
             <br />
-            <i className="font-instrument text-[#F54BB4]">{services?.sub_title_two} </i>
+            <i className="font-instrument text-[#F54BB4]">maximum impact </i>
           </h2>
         </TextAppearAnimation02>
         <TextAppearAnimation>
           <p className="text-appear mx-auto px-4 md:px-0 lg:max-w-[770px]">
-            {services?.content ||
-              'Our marketing solutions boost engagement and ROI with targeted campaigns, improving brand visibility through SEO and social media.'}
+            Delivering Digital Solutions To Brands & Start Ups
           </p>
         </TextAppearAnimation>
       </div>

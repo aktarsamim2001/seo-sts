@@ -3,6 +3,7 @@
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import type { RootState, AppDispatch } from '@/store/store'
 import { fetchPageDetails } from '@/store/slice/homeSlice'
 import HeroV24 from '@/components/homepage-24/HeroV24'
 import AboutSection from '@/components/homepage-07/AboutSection'
@@ -17,8 +18,8 @@ import { fetchMenus } from '@/store/slice/menuSlice'
 import OurWorkV2 from '@/components/homepage-15/OurWorkV2'
 
 const Page = () => {
-  const dispatch = useDispatch()
-  const pageDetails = useSelector((state) => state.pageDetails)
+  const dispatch = useDispatch<AppDispatch>()
+  const pageDetails = useSelector((state: RootState) => state.pageDetails)
 
   console.log('Page details:', pageDetails)
 
@@ -40,7 +41,10 @@ const Page = () => {
         subtitle={'We build innovative digital experiences where creativity meets advanced technology'}
         button={pageDetails.page_content.services.button}
         buttonUrl={pageDetails.page_content.services.button_url}
-        services={pageDetails.page_content.services.services}
+        services={pageDetails.page_content.services.services.map((service: any, idx: number) => ({
+          id: service.service_id ?? idx,
+          ...service,
+        }))}
       />
       <OurWorkV2
         title="What"

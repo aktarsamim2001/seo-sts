@@ -19,9 +19,10 @@ interface ServicesV6Props {
   button: string
   buttonUrl: string
   services: Service[]
+  italicTitle?: string
 }
 
-const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, buttonUrl, services }) => {
+const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, buttonUrl, services, italicTitle }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   const toggleAccordion = (index: number) => {
@@ -35,12 +36,12 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
       </div>
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
-          <RevealWrapper className="rv-badge reveal-me mb-5 md:mb-8">
-            <span className="rv-badge-text">{title}</span>
-          </RevealWrapper>
-          <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">{subtitle}</h2>
-          </TextAppearAnimation>
+          <h1 className="mb-4 mt-3.5 font-[400]">
+            {title} <span className="font-instrument italic text-[#F54BB4]">{italicTitle}</span>
+          </h1>
+          <h2 className="text-appear mx-auto max-w-[770px] font-[450] md:mb-8 md:text-[28px] md:leading-[1.3] lg:text-[35px] lg:leading-[1.3]">
+            {subtitle}
+          </h2>
         </div>
 
         <RevealWrapper className="mx-auto w-full max-w-[1170px] [&>*:not(:last-child)]:mb-6">

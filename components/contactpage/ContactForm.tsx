@@ -81,7 +81,7 @@ const ContactForm = () => {
             <label
               htmlFor="name"
               className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
-              Full Name
+              Full Name<span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -116,7 +116,7 @@ const ContactForm = () => {
             <label
               htmlFor="email"
               className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
-              Email
+              Email<span className="text-red-500">*</span>
             </label>
             <input
               type="email"
@@ -134,7 +134,7 @@ const ContactForm = () => {
             <label
               htmlFor="message"
               className="text-2xl leading-[1.2] tracking-[-0.48px] text-[#000000b3] dark:text-dark-100">
-              Project Brief*
+              Your Message For Us<span className="text-red-500">*</span>
             </label>
             <textarea
               id="message"

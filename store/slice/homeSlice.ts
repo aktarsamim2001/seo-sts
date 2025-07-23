@@ -164,7 +164,7 @@ export const { setPageDetails, setPageDetailsLoading, setPageDetailsError } = ho
 export default homeSlice.reducer
 
 // Thunk
-export const fetchPageDetails = (slug: string) => {
+export const fetchPageDetails = ({ slug }: { slug: string }) => {
   return async (dispatch: any) => {
     dispatch(setPageDetailsLoading(true))
     try {

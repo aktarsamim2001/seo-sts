@@ -42,14 +42,14 @@ const Footer = () => {
         <div className="relative z-10 flex flex-col flex-wrap justify-center gap-y-10 sm:flex-row sm:justify-between sm:gap-y-16">
           {/* REACH US */}
           <div className="pr-8 max-lg:basis-full">
-            <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
+            <h5 className="mb-4 font-[poppins] text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
               Reach Us
             </h5>
             <p className="mb-5 text-sm text-white">Any project or idea. will be happy to discuss and quote.</p>
             <div className="group flex max-w-[360px] items-center justify-between gap-4 bg-primary bg-opacity-30 p-4 backdrop-blur-2xl">
               <Image className="h-[70px] w-auto" src={logo} alt="logo" height={70} width={120} />
               <div>
-                <h6 className="font-satoshi text-sm font-bold text-white">Get a free quote within 24 hours</h6>
+                <h6 className="font-poppins text-sm font-bold text-white">Get a free quote within 24 hours</h6>
               </div>
               <Link href="/get-a-quote" className="group relative">
                 <figure className="relative h-[55px] w-[55px] cursor-pointer overflow-hidden bg-primary">
@@ -76,7 +76,7 @@ const Footer = () => {
             if (sectionTitle === 'quick menus') {
               return (
                 <div key={`Id_${index}`}>
-                  <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
+                  <h5 className="mb-4 font-[poppins] text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
                     {section.menu_item_title}
                   </h5>
                   <ul>
@@ -104,7 +104,7 @@ const Footer = () => {
             if (sectionTitle === 'what we do') {
               return (
                 <div key={`Id_${index}`}>
-                  <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
+                  <h5 className="mb-4 font-[poppins] text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
                     {section.menu_item_title}
                   </h5>
                   <ul>
@@ -131,7 +131,7 @@ const Footer = () => {
             // OTHER SECTIONS (e.g., Important Links)
             return (
               <div key={`Id_${index}`}>
-                <h5 className="mb-4 font-satoshi text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
+                <h5 className="mb-4 font-[poppins] text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
                   {section.menu_item_title}
                 </h5>
 
@@ -180,7 +180,7 @@ const Footer = () => {
       </div>
 
       <div className="absolute bottom-0 w-full">
-        <h5 className="footer-text xs:text-5xl absolute bottom-0 left-1/2 w-full -translate-x-1/2 translate-y-[30%] text-nowrap text-center font-satoshi text-4xl font-medium tracking-widest sm:text-6xl md:text-[110px]">
+        <h5 className="footer-text xs:text-5xl absolute bottom-0 left-1/2 w-full -translate-x-1/2 translate-y-[30%] text-nowrap text-center font-[poppins] text-4xl font-medium tracking-widest sm:text-6xl md:text-[110px]">
           SMARTTASK STUDIOS
         </h5>
       </div>

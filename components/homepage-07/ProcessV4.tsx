@@ -2,27 +2,38 @@ import processImg from '@/public/images/process-img-01.webp'
 import Image from 'next/image'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
+import Link from 'next/link'
 
-const ProcessV4 = () => {
+const ProcessV4 = ({ title, italicTitle, subtitle, featureImage, processSteps }: any) => {
   return (
     <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
-          <RevealWrapper className="rv-badge reveal-me mb-5 md:mb-8">
-            <span className="rv-badge-text">Our Process</span>
-          </RevealWrapper>
-          <TextAppearAnimation>
-            <h2 className="text-appear mx-auto max-w-[770px]">Our Creative Journey</h2>
-          </TextAppearAnimation>
+          <h1 className="mb-4 mt-3.5 font-[400]">
+            {title} <span className="font-instrument italic text-[#F54BB4]">{italicTitle}</span>
+          </h1>
+          <h2 className="text-appear mx-auto max-w-[770px] font-[450] md:mb-8 md:text-[28px] md:leading-[1.3] lg:text-[35px] lg:leading-[1.3]">
+            {subtitle}
+          </h2>
         </div>
-        <RevealWrapper className="flex flex-col gap-20 md:flex-row">
-          <figure>
-            <Image
-              src={processImg}
-              alt="Process
-           Images "
-            />
-          </figure>
+        <RevealWrapper className="relative flex flex-col gap-20 md:flex-row">
+          <div className="flex flex-col items-center">
+            <figure>
+              <Image src={processImg} alt="Process Images" />
+            </figure>
+            <button className="absolute -bottom-20 left-0 md:bottom-56 md:left-40">
+              <Link
+                href="/get-a-quote"
+                className="rv-button rv-button-primary block w-full text-center md:inline-block md:w-auto">
+                <div className="rv-button-top">
+                  <span>Get Started</span>
+                </div>
+                <div className="rv-button-bottom">
+                  <span>Get Started</span>
+                </div>
+              </Link>
+            </button>
+          </div>
 
           <div>
             <ul className="relative space-y-10 border-secondary dark:border-backgroundBody md:border-l lg:space-y-28 xl:space-y-[170px]">

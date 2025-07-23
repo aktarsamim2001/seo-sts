@@ -20,26 +20,17 @@ const WhyChooseUsV6 = ({ whyChooseUs }: any) => {
       <div className="container">
         {/* Section Header */}
         <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:flex-row lg:mb-24 lg:justify-between">
-          <div className="md:w-[60%] md:self-start">
-            <RevealWrapper className="rv-badge mb-2">
-              <span className="rv-badge-text">{whyChooseUs?.title}</span>
-            </RevealWrapper>
-            <TextAppearAnimation>
-              <h2 className="text-appear lg:leading-[1.1]">
-                {whyChooseUs?.sub_title_one} &amp;
-                <i className="font-instrument text-[#F54BB4]"> {whyChooseUs?.sub_title_two} </i>
-              </h2>
-            </TextAppearAnimation>
-          </div>
-
-          <div className="w-full md:w-[40%] md:max-w-72 md:self-end lg:max-w-[470px]">
-            <TextAppearAnimation>
-              <p className="text-appear max-w-lg md:place-self-end md:text-right">{whyChooseUs?.section_content}</p>
-            </TextAppearAnimation>
-
+          <div className="mb-8 text-center md:mb-20">
+            <h1 className="mb-4 mt-3.5 font-[400]">
+              {whyChooseUs?.title}{' '}
+              <span className="font-instrument italic text-[#F54BB4]">{whyChooseUs?.sub_title_one}</span>
+            </h1>
+            <h2 className="text-appear mx-auto max-w-[770px] font-[450] md:mb-8 md:text-[28px] md:leading-[1.3] lg:text-[35px] lg:leading-[1.3]">
+              {whyChooseUs?.section_content}
+            </h2>
             {whyChooseUs?.button && (
-              <RevealWrapper className="mt-5 justify-self-end max-md:w-full md:mt-10">
-                <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
+              <RevealWrapper className="mt-5 flex w-full justify-center md:mt-10">
+                <li className="block w-full text-center md:inline-block md:w-auto">
                   <Link href="/contact" className="rv-button rv-button-primary block md:inline-block">
                     <div className="rv-button-top">
                       <span>{whyChooseUs?.button}</span>
@@ -52,6 +43,9 @@ const WhyChooseUsV6 = ({ whyChooseUs }: any) => {
               </RevealWrapper>
             )}
           </div>
+          {/* <TextAppearAnimation>
+              <p className="text-appear max-w-lg md:place-self-end md:text-right">{whyChooseUs?.section_content}</p>
+            </TextAppearAnimation> */}
         </div>
 
         {/* Cards Layout */}
