@@ -3,7 +3,6 @@ import HeroGradientAnimation from './HeroGradientAnimation'
 import Link from 'next/link'
 
 interface PropsType {
-  badgeTitle?: string
   title: string
   italicTitle?: string
   description?: string
@@ -16,7 +15,6 @@ interface PropsType {
 }
 
 const PageHero = ({
-  badgeTitle,
   title,
   subtitle,
   description,

@@ -7,22 +7,26 @@ export interface PageContent {
     title_one: string
     title_two: string
     title_three: string
-    title_four: string
-    content_one: string
-    content_two: string
-    title_images: string[]
-    slider_images: string[]
-  }
-  our_work: {
-    title: string
-    subtitle: string
-    work_images: string[]
-  }
-  services: {
-    title: string
+    button_one?: string
+    button_one_url?: string
+    button_two?: string
+    button_two_url?: string
+    banner_image?: string
+  }[]
+  about?: {
+    title_one: string
+    title_two: string
     subtitle: string
     button: string
     button_url: string
+    content: string
+  }
+  services?: {
+    title_one?: string
+    title_two?: string
+    subtitle?: string
+    button?: string
+    button_url?: string
     services: {
       service_id: number
       title: string
@@ -32,29 +36,48 @@ export interface PageContent {
       list_image: string
     }[]
   }
-  testimonials: {
-    title: string
-    subtitle: string
-    testimonials: any[]
-  }
-  process_data: {
-    title: string
-    subtitle: string
-    feature_image: string
-    process_data: {
-      title: string
-      content: string
-    }[]
-  }
-  enquiry_data: {
+  what_we_did?: {
     title_one: string
     title_two: string
-    title_three: string
+    subtitle: string
     button: string
     button_url: string
-    title_images: string[]
-    form_interests: string[]
-    form_budgets: string[]
+    portfolio: {
+      title: string
+      subtitle: string
+      feature_image: string
+    }[]
+  }
+  how_we_work?: {
+    title_one: string
+    title_two: string
+    subtitle: string
+    button: string
+    button_url: string
+    feature_image: string
+    work_timeline: {
+      title: string
+      content: string
+      color: string
+    }[]
+  }
+  testimonials?: {
+    title: string
+    subtitle: string
+    testimonials: {
+      name: string
+      designation: string
+      message: string
+      posted_at: string
+      avatar_url: string
+      logo: string
+    }[]
+  }
+  enquiry_data?: {
+    title: string
+    subtitle: string
+    button: string
+    button_url: string
   }
   page_seo?: {
     meta_title: string
@@ -84,48 +107,50 @@ const initialState: PageDetailsState = {
   page_title: '',
   page_slug: '',
   page_content: {
-    banner: {
+    banner: [],
+    about: {
       title_one: '',
       title_two: '',
-      title_three: '',
-      title_four: '',
-      content_one: '',
-      content_two: '',
-      title_images: [],
-      slider_images: [],
-    },
-    our_work: {
-      title: '',
       subtitle: '',
-      work_images: [],
+      button: '',
+      button_url: '',
+      content: '',
     },
     services: {
-      title: '',
+      title_one: '',
+      title_two: '',
       subtitle: '',
       button: '',
       button_url: '',
       services: [],
+    },
+    what_we_did: {
+      title_one: '',
+      title_two: '',
+      subtitle: '',
+      button: '',
+      button_url: '',
+      portfolio: [],
+    },
+    how_we_work: {
+      title_one: '',
+      title_two: '',
+      subtitle: '',
+      button: '',
+      button_url: '',
+      feature_image: '',
+      work_timeline: [],
     },
     testimonials: {
       title: '',
       subtitle: '',
       testimonials: [],
     },
-    process_data: {
+    enquiry_data: {
       title: '',
       subtitle: '',
-      feature_image: '',
-      process_data: [],
-    },
-    enquiry_data: {
-      title_one: '',
-      title_two: '',
-      title_three: '',
       button: '',
       button_url: '',
-      title_images: [],
-      form_interests: [],
-      form_budgets: [],
     },
   },
   page_seo: {

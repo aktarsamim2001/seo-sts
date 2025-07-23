@@ -4,8 +4,7 @@ import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 import PageHero from '@/components/shared/PageHero'
 
-const AboutSection = ({ title, subtitle, workImages }: any) => {
-  console.log('Work Images:', workImages)
+const AboutSection = ({ titleOne, titleTwo, subtitle, content, button, buttonUrl }: any) => {
   return (
     <section className="overflow-hidden`">
       {/* <div className="container">
@@ -19,12 +18,12 @@ const AboutSection = ({ title, subtitle, workImages }: any) => {
         </div>
       </div> */}
       <PageHero
-        title="Smart Task"
-        italicTitle="Studios"
-        subtitle="Transforming Business to Digital Platforms"
-        description="Transforming brands with memorable logos, stunning websites, and results-driven digital marketing strategies that help businesses stand out, connect with their audience, and grow across every platform and screen."
-        buttonText="Explore Us"
-        buttonUrl="/about-us"
+        title={titleOne}
+        italicTitle={titleTwo}
+        subtitle={subtitle}
+        description={content}
+        buttonText={button}
+        buttonUrl={buttonUrl}
       />
       {/* 
       <RevealWrapper>

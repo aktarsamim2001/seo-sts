@@ -6,7 +6,7 @@ import TextAppearAnimation from '../animation/TextAppearAnimation'
 import HeroGradientAnimation from './HeroGradientAnimation'
 
 interface Service {
-  id: number
+  service_id: number
   title: string
   subtitle?: string
   short_desc?: string
@@ -14,7 +14,8 @@ interface Service {
 }
 
 interface ServicesV6Props {
-  title: string
+  titleOne: string
+  titleTwo: string
   subtitle: string
   button: string
   buttonUrl: string
@@ -22,7 +23,15 @@ interface ServicesV6Props {
   italicTitle?: string
 }
 
-const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, buttonUrl, services, italicTitle }) => {
+const ServicesV6: React.FC<ServicesV6Props> = ({
+  titleOne,
+  titleTwo,
+  subtitle,
+  button,
+  buttonUrl,
+  services,
+  italicTitle,
+}) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   const toggleAccordion = (index: number) => {
@@ -30,14 +39,14 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
   }
 
   return (
-    <section className="relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
+    <section className="overflow- service_iden relative pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="absolute left-[50%] top-40 -z-10 h-2/6 w-2/6 blur-[35px] md:blur-[60px]">
         <HeroGradientAnimation />
       </div>
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <h1 className="mb-4 mt-3.5 font-[400]">
-            {title} <span className="font-instrument italic text-[#F54BB4]">{italicTitle}</span>
+            {titleOne} <span className="font-instrument italic text-[#F54BB4]">{titleTwo}</span>
           </h1>
           <h2 className="text-appear mx-auto max-w-[770px] font-[450] md:mb-8 md:text-[28px] md:leading-[1.3] lg:text-[35px] lg:leading-[1.3]">
             {subtitle}
@@ -45,15 +54,15 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
         </div>
 
         <RevealWrapper className="mx-auto w-full max-w-[1170px] [&>*:not(:last-child)]:mb-6">
-          {services?.map((service, index) => (
+          {services?.map((service: Service) => (
             <div
-              key={index}
+              key={service.service_id}
               className="faq-body-transition overflow-hidden border border-[#F54BB4] bg-backgroundBody duration-300 dark:border-[#F54BB4] dark:bg-dark">
               <div
                 className={`group relative flex cursor-pointer items-center justify-between px-5 py-5 md:px-10 ${
-                  activeIndex === index ? 'active' : ''
+                  activeIndex === service.service_id ? 'active' : ''
                 }`}
-                onClick={() => toggleAccordion(index)}>
+                onClick={() => toggleAccordion(service.service_id)}>
                 <h3 className="flex flex-col items-start gap-x-10 gap-y-3 text-[25px] font-normal leading-[25.2px] text-secondary dark:text-white md:flex-row md:items-center md:text-5xl md:leading-[1.2]">
                   <span className="max-w-sm text-inherit">{service.title}</span>
                   <span className="flex items-start pr-[2px] text-base text-secondary/70 dark:text-white/70 md:text-xl md:leading-[1.4] md:tracking-[0.4px]">
@@ -80,7 +89,7 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
 
               <div
                 className={`grid transition-all duration-300 ease-in-out ${
-                  activeIndex === index ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                  activeIndex === service.service_id ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
                 }`}>
                 <div className="overflow-hidden">
                   <div className="accordion-body flex flex-col justify-start px-10 pb-10 duration-300 sm:ml-2.5 sm:flex-row sm:gap-10 md:ml-6 lg:gap-x-[73px]">
@@ -89,7 +98,7 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
                         .slice(0, Math.ceil((service.features ?? []).length / 2))
                         .map((item, idx) => (
                           <li
-                            key={`first-${service.id}-${idx}`}
+                            key={`first-${service.service_id}-${idx}`}
                             className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70">
                             {item}
                           </li>
@@ -100,7 +109,7 @@ const ServicesV6: React.FC<ServicesV6Props> = ({ title, subtitle, button, button
                         .slice(Math.ceil((service.features ?? []).length / 2))
                         .map((item, idx) => (
                           <li
-                            key={`second-${service.id}-${idx}`}
+                            key={`second-${service.service_id}-${idx}`}
                             className="list-disc text-[17px] leading-[1.5] tracking-[0.36px] text-secondary/70 dark:text-backgroundBody/70">
                             {item}
                           </li>

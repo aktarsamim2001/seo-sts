@@ -21,13 +21,13 @@ const BlogPage = () => {
     dispatch(fetchBlogsDetails({ slug: 'blogs' }))
   }, [dispatch])
 
-  if (blogsDetails.status) {
-    return <p>Loading...</p>
-  }
+  // if (blogsDetails.status) {
+  //   return <p>Loading...</p>
+  // }
 
-  if (blogsDetails.error) {
-    return <p>Error: {blogsDetails.error}</p>
-  }
+  // if (blogsDetails.error) {
+  //   return <p>Error: {blogsDetails.error}</p>
+  // }
 
   return (
     <LayoutOne>

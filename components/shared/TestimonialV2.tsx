@@ -6,7 +6,6 @@ import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 
 interface Testimonial {
-  id: number
   name: string
   designation: string
   avatar_url: string
@@ -19,10 +18,9 @@ interface TestimonialV2Props {
   title: string
   subtitle: string
   testimonials: Testimonial[]
-  italicTitle?: string
 }
 
-const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimonials, italicTitle }) => {
+const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimonials }) => {
   console.log(testimonials)
 
   return (
@@ -30,7 +28,7 @@ const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimon
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <h1 className="mb-4 mt-3.5 font-[400]">
-            {title} <span className="font-instrument italic text-[#F54BB4]">{italicTitle}</span>
+            {/* {title} <span className="font-instrument italic text-[#F54BB4]">{italicTitle}</span> */}
           </h1>
           <h2 className="text-appear mx-auto max-w-[770px] font-[450] md:mb-8 md:text-[28px] md:leading-[1.3] lg:text-[35px] lg:leading-[1.3]">
             {subtitle}

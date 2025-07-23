@@ -4,58 +4,15 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useCallback } from 'react'
 
-// Dummy data for sliding content
-const heroSlides = [
-  {
-    id: 1,
-    title: 'Transform business with',
-    title_two: 'consulting',
-    subtitle: 'Strategic Excellence',
-    description:
-      'We provide expert advice and actionable strategies to help you grow, streamline operations, and stay ahead in a competitive market.',
-    primaryButton: { text: 'Explore Services', href: '/services' },
-    secondaryButton: { text: 'Get Started', href: '/get-a-quote' },
-    images: [
-      { src: '/images/hero-img/business-hero-1.png', alt: 'Business professionals in a consultation meeting' },
-      { src: '/images/hero-img/hero-img-03.webp', alt: 'Business growth and strategy visualization' },
-    ],
-  },
-  {
-    id: 2,
-    title: 'Scale your operations with',
-    title_two: 'precision',
-    subtitle: 'Operational Excellence',
-    description:
-      'Optimize workflows, reduce costs, and increase efficiency with our data-driven approach to business transformation.',
-    primaryButton: { text: 'Explore Services', href: '/services' },
-    secondaryButton: { text: 'Get Started', href: '/get-a-quote' },
-    images: [
-      { src: '/images/hero-img/blog-img-29.png', alt: 'Team analyzing operational metrics' },
-      { src: '/images/hero-img/business-hero-1.png', alt: 'Digital transformation dashboard' },
-    ],
-  },
-  {
-    id: 3,
-    title: 'Innovation driven growth',
-    title_two: 'strategies',
-    subtitle: 'Future Forward',
-    description:
-      'Leverage cutting-edge technologies and methodologies to drive sustainable growth and competitive advantage.',
-    primaryButton: { text: 'Explore Services', href: '/services' },
-    secondaryButton: { text: 'Get Started', href: '/get-a-quote' },
-    images: [
-      { src: '/images/hero-img/startup-hero-2 (1).jpg', alt: 'Innovation workshop session' },
-      { src: '/images/hero-img/startup-hero-1 (1).jpg', alt: 'Technology integration planning' },
-    ],
-  },
-]
-
-const HeroV24 = () => {
+const HeroV24 = ({ heroSlides }: any) => {
+  const slides = Array.isArray(heroSlides) ? heroSlides : []
   const sectionRef = useRef<HTMLElement>(null)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
   const imagesRef = useRef<HTMLDivElement>(null)
+
+  console.log('Hero slides data:', slides)
 
   useEffect(() => {
     if (sectionRef.current) {
@@ -73,13 +30,13 @@ const HeroV24 = () => {
   }, [])
 
   const nextSlide = useCallback(() => {
-    if (isAnimating) return
+    if (isAnimating || slides.length === 0) return
     setIsAnimating(true)
 
     // Animate out current content
     const tl = gsap.timeline({
       onComplete: () => {
-        setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+        setCurrentSlide((prev) => (prev + 1) % slides.length)
         setIsAnimating(false)
       },
     })
@@ -90,10 +47,11 @@ const HeroV24 = () => {
       duration: 0.3,
       ease: 'power2.in',
     })
-  }, [isAnimating, contentRef, imagesRef])
+  }, [isAnimating, contentRef, imagesRef, slides.length])
 
   // Auto-slide functionality
   useEffect(() => {
+    if (slides.length === 0) return
     const interval = setInterval(() => {
       if (!isAnimating) {
         nextSlide()
@@ -101,10 +59,10 @@ const HeroV24 = () => {
     }, 4000) // Change slide every 4 seconds
 
     return () => clearInterval(interval)
-  }, [currentSlide, isAnimating, nextSlide])
+  }, [currentSlide, isAnimating, nextSlide, slides.length])
 
   const goToSlide = (index: number) => {
-    if (isAnimating || index === currentSlide) return
+    if (isAnimating || index === currentSlide || slides.length === 0) return
     setIsAnimating(true)
 
     const tl = gsap.timeline({
@@ -139,7 +97,16 @@ const HeroV24 = () => {
     }
   }, [currentSlide])
 
-  const currentSlideData = heroSlides[currentSlide]
+  const currentSlideData = slides?.[currentSlide] ?? {}
+  const imageSrc = typeof currentSlideData?.banner_image === 'string' ? currentSlideData.banner_image : ''
+  const primaryButton = {
+    text: currentSlideData?.button_one?.text ?? currentSlideData?.button_one ?? '',
+    href: currentSlideData?.button_one?.href ?? currentSlideData?.button_one?.button_one_url ?? '#',
+  }
+  const secondaryButton = {
+    text: currentSlideData?.button_two?.text ?? currentSlideData?.button_two ?? '',
+    href: currentSlideData?.button_two?.href ?? currentSlideData?.button_two?.button_two_url ?? '#',
+  }
 
   return (
     <section
@@ -166,7 +133,7 @@ const HeroV24 = () => {
             <RevealWrapper
               as="span"
               className="reveal-me mb-4 inline-block rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-medium text-white">
-              {currentSlideData.subtitle}
+              {currentSlideData.title_one}
             </RevealWrapper>
 
             {/* Main Title */}
@@ -174,37 +141,32 @@ const HeroV24 = () => {
               as="h1"
               id="hero-heading"
               className="reveal-me mb-4 mt-3.5 text-5xl font-[400] leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]">
-              {currentSlideData?.title}{' '}
-              <i className="font-instrument italic text-[#F54BB4]">{currentSlideData?.title_two}</i>
+              {currentSlideData?.title_two}{' '}
+              <i className="font-instrument italic text-[#F54BB4]">{currentSlideData?.title_three}</i>
             </RevealWrapper>
-
-            {/* Description */}
-            {/* <RevealWrapper as="p" className="reveal-me mt-3 max-w-xl text-gray-600">
-              {currentSlideData.description}
-            </RevealWrapper> */}
 
             {/* Buttons */}
             <div className="flex flex-col gap-4 md:mt-9 md:flex-row lg:mt-14">
               <Link
-                href={currentSlideData.primaryButton.href}
+                href={primaryButton.href}
                 className="rv-button rv-button-primary rv-button-sm block md:inline-block"
-                aria-label={currentSlideData.primaryButton.text}>
+                aria-label={primaryButton.text}>
                 <div className="rv-button-top text-center">
-                  <span>{currentSlideData.primaryButton.text}</span>
+                  <span>{primaryButton.text}</span>
                 </div>
                 <div className="rv-button-bottom text-center">
-                  <span className="text-nowrap">{currentSlideData.primaryButton.text}</span>
+                  <span className="text-nowrap">{primaryButton.text}</span>
                 </div>
               </Link>
               <Link
-                href={currentSlideData.secondaryButton.href}
+                href={secondaryButton.href}
                 className="rv-button rv-button-primary rv-button-sm block md:inline-block"
-                aria-label={currentSlideData.secondaryButton.text}>
+                aria-label={secondaryButton.text}>
                 <div className="rv-button-top text-center">
-                  <span>{currentSlideData.secondaryButton.text}</span>
+                  <span>{secondaryButton.text}</span>
                 </div>
                 <div className="rv-button-bottom text-center">
-                  <span className="text-nowrap">{currentSlideData.secondaryButton.text}</span>
+                  <span className="text-nowrap">{secondaryButton.text}</span>
                 </div>
               </Link>
             </div>
@@ -216,17 +178,17 @@ const HeroV24 = () => {
           ref={imagesRef}
           className="flex w-full flex-1 flex-col gap-5 md:flex-row"
           aria-label="Business consulting imagery">
-          {currentSlideData.images[0] && (
+          {imageSrc ? (
             <figure className="relative overflow-hidden">
               <img
-                src={currentSlideData.images[0].src}
-                alt={currentSlideData.images[0].alt}
+                src={imageSrc}
+                alt={currentSlideData?.title_one ?? ''}
                 className="h-auto w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[540px] md:w-[820px]"
                 width={820}
                 height={540}
               />
             </figure>
-          )}
+          ) : null}
         </div>
       </RevealWrapper>
 

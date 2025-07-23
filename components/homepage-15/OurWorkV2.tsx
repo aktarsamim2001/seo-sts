@@ -2,42 +2,12 @@ import Link from 'next/link'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 
-interface WorkType {
-  slug: string
-  content: string
-  [key: string]: any
-}
-
-// Demo data for our work
-const ourWork = [
-  {
-    slug: 'brand-refresh',
-    title: 'Brand Refresh for TechCorp',
-    image: '/images/home-3/services-1.webp',
-  },
-  {
-    slug: 'creative-campaign',
-    title: 'Creative Campaign for Foodies',
-    image: '/images/home-3/services-2.webp',
-  },
-  {
-    slug: 'digital-strategy',
-    title: 'Digital Strategy for FinServe',
-    image: '/images/home-3/services-3.webp',
-  },
-  {
-    slug: 'identity-design',
-    title: 'Identity Design for HealthPlus',
-    image: '/images/home-3/services-4.webp',
-  },
-]
-
-const OurWorkV2 = ({ title, italicTitle, subtitle }: any) => {
+const OurWorkV2 = ({ titleOne, titleTwo, subtitle, portfolio, button, buttonUrl }: any) => {
   return (
     <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="mb-8 text-center md:mb-20">
         <h1 className="mb-4 mt-3.5 font-[400]">
-          {title} <span className="font-instrument italic text-[#F54BB4]">{italicTitle}</span>
+          {titleOne} <span className="font-instrument italic text-[#F54BB4]">{titleTwo}</span>
         </h1>
         <h2 className="text-appear mx-auto max-w-[770px] font-[450] md:mb-8 md:text-[28px] md:leading-[1.3] lg:text-[35px] lg:leading-[1.3]">
           {subtitle}
@@ -45,12 +15,12 @@ const OurWorkV2 = ({ title, italicTitle, subtitle }: any) => {
       </div>
 
       <div className="relative mx-auto mb-[60px] grid max-w-[1500px] grid-cols-1 items-center justify-items-center gap-[30px] gap-y-10 px-5 after:absolute after:top-1/2 after:h-[1px] after:w-full after:bg-secondary/10 after:content-[''] dark:after:bg-backgroundBody/10 md:grid-cols-2 md:items-start md:before:absolute md:before:h-full md:before:w-[1px] md:before:bg-secondary/10 md:before:content-[''] md:dark:before:bg-backgroundBody/10">
-        {ourWork.map((item) => (
-          <RevealWrapper key={item.slug} className="underline-hover-effect group w-full">
+        {portfolio.map((item: any) => (
+          <RevealWrapper key={item.title} className="underline-hover-effect group w-full">
             <div className="block">
               <figure className="w-full overflow-hidden">
                 <img
-                  src={item?.image}
+                  src={item?.feature_image}
                   className="h-full w-full transition-all duration-500 group-hover:rotate-3 group-hover:scale-125"
                   alt={item?.title}
                 />
@@ -61,7 +31,7 @@ const OurWorkV2 = ({ title, italicTitle, subtitle }: any) => {
                 <h3>{item?.title}</h3>
               </div>
               <p className="mt-3.5 text-xs uppercase leading-[1.2] tracking-[0.96px] text-secondary/70 dark:text-backgroundBody/70">
-                A complete rebrand that positioned them as a global icon.
+                {item?.subtitle}
               </p>
             </div>
           </RevealWrapper>
@@ -71,13 +41,13 @@ const OurWorkV2 = ({ title, italicTitle, subtitle }: any) => {
       <RevealWrapper as="ul" className="flex justify-center px-5">
         <li className="mx-auto block max-md:w-full md:ml-auto md:inline-block md:w-auto">
           <Link
-            href="/get-a-quote"
+            href={buttonUrl}
             className="rv-button rv-button-primary block w-full text-center md:inline-block md:w-auto">
             <div className="rv-button-top">
-              <span>View More Projects</span>
+              <span>{button}</span>
             </div>
             <div className="rv-button-bottom">
-              <span>View More Projects</span>
+              <span>{button}</span>
             </div>
           </Link>
         </li>

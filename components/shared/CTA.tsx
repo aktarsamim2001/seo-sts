@@ -5,24 +5,15 @@ import { FC } from 'react'
 import RevealWrapper from '../animation/RevealWrapper'
 import CtaImageSlider from './CtaImageSlider'
 
-interface EnquiryData {
-  button: string
-  button_url: string
-  form_budgets?: string[]
-  form_interests?: string[]
-  title_images: string[]
-  title_one: string
-  title_two: string
-  title_three: string
-}
-
 interface CTAProps {
-  enquiryData: EnquiryData
+  title: string
+  subtitle: string
+  button: string
+  buttonUrl: string
   headingClass?: string
-  form: boolean
 }
 
-const CTA: FC<CTAProps> = ({ enquiryData, headingClass = '', form }) => {
+const CTA: FC<CTAProps> = ({ title, subtitle, button, buttonUrl, headingClass = '' }) => {
   return (
     <section className="relative pb-[70px] pt-14 md:pt-16 lg:pb-[140px] lg:pt-[88px] xl:pt-[100px]">
       <div className="container">
@@ -32,27 +23,23 @@ const CTA: FC<CTAProps> = ({ enquiryData, headingClass = '', form }) => {
               'text-center font-normal xl:text-[96px] xl:leading-[1.1] xl:tracking-[-2.88px]',
               headingClass,
             )}>
-            {enquiryData?.title_one} {enquiryData?.title_two}
-            <span className="block font-instrument italic text-[#F54BB4] max-md:inline-block sm:mt-10">
-              {enquiryData?.title_three}
-            </span>
+            {title}
+            <span className="block font-instrument italic text-[#F54BB4] max-md:inline-block sm:mt-10">{subtitle}</span>
           </h2>
         </RevealWrapper>
         <RevealWrapper as="ul" className="mt-14 flex list-none items-center justify-center">
           <li className="mx-auto block w-full text-center md:inline-block md:w-auto">
-            <Link
-              href={enquiryData?.button_url || '/contact'}
-              className="rv-button rv-button-primary block md:inline-block">
+            <Link href={buttonUrl || '/contact'} className="rv-button rv-button-primary block md:inline-block">
               <div className="rv-button-top">
-                <span>{enquiryData?.button}</span>
+                <span>{button}</span>
               </div>
               <div className="rv-button-bottom">
-                <span className="whitespace-nowrap">{enquiryData?.button}</span>
+                <span className="whitespace-nowrap">{button}</span>
               </div>
             </Link>
           </li>
         </RevealWrapper>
-        {form && <ContactForm budgets={enquiryData.form_budgets} interests={enquiryData.form_interests} />}
+        {/* {form && <ContactForm budgets={enquiryData.form_budgets} interests={enquiryData.form_interests} />} */}
       </div>
     </section>
   )

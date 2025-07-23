@@ -37,17 +37,6 @@ const HeroBanner = () => {
 
           <div className="flex flex-col gap-4 md:mt-9 md:flex-row lg:mt-14">
             <Link
-              href="/services"
-              className="rv-button rv-button-primary rv-button-sm block md:inline-block"
-              aria-label="Explore Services">
-              <div className="rv-button-top text-center">
-                <span>Explore Services</span>
-              </div>
-              <div className="rv-button-bottom text-center">
-                <span className="text-nowrap">Explore Services</span>
-              </div>
-            </Link>
-            <Link
               href="/get-a-quote"
               className="rv-button rv-button-primary rv-button-sm block md:inline-block"
               aria-label="Get Started">
@@ -67,17 +56,8 @@ const HeroBanner = () => {
             <img
               src="/images/hero-img/business-hero-1.png"
               alt="Business professionals in a consultation meeting"
-              className="h-auto w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[540px] md:w-[410px]"
-              width={410}
-              height={540}
-            />
-          </figure>
-          <figure className="relative overflow-hidden">
-            <img
-              src="/images/hero-img/hero-img-03.webp"
-              alt="Business growth and strategy visualization"
-              className="h-auto w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[540px] md:w-[410px]"
-              width={410}
+              className="h-auto w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[540px] md:w-[820px]"
+              width={820}
               height={540}
             />
           </figure>

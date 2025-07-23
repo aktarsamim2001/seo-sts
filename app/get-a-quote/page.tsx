@@ -119,7 +119,6 @@ const Page = () => {
       <section className="pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
         <PageHero
           title={page_content?.banner?.title || 'Happy to Assist You'}
-          badgeTitle={page_content?.banner?.sub_title || 'Get a Quote'}
           description={
             page_content?.banner?.content ||
             'Discover our innovative, cutting-edge no-code websites, crafted to effortlessly captivate and engage your visitors.'

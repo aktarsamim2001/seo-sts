@@ -27,46 +27,55 @@ const Page = () => {
     dispatch(fetchPageDetails({ slug: 'home' }))
   }, [dispatch])
 
+  const content = pageDetails?.page_content || {}
   return (
     <LayoutOne>
-      <HeroV24 />
+      <HeroV24 heroSlides={content.banner ?? []} />
       <AboutSection
-        title={pageDetails.page_content.our_work.title}
-        subtitle={pageDetails.page_content.our_work.subtitle}
-        workImages={pageDetails.page_content.our_work.work_images}
+        titleOne={content.about?.title_one ?? ''}
+        titleTwo={content.about?.title_two ?? ''}
+        subtitle={content.about?.subtitle ?? ''}
+        content={content.about?.content ?? ''}
+        button={content.about?.button ?? ''}
+        buttonUrl={content.about?.button_url ?? '#'}
       />
       <ServicesV6
-        title={'What'}
-        italicTitle={'We Do'}
-        subtitle={'We build innovative digital experiences where creativity meets advanced technology'}
-        button={pageDetails.page_content.services.button}
-        buttonUrl={pageDetails.page_content.services.button_url}
-        services={pageDetails.page_content.services.services.map((service: any, idx: number) => ({
-          id: service.service_id ?? idx,
-          ...service,
-        }))}
+        titleOne={content.services?.title_one ?? ''}
+        titleTwo={content.services?.title_two ?? ''}
+        subtitle={content.services?.subtitle ?? ''}
+        button={content.services?.button ?? ''}
+        buttonUrl={content.services?.button_url ?? '#'}
+        services={content.services?.services ?? []}
       />
       <OurWorkV2
-        title="What"
-        italicTitle="We Did"
-        subtitle="Brand identities that speak for themselves"
-        workImages={pageDetails?.page_content?.our_work?.work_images}
+        titleOne={content.what_we_did?.title_one ?? ''}
+        titleTwo={content.what_we_did?.title_two ?? ''}
+        subtitle={content.what_we_did?.subtitle ?? ''}
+        portfolio={content.what_we_did?.portfolio ?? []}
+        button={content.what_we_did?.button ?? ''}
+        buttonUrl={content.what_we_did?.button_url ?? '#'}
       />
       <ProcessV4
-        title="How"
-        italicTitle="We Work"
-        subtitle="Our Work Process Journey"
-        featureImage={pageDetails.page_content.process_data.feature_image}
-        processSteps={pageDetails.page_content.process_data.process_data}
+        titleOne={content.how_we_work?.title_one ?? ''}
+        titleTwo={content.how_we_work?.title_two ?? ''}
+        subtitle={content.how_we_work?.subtitle ?? ''}
+        featureImage={content.how_we_work?.feature_image ?? ''}
+        workTimeline={content.how_we_work?.work_timeline ?? []}
+        button={content.how_we_work?.button ?? ''}
+        buttonUrl={content.how_we_work?.button_url ?? '#'}
       />
       <TestimonialV2
-        title="What Our"
-        italicTitle="Clients Say"
-        subtitle="Celebrating excellence in Digital Transformation"
-        testimonials={pageDetails.page_content.testimonials.testimonials}
+        title={content.testimonials?.title ?? ''}
+        subtitle={content.testimonials?.subtitle ?? ''}
+        testimonials={content.testimonials?.testimonials ?? []}
       />
       {/* <PricingCard showHeader={true} /> */}
-      <CTA enquiryData={pageDetails?.page_content?.enquiry_data} form={false} />
+      <CTA
+        title={content.enquiry_data?.title ?? ''}
+        subtitle={content.enquiry_data?.subtitle ?? ''}
+        button={content.enquiry_data?.button ?? ''}
+        buttonUrl={content.enquiry_data?.button_url ?? '#'}
+      />
     </LayoutOne>
   )
 }
