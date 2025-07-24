@@ -150,7 +150,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
           {item.sub_menues && item.sub_menues.length > 0 ? (
             <div className="group relative flex items-center">
               <Link
-                href={`/${item.menu_item_slug}`}
+                href={item.menu_item_title === 'Home' ? '/' : `/${item.menu_item_slug}`}
                 onClick={() => onItemClick?.()}
                 className={`menu-list-item-text text-[28px] leading-[70px] md:text-[42px] xl:text-[56px] xl:leading-[90px] ${
                   activeItems.includes(item.menu_item_title) ? 'text-[#F54BB4]' : 'text-white hover:!text-[#9BCB4B]'
@@ -179,7 +179,7 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
             </div>
           ) : (
             <Link
-              href={`/${item.menu_item_slug}`}
+              href={item.menu_item_title === 'Home' ? '/' : `/${item.menu_item_slug}`}
               onClick={() => onItemClick?.()}
               className={`menu-list-item-text text-[28px] leading-[70px] md:text-[42px] xl:text-[56px] xl:leading-[90px] ${
                 activeItems.includes(item.menu_item_title) ? 'text-[#F54BB4]' : 'text-white hover:text-[#9BCB4B]'

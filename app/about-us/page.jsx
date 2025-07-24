@@ -21,63 +21,71 @@ const AboutPage = () => {
   const dispatch = useDispatch()
 
   const aboutUsDetails = useSelector((state) => state.aboutUs)
-  const pageDetails = useSelector((state) => state.pageDetails)
 
   useEffect(() => {
     dispatch(fetchAboutUsDetails({ slug: 'about-us' }))
-    dispatch(fetchPageDetails({ slug: 'home' }))
   }, [dispatch])
-
-  const services = aboutUsDetails?.page_content?.services
-  const sectionContent = aboutUsDetails?.page_content?.section_content
-  const enquiryData = aboutUsDetails?.page_content?.enquiry_data
-  const clients = aboutUsDetails?.page_content?.clients
-  const testimonials = pageDetails?.page_content?.testimonials?.testimonials
 
   return (
     <LayoutOne>
-      <HeroBanner />
+      <HeroBanner banner={aboutUsDetails?.page_content?.banner ?? []} />
       <PageHero
-        title="SmartTask"
-        subtitle="Your Creative Powerhouse, On Demand"
-        italicTitle="Studios"
-        description={
-          'At SmartTask Studio, we believe that high-quality creative work should be accessible, efficient, and stress-free. That’s why we built a modern studio that connects growing brands, entrepreneurs, and agencies with a dedicated team of top-tier designers, developers, writers, and marketers — all managed under one roof. We’re not just a service provider — we’re your behind-the-scenes creative team, helping you build bold brands, launch better content, and market smarter. Whether you need a full rebrand, a sleek website, a scroll-stopping ad, or consistent content creation, SmartTask Studio delivers the quality of a full agency — without the agency price tag or delays.'
-        }
+        title={aboutUsDetails?.page_content?.section_content?.title_one ?? ''}
+        subtitle={aboutUsDetails?.page_content?.section_content?.subtitle ?? ''}
+        italicTitle={aboutUsDetails?.page_content?.section_content?.title_two ?? ''}
+        description={aboutUsDetails?.page_content?.section_content?.content ?? ''}
       />
 
-      {services && (
+      {aboutUsDetails?.page_content?.services && (
         <AwardsV2
-          title={services.title}
-          subtitle={services.subtitle}
-          button={services.button}
-          buttonUrl={services.button_url}
-          services={services.services}
+          title={aboutUsDetails?.page_content?.services?.title}
+          subtitle={aboutUsDetails?.page_content?.services?.subtitle}
+          content={aboutUsDetails?.page_content?.services?.content}
+          button={aboutUsDetails?.page_content?.services?.button}
+          buttonUrl={aboutUsDetails?.page_content?.services?.button_url}
+          services={aboutUsDetails?.page_content?.services?.services}
         />
       )}
 
-      {sectionContent && (
+      {aboutUsDetails?.page_content?.our_mission && (
         <About
-          title="Our Mission"
-          content_one="To simplify creative production for modern businesses by delivering premium design, content, and marketing solutions — fast, affordable, and done right the first time."
-          feature_image={sectionContent.feature_image}
+          title={aboutUsDetails?.page_content?.our_mission?.title}
+          content={aboutUsDetails?.page_content?.our_mission?.content}
+          feature_image={aboutUsDetails?.page_content?.our_mission?.feature_image}
+          button={aboutUsDetails?.page_content?.our_mission?.button}
+          button_url={aboutUsDetails?.page_content?.our_mission?.button_url || '#'}
+        />
+      )}
+      {aboutUsDetails?.page_content?.work_with_us?.data && (
+        <OurVision
+          title_one={aboutUsDetails.page_content.work_with_us.title_one}
+          title_two={aboutUsDetails.page_content.work_with_us.title_two}
+          content={aboutUsDetails.page_content.work_with_us.content}
+          data={aboutUsDetails.page_content.work_with_us.data}
         />
       )}
 
-      <OurVision />
+      {aboutUsDetails?.page_content?.clients && (
+        <Marquee clientsData={aboutUsDetails?.page_content?.clients} withBorder={true} />
+      )}
 
-      {clients && <Marquee clientsData={clients} withBorder={true} />}
-
-      {testimonials && (
+      {aboutUsDetails?.page_content?.testimonial && (
         <TestimonialV2
-          title="What Our"
-          italicTitle="Clients Say"
-          subtitle="Celebrating excellence in Digital Transformation"
-          testimonials={testimonials}
+          titleOne={aboutUsDetails?.page_content?.testimonial?.title_one}
+          titleTwo={aboutUsDetails?.page_content?.testimonial?.title_two}
+          subtitle={aboutUsDetails?.page_content?.testimonial?.subtitle}
+          testimonials={aboutUsDetails?.page_content?.testimonial?.testimonials}
         />
       )}
 
-      {enquiryData && <CTA enquiryData={enquiryData} form={false} />}
+      {aboutUsDetails?.page_content?.enquiry_data && (
+        <CTA
+          title={aboutUsDetails?.page_content?.enquiry_data?.title ?? ''}
+          subtitle={aboutUsDetails?.page_content?.enquiry_data?.subtitle ?? ''}
+          button={aboutUsDetails?.page_content?.enquiry_data?.button ?? ''}
+          buttonUrl={aboutUsDetails?.page_content?.enquiry_data?.button_url ?? '#'}
+        />
+      )}
     </LayoutOne>
   )
 }

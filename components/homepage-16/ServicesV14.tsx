@@ -26,23 +26,27 @@ interface ServicesData {
   services: ServiceType[]
 }
 
-const ServicesV14 = ({ services }: { services: ServicesData }) => {
+const ServicesV14 = ({
+  services,
+  title_one,
+  title_two,
+  subtitle,
+}: {
+  services: ServicesData
+  title_one: string
+  title_two: string
+  subtitle: string
+}) => {
   return (
     <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="mb-8 text-center md:mb-16">
-        <TextAppearAnimation02>
-          <h2 className="text-appear mb-3">
-            Digital solutions designed for
-            <br />
-            <i className="font-instrument text-[#F54BB4]">maximum impact </i>
-          </h2>
-        </TextAppearAnimation02>
-        <TextAppearAnimation>
-          <p className="text-appear mx-auto px-4 md:px-0 lg:max-w-[770px]">
-            Delivering Digital Solutions To Brands & Start Ups
-          </p>
-        </TextAppearAnimation>
+        <h2 className="text-appear mb-3">
+          {title_one} <br />
+          <span className="font-instrument italic text-[#F54BB4]">{title_two}</span>
+        </h2>
+        <p className="text-appear mx-auto px-4 md:px-0 lg:max-w-[770px]">{subtitle}</p>
       </div>
+
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-[30px] px-4 md:grid-cols-2 md:px-[30px] 2xl:grid-cols-3">
         {services?.services?.map((service) => (
           <RevealWrapper

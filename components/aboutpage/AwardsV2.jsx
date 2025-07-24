@@ -8,7 +8,7 @@ import gradientBg from '@/public/images/services-gradient-bg-2.png'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const AwardsV2 = ({ title, subtitle, button, buttonUrl, services }) => {
+const AwardsV2 = ({ title, subtitle, content, button, buttonUrl, services }) => {
   const [activeIndex, setActiveIndex] = useState(null)
 
   const toggleAccordion = (index) => {
@@ -17,20 +17,13 @@ const AwardsV2 = ({ title, subtitle, button, buttonUrl, services }) => {
 
   return (
     <section className="container relative overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
-      <div className="mb-8 flex flex-col gap-x-8 gap-y-4 md:mb-20 lg:flex-row lg:justify-between">
-        <div>
-          <RevealWrapper className="rv-badge">
-            <span className="rv-badge-text">{title}</span>
-          </RevealWrapper>
-          <TextAppearAnimation>
-            <h2 className="text-appear mt-3 lg:mt-5">{subtitle}</h2>
-          </TextAppearAnimation>
-        </div>
-        <TextAppearAnimation>
-          <p className="text-appear max-w-[470px] lg:self-end">
-            Our commitment to exceptional design has earned global recognition and industry accolades.
-          </p>
-        </TextAppearAnimation>
+      <div className="mb-8 text-center md:mb-20">
+        <h1 className="mb-4 mt-3.5 font-[400]">
+          {title} <span className="font-instrument italic text-[#F54BB4]">{subtitle}</span>
+        </h1>
+        <h2 className="text-appear mx-auto max-w-[770px] font-[450] md:mb-8 md:text-[28px] md:leading-[1.3] lg:text-[35px] lg:leading-[1.3]">
+          {content}
+        </h2>
       </div>
       <RevealWrapper className="mx-auto w-full max-w-[1170px] [&>*:not(:last-child)]:mb-6">
         {services.map((service) => (

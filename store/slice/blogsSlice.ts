@@ -4,9 +4,13 @@ import { service } from '../api_services/api_service'
 
 export interface BlogsContent {
   banner: {
-    title: string
-    sub_title: string
+    title_one: string
+    title_two: string
+    title_three: string
+    button: string
+    button_url: string
     content: string
+    feature_image: string
   }
   enquiry_data: {
     title_one: string
@@ -47,9 +51,13 @@ const initialState: BlogsState = {
   page_slug: '',
   page_content: {
     banner: {
-      title: '',
-      sub_title: '',
+      title_one: '',
+      title_two: '',
+      title_three: '',
+      button: '',
+      button_url: '',
       content: '',
+      feature_image: '',
     },
     enquiry_data: {
       title_one: '',

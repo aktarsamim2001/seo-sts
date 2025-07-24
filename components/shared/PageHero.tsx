@@ -46,7 +46,13 @@ const PageHero = ({
               {subtitle}
             </h2>
           )}
-          {description && <p className="text-appear mx-auto max-w-[470px] md:max-w-[68rem]">{description}</p>}
+          {description && (
+            <p
+              className="text-appear mx-auto max-w-[470px] md:max-w-[68rem]"
+              dangerouslySetInnerHTML={{ __html: description as string }}
+            />
+          )}
+
           {image && (
             <RevealWrapper as="figure" className="mt-8">
               <img src={image} alt="Page Hero Image" className="mx-auto w-full max-w-[600px] object-cover" />

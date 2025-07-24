@@ -14,7 +14,7 @@ import { fetchBlogList } from '../../../store/slice/blogListSlice'
 const BlogDetails = () => {
   const dispatch = useDispatch()
   const params = useParams()
-  const slug = params?.slug
+  const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug
   const blogsDetails = useSelector((state) => state?.blogs)
   const blogData = blogsDetails?.blogsDetailsData
   const blogList = useSelector((state) => state.blogList.blogListData)
@@ -44,30 +44,12 @@ const BlogDetails = () => {
       />
       <BlogContent blog_content={blogData?.table_contents} blogList={blogList?.data} image={blogData?.feature_image} />
       {blogsDetails?.page_content?.enquiry_data && (
-        <CTA enquiryData={blogsDetails.page_content.enquiry_data}>
-          {blogsDetails.page_content.enquiry_data?.title_one && (
-            <p>{blogsDetails.page_content.enquiry_data.title_one}</p>
-          )}
-
-          {Array.isArray(blogsDetails.page_content.enquiry_data?.title_images) && (
-            <CtaImageSlider
-              slides={blogsDetails.page_content.enquiry_data.title_images.map((img, index) => ({
-                id: String(index + 1),
-                img,
-              }))}
-            />
-          )}
-
-          {blogsDetails.page_content.enquiry_data?.title_two && (
-            <p>{blogsDetails.page_content.enquiry_data.title_two}</p>
-          )}
-
-          {blogsDetails.page_content.enquiry_data?.title_three && (
-            <i className="block font-instrument italic text-[#F54BB4] max-md:inline-block max-sm:pl-2 sm:mt-10">
-              {blogsDetails.page_content.enquiry_data.title_three}
-            </i>
-          )}
-        </CTA>
+        <CTA
+          title={blogsDetails?.page_content?.enquiry_data?.title}
+          subtitle={blogsDetails?.page_content?.enquiry_data?.subtitle}
+          button={blogsDetails?.page_content?.enquiry_data?.button}
+          buttonUrl={blogsDetails?.page_content?.enquiry_data?.button_url || '#'}
+        />
       )}
     </LayoutOne>
   )

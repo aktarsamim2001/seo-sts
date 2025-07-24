@@ -13,6 +13,7 @@ import termsConditionsReducer from '../store/slice/termsConditionsSlice'
 import contactPageReducer from '../store/slice/contactSlice'
 import getQuotePageReducer from '../store/slice/quotePageSlice'
 import enquiryReducer from '../store/slice/enquirySlice'
+import portfoliosListReducer from '../store/slice/portfoliosListSlice'
 
 export const store = configureStore({
   reducer: {
@@ -29,6 +30,7 @@ export const store = configureStore({
     contactPage: contactPageReducer,
     getQuotePage: getQuotePageReducer,
     enquiry: enquiryReducer,
+    portfoliosList: portfoliosListReducer,
   },
 })
 

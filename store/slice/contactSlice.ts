@@ -9,10 +9,13 @@ interface MovingText {
 
 interface ContactPageContent {
   banner: {
-    title: string
-    sub_title_one: string
-    sub_title_two: string
+    title_one: string
+    title_two: string
+    title_three: string
+    button: string
+    button_url: string
     content: string
+    feature_image: string
   }
   contact_data: {
     moving_texts: MovingText[]
@@ -47,10 +50,13 @@ const initialState: ContactPageState = {
   page_slug: '',
   page_content: {
     banner: {
-      title: '',
-      sub_title_one: '',
-      sub_title_two: '',
+      title_one: '',
+      title_two: '',
+      title_three: '',
+      button: '',
+      button_url: '',
       content: '',
+      feature_image: '',
     },
     contact_data: {
       moving_texts: [],

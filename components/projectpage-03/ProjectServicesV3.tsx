@@ -13,17 +13,11 @@ interface ProjectItem {
   [key: string]: any
 }
 
-interface projectType {
-  slug: string
-  content: string
-  portfolio: ProjectItem[]
-}
-
-const ProjectServicesV3 = ({ portfolio }: { portfolio: projectType }) => {
+const ProjectServicesV3 = ({ portfolio }: { portfolio: ProjectItem[] }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 4
 
-  const portfolioListData = portfolio?.portfolio || []
+  const portfolioListData = portfolio || []
   const totalItems = portfolioListData.length
 
   const totalPages = Math.ceil(totalItems / itemsPerPage)
@@ -36,31 +30,7 @@ const ProjectServicesV3 = ({ portfolio }: { portfolio: projectType }) => {
   return (
     <section className="pb-14 pt-28 sm:pt-36 md:pb-16 md:pt-[157px] lg:pb-[88px] xl:pb-[100px]">
       <div className="container">
-        <div className="mb-20 flex flex-col items-center justify-center gap-y-7 text-center md:mb-28 xl:mb-32">
-          <div className="flex flex-col items-center justify-center text-center">
-            <TextAppearAnimation>
-              <h2 className="text-appear pb-14 text-[46px] font-normal leading-[1.1] md:text-7xl md:tracking-[-2.88px] xl:text-[96px]">
-                Crafting Tomorrow’s
-                <span className="mt-5 font-instrument italic !text-[#F54BB4]"> Solutions, Today</span>
-              </h2>
-            </TextAppearAnimation>
-            <div>
-              <Link
-                href="/get-a-quote"
-                className="rv-button rv-button-primary rv-button-sm block md:inline-block"
-                aria-label="Explore Services">
-                <div className="rv-button-top text-center">
-                  <span>Get Started</span>
-                </div>
-                <div className="rv-button-bottom text-center">
-                  <span className="text-nowrap">Get Started</span>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <div className="mb-8 text-center md:mb-16">
+        {/* <div className="mb-8 text-center md:mb-16">
           <h2 className="text-appear mb-3">
             Quality stuff. In every project.
             <br />
@@ -72,13 +42,12 @@ const ProjectServicesV3 = ({ portfolio }: { portfolio: projectType }) => {
               together here for you to see.
             </p>
           </TextAppearAnimation>
-        </div>
+        </div> */}
 
         <div className="container grid gap-20 max-md:gap-y-16 md:grid-cols-2 xl:gap-16">
           {currentItems.map((project, idx) => (
             <a
               key={project.title || idx}
-              href="#"
               className="project-item underline-hover-effect group col-span-full flex flex-col gap-x-10 gap-y-6 lg:items-center">
               <figure className="overflow-hidden max-lg:w-full">
                 <Image

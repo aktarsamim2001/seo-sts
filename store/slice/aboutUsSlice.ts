@@ -4,24 +4,24 @@ import { service } from '../api_services/api_service'
 
 export interface AboutUsContent {
   banner: {
-    title: string
-    sub_title_one: string
-    sub_title_two: string
+    title_one: string
+    title_two: string
+    title_three: string
     content: string
     feature_image: string
   }
   section_content: {
-    content_one: string
-    content_two: string
-    feature_image: string
+    title_one: string
+    title_two: string
+    subtitle: string
+    content: string
   }
-  teams: any[]
-  clients: string[]
   services: {
     title: string
     subtitle: string
     button: string
     button_url: string
+    content: string
     services: {
       service_id: number
       title: string
@@ -31,20 +31,42 @@ export interface AboutUsContent {
       list_image: string
     }[]
   }
-  enquiry_data: {
-    title_one: string
-    title_two: string
-    title_three: string
+  our_mission?: {
+    title: string
     button: string
     button_url: string
-    title_images: string[]
-  }
-  page_seo?: {
-    meta_title: string
-    meta_author: string
-    meta_description: string
-    meta_keywords: string
+    content: string
     feature_image: string
+  }
+  work_with_us?: {
+    title_one: string
+    title_two: string
+    content: string
+    data: {
+      title: string
+      content: string
+      feature_image: string
+    }[]
+  }
+  clients: string[]
+  testimonial?: {
+    title_one: string
+    title_two: string
+    subtitle: string
+    testimonials: {
+      name: string
+      designation: string
+      message: string
+      posted_at: string
+      avatar_url: string
+      logo: string
+    }[]
+  }
+  enquiry_data: {
+    title: string
+    subtitle: string
+    button: string
+    button_url: string
   }
 }
 
@@ -68,33 +90,51 @@ const initialState: AboutUsState = {
   page_slug: '',
   page_content: {
     banner: {
-      title: '',
-      sub_title_one: '',
-      sub_title_two: '',
+      title_one: '',
+      title_two: '',
+      title_three: '',
       content: '',
       feature_image: '',
     },
     section_content: {
-      content_one: '',
-      content_two: '',
-      feature_image: '',
+      title_one: '',
+      title_two: '',
+      subtitle: '',
+      content: '',
     },
-    teams: [],
-    clients: [],
     services: {
       title: '',
       subtitle: '',
       button: '',
       button_url: '',
+      content: '',
       services: [],
     },
-    enquiry_data: {
-      title_one: '',
-      title_two: '',
-      title_three: '',
+    our_mission: {
+      title: '',
       button: '',
       button_url: '',
-      title_images: [],
+      content: '',
+      feature_image: '',
+    },
+    work_with_us: {
+      title_one: '',
+      title_two: '',
+      content: '',
+      data: [],
+    },
+    clients: [],
+    testimonial: {
+      title_one: '',
+      title_two: '',
+      subtitle: '',
+      testimonials: [],
+    },
+    enquiry_data: {
+      title: '',
+      subtitle: '',
+      button: '',
+      button_url: '',
     },
   },
   page_seo: {

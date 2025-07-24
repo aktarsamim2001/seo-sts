@@ -6,15 +6,21 @@ export interface PortfolioContent {
   banner: {
     title_one: string
     title_two: string
+    title_three: string
+    button: string
+    button_url: string
     content: string
-  }
-  portfolio: {
-    title: string
     feature_image: string
-  }[]
+  }
   enquiry_data: {
     title_one: string
     title_two: string
+    button: string
+    button_url: string
+  }
+  bottom_section: {
+    title: string
+    button: string
     button_url: string
   }
   page_seo?: {
@@ -48,12 +54,21 @@ const initialState: PortfolioState = {
     banner: {
       title_one: '',
       title_two: '',
+      title_three: '',
+      button: '',
+      button_url: '',
       content: '',
+      feature_image: '',
     },
-    portfolio: [],
     enquiry_data: {
       title_one: '',
       title_two: '',
+      button: '',
+      button_url: '',
+    },
+    bottom_section: {
+      title: '',
+      button: '',
       button_url: '',
     },
   },

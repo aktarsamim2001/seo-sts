@@ -13,11 +13,17 @@ interface ServiceOption {
 
 interface GetQuotePageContent {
   banner: {
-    title: string
-    sub_title: string
+    title_one: string
+    title_two: string
+    title_three: string
+    button: string
+    button_url: string
     content: string
+    feature_image: string
   }
   form_options: {
+    title: string
+    content: string
     service_options: ServiceOption[]
     service_time_options: string[]
     budget_options: string[]
@@ -45,11 +51,17 @@ const initialState: GetQuotePageState = {
   page_slug: '',
   page_content: {
     banner: {
-      title: '',
-      sub_title: '',
+      title_one: '',
+      title_two: '',
+      title_three: '',
+      button: '',
+      button_url: '',
       content: '',
+      feature_image: '',
     },
     form_options: {
+      title: '',
+      content: '',
       service_options: [],
       service_time_options: [],
       budget_options: [],

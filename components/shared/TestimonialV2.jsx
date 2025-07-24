@@ -1,3 +1,20 @@
+// Usage example:
+// If your API returns:
+// testimonials: {
+//   title_one: string,
+//   title_two: string,
+//   subtitle: string,
+//   testimonials: Testimonial[]
+// }
+//
+// In your parent component, map the API fields to the expected props:
+// <TestimonialV2
+//   titleOne={testimonials.title_one}
+//   titleTwo={testimonials.title_two}
+//   subtitle={testimonials.subtitle}
+//   testimonials={testimonials.testimonials}
+// />
+
 // src/components/shared/TestimonialV2.tsx
 import React from 'react'
 import Image from 'next/image'
@@ -5,30 +22,13 @@ import Marquee from 'react-fast-marquee'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 
-interface Testimonial {
-  name: string
-  designation: string
-  avatar_url: string
-  message: string
-  posted_at: string
-  logo: string
-}
-
-interface TestimonialV2Props {
-  title: string
-  subtitle: string
-  testimonials: Testimonial[]
-}
-
-const TestimonialV2: React.FC<TestimonialV2Props> = ({ title, subtitle, testimonials }) => {
-  console.log(testimonials)
-
+const TestimonialV2 = ({ titleOne = '', titleTwo = '', subtitle = '', testimonials = [] }) => {
   return (
     <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <h1 className="mb-4 mt-3.5 font-[400]">
-            {/* {title} <span className="font-instrument italic text-[#F54BB4]">{italicTitle}</span> */}
+            {titleOne} <span className="font-instrument italic text-[#F54BB4]">{titleTwo}</span>
           </h1>
           <h2 className="text-appear mx-auto max-w-[770px] font-[450] md:mb-8 md:text-[28px] md:leading-[1.3] lg:text-[35px] lg:leading-[1.3]">
             {subtitle}

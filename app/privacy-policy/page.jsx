@@ -10,10 +10,6 @@ import TermsPolicyBody from '@/components/shared/TermsPolicyBody'
 import CTA from '@/components/shared/CTA'
 import CtaImageSlider from '@/components/shared/CtaImageSlider'
 
-// export const metadata = {
-//   title: 'Privacy & Policy - SmartTask Studios',
-// }
-
 const FAQPage = () => {
   const dispatch = useDispatch()
   const pageDetails = useSelector((state) => state.privacyPolicy)

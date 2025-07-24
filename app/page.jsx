@@ -3,7 +3,6 @@
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import type { RootState, AppDispatch } from '@/store/store'
 import { fetchPageDetails } from '@/store/slice/homeSlice'
 import HeroV24 from '@/components/homepage-24/HeroV24'
 import AboutSection from '@/components/homepage-07/AboutSection'
@@ -18,8 +17,8 @@ import { fetchMenus } from '@/store/slice/menuSlice'
 import OurWorkV2 from '@/components/homepage-15/OurWorkV2'
 
 const Page = () => {
-  const dispatch = useDispatch<AppDispatch>()
-  const pageDetails = useSelector((state: RootState) => state.pageDetails)
+  const dispatch = useDispatch()
+  const pageDetails = useSelector((state) => state.pageDetails)
 
   console.log('Page details:', pageDetails)
 
@@ -65,7 +64,8 @@ const Page = () => {
         buttonUrl={content.how_we_work?.button_url ?? '#'}
       />
       <TestimonialV2
-        title={content.testimonials?.title ?? ''}
+        title_one={content.testimonials?.title_one ?? ''}
+        title_two={content.testimonials?.title_two ?? ''}
         subtitle={content.testimonials?.subtitle ?? ''}
         testimonials={content.testimonials?.testimonials ?? []}
       />

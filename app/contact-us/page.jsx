@@ -28,18 +28,18 @@ const ContactPage = () => {
   return (
     <LayoutOne>
       {/* Hero Section */}
-      <HeroBanner />
+      <HeroBanner banner={banner} />
       <div className="container relative overflow-hidden py-32 md:py-40 lg:py-[185px]">
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-6 sm:items-center md:mb-20 md:flex-row lg:justify-start">
           <div className="flex-1">
             <RevealWrapper className="rv-badge mb-3 md:mb-4">
-              <span className="rv-badge-text">{page_content?.banner?.title}</span>
+              <span className="rv-badge-text">{banner?.title_one}</span>
             </RevealWrapper>
-            {page_content?.banner?.sub_title_one && page_content?.banner?.sub_title_two && (
+            {(banner?.title_two || banner?.title_three) && (
               <TextAppearAnimation>
-                <h2 className="text-appear" key={page_content.banner.sub_title_one + page_content.banner.sub_title_two}>
-                  {page_content.banner.sub_title_one} <br />
-                  <span className="font-instrument italic !text-[#F54BB4]">{page_content.banner.sub_title_two}</span>
+                <h2 className="text-appear" key={banner.title_two + banner.title_three}>
+                  {banner.title_two} <br />
+                  <span className="font-instrument italic !text-[#F54BB4]">{banner.title_three}</span>
                 </h2>
               </TextAppearAnimation>
             )}
@@ -47,7 +47,7 @@ const ContactPage = () => {
           <div className="flex-1 max-md:w-full">
             <TextAppearAnimation>
               <p className="text-appear max-w-lg max-md:text-justify md:place-self-end md:text-right">
-                {page_content?.banner?.content}
+                {banner?.content}
               </p>
             </TextAppearAnimation>
           </div>

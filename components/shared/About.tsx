@@ -1,87 +1,68 @@
 'use client'
-import useReveal from '@/hooks/useReveal'
-import RevealWrapper from '../animation/RevealWrapper'
-import CompanyLogosMarquee from '../homepage-02/CompanyLogosMarquee'
-import CircleTextAnimation from './CircleTextAnimation'
-import logoDark from '@/public/images/logo-black.png'
-import logo2 from '@/public/images/logo-white2.png'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
-const About = ({ title }: any) => {
-  // const { revealRef } = useReveal()
+type AboutProps = {
+  title?: string
+  content?: string
+  feature_image?: string
+  button?: string
+  button_url?: string
+}
 
-  // if (marquee) {
-  //   return (
-  //     <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[120px]">
-  //       <div className="container">
-  //         <RevealWrapper>
-  //           <h3 className="pb-10 sm:pb-20" ref={revealRef}>
-  //             We provide customized solutions for enhancing your existing site or building a brand-new digital platform
-  //             from the ground up.
-  //           </h3>
-  //         </RevealWrapper>
-  //         <RevealWrapper>
-  //           <CircleTextAnimation />
-  //         </RevealWrapper>
-
-  //         <div className="flex flex-auto flex-col items-center justify-between gap-x-8 gap-y-14 pt-14 sm:pt-[70px] md:flex-row md:pt-[100px] xl:gap-x-28">
-  //           <RevealWrapper className="relative w-full overflow-hidden">
-  //             <div className="absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-backgroundBody to-transparent dark:from-dark"></div>
-  //             <div className="absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-backgroundBody to-transparent dark:from-dark"></div>
-
-  //             <CompanyLogosMarquee />
-  //           </RevealWrapper>
-  //         </div>
-  //       </div>
-  //     </section>
-  //   )
-  // }
+const About = ({ title, content, feature_image, button, button_url }: AboutProps) => {
+  const isValidUrl = typeof button_url === 'string' && button_url.trim() !== ''
+  const hasImage = typeof feature_image === 'string' && feature_image.trim() !== ''
 
   return (
     <section className="relative overflow-hidden pb-14 pt-28 md:pb-16 md:pt-32 lg:pb-[88px] lg:pt-44 xl:pb-[100px] xl:pt-[200px]">
       <div className="container">
         <div className="flex flex-col items-center justify-center lg:items-stretch lg:justify-normal">
-          {/* <CircleTextAnimation /> */}
-          <div className="flex items-center justify-center">
-            <Image
-              className="inline-block max-h-[140px] w-auto dark:hidden"
-              src={logo2}
-              alt="logo"
-              width={180}
-              height={140}
-              priority
-            />
-            <Image
-              className="hidden max-h-[140px] w-auto dark:inline-block"
-              src={logoDark}
-              alt="logo"
-              width={180}
-              height={140}
-              priority
-            />
-          </div>
+          {/* Logo (light and dark) */}
+          {hasImage && (
+            <div className="flex items-center justify-center">
+              <Image
+                className="inline-block max-h-[140px] w-auto dark:hidden"
+                src={feature_image}
+                alt="logo"
+                width={180}
+                height={140}
+                priority
+              />
+              <Image
+                className="hidden max-h-[140px] w-auto dark:inline-block"
+                src={feature_image}
+                alt="logo"
+                width={180}
+                height={140}
+                priority
+              />
+            </div>
+          )}
+
+          {/* Content */}
           <div className="mx-auto mt-[34px] flex flex-col items-center gap-6 text-center">
-            <h1>{title}</h1>
-            <p>
-              {' '}
-              To simplify creative production for modern businesses by delivering premium design, content, and marketing
-              solutions — fast, affordable, and done right the first time.
-            </p>
-            <Link
-              href={'/get-a-quote'}
-              className="rv-button rv-button-primary mt-8 block w-full text-center md:inline-block md:w-auto">
-              <div className="rv-button-top">
-                <span>Get Started</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span>Get Started</span>
-              </div>
-            </Link>
+            {title && <h1>{title}</h1>}
+            {content && <p>{content}</p>}
+
+            {isValidUrl && (
+              <Link
+                href={button_url}
+                className="rv-button rv-button-primary mt-8 block w-full text-center md:inline-block md:w-auto">
+                <div className="rv-button-top">
+                  <span>{button}</span>
+                </div>
+                <div className="rv-button-bottom">
+                  <span>{button}</span>
+                </div>
+              </Link>
+            )}
           </div>
         </div>
       </div>
     </section>
   )
 }
+
 export default About

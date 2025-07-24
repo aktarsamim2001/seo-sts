@@ -58,6 +58,13 @@ async function fetchContactEnquiryApi(payload: any) {
   })
 }
 
+async function fetchPortfoliosApi(payload: any) {
+  const token = getToken()
+  return axios.post(rootUrl + 'api/cms/portfolios', payload, {
+    headers: await authHeader(token),
+  })
+}
+
 export const service = {
   fetchMenusApi,
   fetchPageDetailsApi,
@@ -67,4 +74,5 @@ export const service = {
   fetchGetAQuoteApi,
   submitEnquiryApi: fetchGetAQuoteApi,
   fetchContactEnquiryApi,
+  fetchPortfoliosApi,
 }

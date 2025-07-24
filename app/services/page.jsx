@@ -13,39 +13,36 @@ import CtaImageSlider from '@/components/shared/CtaImageSlider'
 import HeroBanner from '@/components/aboutpage/HeroBanner'
 import FAQ from '@/components/shared/FAQ'
 
-// export const metadata = {
-//   title: 'Services',
-// }
-
 const ServicesPage = () => {
   const dispatch = useDispatch()
   const servicesDetails = useSelector((state) => state.services)
-  console.log('Services details:', servicesDetails) // Debugging line to check services details
+  console.log('Services details:', servicesDetails)
 
   useEffect(() => {
     dispatch(fetchServicesDetails({ slug: 'services' }))
   }, [dispatch])
 
-  if (servicesDetails.status) {
-    return <p>Loading...</p>
-  }
-
-  if (servicesDetails.error) {
-    return <p>Error: {servicesDetails.error}</p>
-  }
-
   return (
     <LayoutOne>
-      <HeroBanner />
+      <HeroBanner banner={servicesDetails?.page_content?.banner ?? []} />
       {/* <PageHero
         badgeTitle={servicesDetails.page_content.banner.title}
         title={servicesDetails.page_content.banner.sub_title}
         description={servicesDetails.page_content.banner.content}
       /> */}
-      <ServicesV14 services={servicesDetails.page_content.section_content} />
-      <Process processSteps={servicesDetails.page_content.process} />
-      <FAQ faqs={servicesDetails.page_content.faqs} />
-      <CTA enquiryData={servicesDetails.page_content.enquiry_data} />
+      <ServicesV14
+        services={servicesDetails.page_content.section_content ?? []}
+        title_one={servicesDetails.page_content.section_content.title_one}
+        title_two={servicesDetails.page_content.section_content.title_two}
+        subtitle={servicesDetails.page_content.section_content.subtitle}
+      />
+      <Process processSteps={servicesDetails.page_content.process ?? []} />
+      <FAQ faqs={servicesDetails.page_content.faqs ?? []} />
+      <CTA
+        title={servicesDetails.page_content.enquiry_data.title_one ?? ''}
+        subtitle={servicesDetails.page_content.enquiry_data.title_two ?? ''}
+        button={servicesDetails.page_content.enquiry_data.button}
+      />
     </LayoutOne>
   )
 }
