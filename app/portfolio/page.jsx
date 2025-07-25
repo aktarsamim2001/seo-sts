@@ -37,7 +37,16 @@ const CaseStudy = () => {
         subtitle={portfolioDetails?.page_content?.portfolio?.title_two}
         italicTitle={portfolioDetails?.page_content?.portfolio?.content}
       />
-      <ProjectServicesV3 portfolio={portfoliosList?.portfolios?.data || []} />
+      <ProjectServicesV3
+        portfolio={portfoliosList?.portfolios?.data || []}
+        paginationData={{
+          total: portfoliosList?.portfolios?.total || 0,
+          current_page: portfoliosList?.portfolios?.current_page || 1,
+          per_page: portfoliosList?.portfolios?.per_page || 4,
+          total_pages: portfoliosList?.portfolios?.total_pages || 1,
+        }}
+      />
+
       <CTA
         title={portfolioDetails?.page_content?.enquiry_data?.title_one}
         subtitle={portfolioDetails?.page_content?.enquiry_data?.title_two}

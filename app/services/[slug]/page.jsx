@@ -44,10 +44,11 @@ const ServiceDetails = () => {
       {data?.why_choose_us?.length > 0 && (
         <WhyChooseUsV6
           whyChooseUs={{
-            title: 'Why Choose Us',
-            sub_title_one: 'for Your Business',
-            section_content: 'We exist so you can focus on your vision: while we handle the creative execution',
-            button: 'Get Started',
+            title: data?.why_choose_us_title_one,
+            sub_title_one: data?.why_choose_us_title_two,
+            section_content: data?.why_choose_us_content,
+            button: data?.why_choose_us_button,
+            button_url: data?.why_choose_us_redirection_url || '#',
             data: data.why_choose_us,
           }}
         />

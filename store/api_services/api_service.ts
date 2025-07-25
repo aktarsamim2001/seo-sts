@@ -65,6 +65,12 @@ async function fetchPortfoliosApi(payload: any) {
   })
 }
 
+async function fetchPortfolioListApi(params: { page: number; per_page: number }) {
+  const token = getToken()
+  return axios.post(rootUrl + 'api/cms/portfolios', params, {
+    headers: await authHeader(token),
+  })
+}
 export const service = {
   fetchMenusApi,
   fetchPageDetailsApi,

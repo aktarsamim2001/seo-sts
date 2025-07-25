@@ -25,6 +25,11 @@ const BlogPage = () => {
   return (
     <LayoutOne>
       <HeroBanner banner={blogsDetails.page_content.banner} />
+      <PageHero
+        title={blogsDetails?.page_content?.section_content?.title_one ?? ''}
+        italicTitle={blogsDetails?.page_content?.section_content?.title_two ?? ''}
+        description={blogsDetails?.page_content?.section_content?.content ?? ''}
+      />
       <BlogPostV5 />
       <CTA
         title={blogsDetails.page_content.enquiry_data.title}

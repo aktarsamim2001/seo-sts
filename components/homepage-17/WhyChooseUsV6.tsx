@@ -20,8 +20,6 @@ const WhyChooseUsV6 = ({ whyChooseUs }: any) => {
     return null
   }
 
-  console.log('WhyChooseUs data array:', whyChooseUs.data)
-
   // Row pattern: 3 cards, then 2, then 3 again...
   const rowPattern = [3, 2, 3]
 
@@ -53,7 +51,7 @@ const WhyChooseUsV6 = ({ whyChooseUs }: any) => {
             {whyChooseUs.button && (
               <RevealWrapper className="mt-5 flex w-full justify-center md:mt-10">
                 <li className="block w-full text-center md:inline-block md:w-auto">
-                  <Link href="/contact" className="rv-button rv-button-primary block md:inline-block">
+                  <Link href={whyChooseUs.button_url} className="rv-button rv-button-primary block md:inline-block">
                     <div className="rv-button-top">
                       <span>{whyChooseUs.button}</span>
                     </div>

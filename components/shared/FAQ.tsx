@@ -32,10 +32,6 @@ const FAQ = ({ faqs, bigTitleWithBadge, titleChange }: FaqProps) => {
     setActiveIndex(activeIndex === index ? null : index)
   }
 
-  console.log('FAQ Component Data:', faqs)
-  console.log('Is Array:', Array.isArray(faqs))
-  console.log('titleChange:', titleChange)
-
   // Handle different data formats
   let data: FaqItem[] = []
   let title_one = 'Frequently Asked'
@@ -44,14 +40,12 @@ const FAQ = ({ faqs, bigTitleWithBadge, titleChange }: FaqProps) => {
   let button_url = '/get-a-quote'
 
   if (Array.isArray(faqs)) {
-    // Service details format - simple array
     data = faqs
     if (titleChange) {
       title_one = 'Frequently Asked'
       title_two = 'Questions'
     }
   } else if (faqs && typeof faqs === 'object') {
-    // Homepage format - complex object
     data = faqs.faq_data ?? []
     title_one = faqs.title_one ?? 'Frequently Asked'
     title_two = faqs.title_two ?? 'Questions'
@@ -157,16 +151,18 @@ const FAQ = ({ faqs, bigTitleWithBadge, titleChange }: FaqProps) => {
         </RevealWrapper>
 
         <RevealWrapper as="ul" className="mx-auto mt-[56px] flex list-none justify-center">
-          <li className="mx-auto block w-[90%] text-center md:inline-block md:w-auto">
-            <Link href={button_url} className="rv-button rv-button-sm rv-button-primary block md:inline-block">
-              <div className="rv-button-top">
-                <span>{button}</span>
-              </div>
-              <div className="rv-button-bottom">
-                <span className="text-nowrap">{button}</span>
-              </div>
-            </Link>
-          </li>
+          {button && (
+            <li className="mx-auto block w-[90%] text-center md:inline-block md:w-auto">
+              <Link href={button_url} className="rv-button rv-button-sm rv-button-primary block md:inline-block">
+                <div className="rv-button-top">
+                  <span>{button}</span>
+                </div>
+                <div className="rv-button-bottom">
+                  <span className="text-nowrap">{button}</span>
+                </div>
+              </Link>
+            </li>
+          )}
         </RevealWrapper>
       </div>
     </section>
