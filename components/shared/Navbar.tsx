@@ -286,8 +286,8 @@ export default function Navbar() {
             }}></div>
         </div>
         <nav
-          className={`fixed z-[1000] w-full px-5 pt-1 transition duration-300 ease-linear will-change-transform sm:px-8 sm:pt-5 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-          <div className="flex justify-between">
+          className={`fixed z-[1000] w-full pt-1 transition duration-300 ease-linear will-change-transform sm:px-8 sm:pt-5 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+          <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between px-6 xl:px-0">
             <Link href="/" className="relative z-10">
               <Image
                 className="inline-block max-h-[140px] w-auto dark:hidden"

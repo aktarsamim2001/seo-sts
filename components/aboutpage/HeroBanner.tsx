@@ -11,7 +11,6 @@ type Banner = {
 }
 
 const HeroBanner = ({ banner }: { banner: Banner }) => {
-  console.log('Banner:', banner)
   return (
     <section
       id="hero"
@@ -28,7 +27,7 @@ const HeroBanner = ({ banner }: { banner: Banner }) => {
         />
       </div>
 
-      <div className="mx-auto flex max-w-[1600px] flex-col items-start justify-start gap-y-8 xl:flex-row xl:justify-between">
+      <div className="mx-auto flex max-w-[1600px] flex-col items-start justify-start gap-y-8 px-8 xl:flex-row xl:justify-between xl:px-14 2xl:px-10">
         {/* Content Section */}
         <div className="flex-1">
           {banner?.title_one && (

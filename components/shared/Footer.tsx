@@ -35,8 +35,6 @@ const Footer = () => {
   const menus = useSelector((state: RootState) => state.menus.data as Menu[])
   const footerMenu = menus.find((menu) => menu.menu_name?.toLowerCase().includes('footer'))
 
-  console.log('Footer menu data:', footerMenu)
-
   // Helper function to get proper link based on menu type
   const getMenuLink = (item: MenuItem) => {
     // If menu item is Home, always link to '/'

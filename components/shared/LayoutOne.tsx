@@ -10,7 +10,7 @@ const LayoutOne = ({
   return (
     <Fragment>
       <Navbar />
-      <main className="relative z-10 bg-backgroundBody dark:bg-dark lg:mb-[700px]">{children}</main>
+      <main className="relative z-10 bg-backgroundBody dark:bg-dark lg:mb-[600px]">{children}</main>
       <Footer />
     </Fragment>
   )

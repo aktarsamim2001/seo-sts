@@ -25,11 +25,6 @@ const ServicesPage = () => {
   return (
     <LayoutOne>
       <HeroBanner banner={servicesDetails?.page_content?.banner ?? []} />
-      {/* <PageHero
-        badgeTitle={servicesDetails.page_content.banner.title}
-        title={servicesDetails.page_content.banner.sub_title}
-        description={servicesDetails.page_content.banner.content}
-      /> */}
       <ServicesV14
         services={servicesDetails.page_content.section_content ?? []}
         title_one={servicesDetails.page_content.section_content.title_one}

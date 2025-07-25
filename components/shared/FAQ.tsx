@@ -53,11 +53,8 @@ const FAQ = ({ faqs, bigTitleWithBadge, titleChange }: FaqProps) => {
     button_url = faqs.button_url ?? '/get-a-quote'
   }
 
-  console.log('Processed FAQ data:', data)
-
   // Return null if no data
   if (!data || data.length === 0) {
-    console.log('No FAQ data available')
     return null
   }
 

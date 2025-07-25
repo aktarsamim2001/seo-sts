@@ -6,17 +6,13 @@ import TextAppearAnimation from '../animation/TextAppearAnimation'
 import Image from 'next/image'
 
 const WhyChooseUsV6 = ({ whyChooseUs }: any) => {
-  console.log('WhyChooseUs Component Data:', whyChooseUs)
-
   // Early return if no data
   if (!whyChooseUs) {
-    console.log('No whyChooseUs data available')
     return null
   }
 
   // Check if data array exists and has items
   if (!whyChooseUs.data || !Array.isArray(whyChooseUs.data) || whyChooseUs.data.length === 0) {
-    console.log('No data array or empty array:', whyChooseUs.data)
     return null
   }
 
@@ -31,8 +27,8 @@ const WhyChooseUsV6 = ({ whyChooseUs }: any) => {
     <section className="pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="container">
         {/* Section Header */}
-        <div className="mb-16 flex flex-col items-start justify-center gap-x-10 gap-y-4 md:flex-row lg:mb-24 lg:justify-between">
-          <div className="mb-8 text-center md:mb-20">
+        <div className="flex flex-col items-start justify-center gap-x-10 gap-y-4 md:flex-row lg:mb-16 lg:justify-between">
+          <div className="mb-4 text-center">
             {whyChooseUs.title && (
               <h1 className="mb-4 mt-3.5 font-[400]">
                 {whyChooseUs.title}{' '}
@@ -46,21 +42,6 @@ const WhyChooseUsV6 = ({ whyChooseUs }: any) => {
               <h2 className="text-appear mx-auto max-w-[770px] font-[450] md:mb-8 md:text-[28px] md:leading-[1.3] lg:text-[35px] lg:leading-[1.3]">
                 {whyChooseUs.section_content}
               </h2>
-            )}
-
-            {whyChooseUs.button && (
-              <RevealWrapper className="mt-5 flex w-full justify-center md:mt-10">
-                <li className="block w-full text-center md:inline-block md:w-auto">
-                  <Link href={whyChooseUs.button_url} className="rv-button rv-button-primary block md:inline-block">
-                    <div className="rv-button-top">
-                      <span>{whyChooseUs.button}</span>
-                    </div>
-                    <div className="rv-button-bottom">
-                      <span>{whyChooseUs.button}</span>
-                    </div>
-                  </Link>
-                </li>
-              </RevealWrapper>
             )}
           </div>
         </div>
@@ -115,6 +96,21 @@ const WhyChooseUsV6 = ({ whyChooseUs }: any) => {
             return cardElement
           })}
         </div>
+
+        {whyChooseUs.button && (
+          <RevealWrapper className="mt-5 flex w-full justify-center md:mt-10">
+            <li className="block w-full text-center md:inline-block md:w-auto">
+              <Link href={whyChooseUs.button_url} className="rv-button rv-button-primary block md:inline-block">
+                <div className="rv-button-top">
+                  <span>{whyChooseUs.button}</span>
+                </div>
+                <div className="rv-button-bottom">
+                  <span>{whyChooseUs.button}</span>
+                </div>
+              </Link>
+            </li>
+          </RevealWrapper>
+        )}
       </div>
     </section>
   )

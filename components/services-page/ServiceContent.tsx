@@ -18,12 +18,11 @@ interface ServiceContentProps {
   service: {
     content_data?: ContentItem[]
     content_list?: any[]
-    banner_image?: string // Optional dynamic image
+    banner_image?: string
     image_alt?: string
   }
 }
 
-// Utility to generate slug-like IDs for heading anchors
 const generateId = (text: string) =>
   text
     .toLowerCase()
@@ -46,30 +45,22 @@ const ServiceContent = ({ service }: ServiceContentProps) => {
           </aside>
 
           {/* Main Content */}
-          <article className="project-details-body">
-            {/* Banner Image */}
-            {/* <RevealWrapper as="figure" className="h-[497px] w-full">
-              <Image
-                width={870}
-                height={497}
-                src={service?.banner_image || img}
-                alt={service?.image_alt || 'Services Big Img'}
-                className="h-full w-full object-cover object-center"
-              />
-            </RevealWrapper> */}
-            {/* Markdown Content */}
+          <article className="project-details-body flex-[3]">
             <RevealWrapper>
               {contentItems.length > 0 ? (
-                <div className="mt-9 space-y-8">
+                <div className="mt-8 space-y-10">
                   {contentItems.map((item, index) => (
-                    <div key={`${item.title}-${index}`} className="content-section">
-                      <h2 id={generateId(item.title)} className="scroll-mt-32 text-[27px] font-[400]">
-                        {item.title}
-                      </h2>
+                    <div key={index} className="space-y-4">
+                      <h3
+                        id={generateId(item.title)}
+                        className="flex scroll-mt-32 items-center gap-2 text-xl font-semibold leading-snug">
+                        <span className="text-[#F54BB4]">{index + 1}.</span>
+                        <span>{item.title}</span>
+                      </h3>
 
                       <ReactMarkdown
                         rehypePlugins={[rehypeSlug, rehypeRaw]}
-                        className="prose dark:prose-invert mt-6 max-w-none">
+                        className="prose dark:prose-invert max-w-none">
                         {item.description}
                       </ReactMarkdown>
                     </div>

@@ -1,21 +1,3 @@
-// Usage example:
-// If your API returns:
-// testimonials: {
-//   title_one: string,
-//   title_two: string,
-//   subtitle: string,
-//   testimonials: Testimonial[]
-// }
-//
-// In your parent component, map the API fields to the expected props:
-// <TestimonialV2
-//   titleOne={testimonials.title_one}
-//   titleTwo={testimonials.title_two}
-//   subtitle={testimonials.subtitle}
-//   testimonials={testimonials.testimonials}
-// />
-
-// src/components/shared/TestimonialV2.tsx
 import React from 'react'
 import Image from 'next/image'
 import Marquee from 'react-fast-marquee'
