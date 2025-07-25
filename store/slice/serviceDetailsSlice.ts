@@ -9,64 +9,51 @@ export interface Banner {
   redirection_url: string
 }
 
-export interface TableContent {
+export interface ContentData {
+  title: string
+  description: string
+}
+
+export interface TableContents {
   content_list: string[]
-  content_data: {
-    title: string
-    description: string
-  }[]
+  content_data: ContentData[]
 }
 
 export interface WhyChooseUs {
   title: string
-  sub_title_one: string
-  sub_title_two: string
-  button: string
-  button_url: string
-  section_content: string
-  data: any[]
+  description: string
+  icon: string
 }
 
-export interface Faqs {
-  title_one: string
-  title_two: string
-  section_content: string
-  data: any[]
+export interface Faq {
+  question: string
+  answer: string
 }
 
-export interface ServiceDetailsContent {
+export interface SeoData {
+  meta_title: string
+  meta_author: string
+  meta_description: string
+  meta_keywords: string
+  feature_image: string
+}
+
+export interface ServiceDetailsData {
   banner: Banner
-  table_contents: TableContent
-  why_choose_us: WhyChooseUs
-  faqs: Faqs
-  seo_data?: {
-    meta_title: string
-    meta_author: string
-    meta_description: string
-    meta_keywords: string[]
-    feature_image: string
-  }
+  table_contents: TableContents
+  why_choose_us: WhyChooseUs[]
+  faqs: Faq[]
+  seo_data: SeoData
 }
 
 export interface ServiceDetailsState {
-  page_title: string
-  page_slug: string
-  page_content: ServiceDetailsContent
-  seo_data?: {
-    meta_title: string
-    meta_author: string
-    meta_description: string
-    meta_keywords: string[]
-    feature_image: string
-  }
+  data: ServiceDetailsData
   status: boolean
   error: string | null
 }
 
 const initialState: ServiceDetailsState = {
-  page_title: '',
-  page_slug: '',
-  page_content: {
+  data: {
     banner: {
       title: '',
       short_desc: '',
@@ -77,28 +64,15 @@ const initialState: ServiceDetailsState = {
       content_list: [],
       content_data: [],
     },
-    why_choose_us: {
-      title: '',
-      sub_title_one: '',
-      sub_title_two: '',
-      button: '',
-      button_url: '',
-      section_content: '',
-      data: [],
+    why_choose_us: [],
+    faqs: [],
+    seo_data: {
+      meta_title: '',
+      meta_author: '',
+      meta_description: '',
+      meta_keywords: '',
+      feature_image: '',
     },
-    faqs: {
-      title_one: '',
-      title_two: '',
-      section_content: '',
-      data: [],
-    },
-  },
-  seo_data: {
-    meta_title: '',
-    meta_author: '',
-    meta_description: '',
-    meta_keywords: [],
-    feature_image: '',
   },
   status: false,
   error: null,
@@ -108,11 +82,8 @@ const serviceDetailsSlice = createSlice({
   name: 'serviceDetails',
   initialState,
   reducers: {
-    setServiceDetails(state, action: PayloadAction<ServiceDetailsState>) {
-      state.page_title = action.payload.page_title
-      state.page_slug = action.payload.page_slug
-      state.page_content = action.payload.page_content
-      state.seo_data = (action.payload as any).seo_data
+    setServiceDetails(state, action: PayloadAction<ServiceDetailsData>) {
+      state.data = action.payload
     },
     setServiceDetailsLoading(state, action: PayloadAction<boolean>) {
       state.status = action.payload
@@ -129,25 +100,16 @@ export const { setServiceDetails, setServiceDetailsLoading, setServiceDetailsErr
 export default serviceDetailsSlice.reducer
 
 // Thunk
-export const fetchServiceDetails = (slug: string) => {
+export const fetchServiceDetails = ({ slug }: { slug: string }) => {
   return async (dispatch: any) => {
     dispatch(setServiceDetailsLoading(true))
     try {
       const response = await service.fetchServiceDetailsApi({ slug })
-
-      const mappedData: ServiceDetailsState = {
-        page_title: response?.data?.banner?.title || 'Service Details',
-        page_slug: slug,
-        page_content: response.data,
-        status: false,
-        error: null,
+      if (response) {
+        dispatch(setServiceDetails(response.data.data))
       }
-      dispatch(setServiceDetails(mappedData))
-      return response
-    } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : 'Something went wrong'
-      dispatch(setServiceDetailsError(errorMessage))
-      throw error
+    } catch (error: any) {
+      dispatch(setServiceDetailsError(error.message || 'Something went wrong'))
     } finally {
       dispatch(setServiceDetailsLoading(false))
     }

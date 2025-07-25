@@ -22,12 +22,7 @@ const Page = () => {
 
   return (
     <LayoutOne>
-      <PageHero
-        title={pageDetails?.page_content?.title}
-        italicTitle={terms?.page_content?.sub_title_two}
-        badgeTitle="Terms"
-        scale
-      />
+      <PageHero title={pageDetails?.page_content?.title_one} italicTitle={pageDetails?.page_content?.title_two} scale />
       <TermsPolicyBody termsData={terms} />
 
       {/* <TermsPolicyBody

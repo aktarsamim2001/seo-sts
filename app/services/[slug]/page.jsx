@@ -2,34 +2,66 @@
 
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'next/navigation'
 import { fetchServiceDetails } from '@/store/slice/serviceDetailsSlice'
+import { fetchServicesDetails } from '@/store/slice/servicesSlice'
 
 import LayoutOne from '@/components/shared/LayoutOne'
-import ServicesHero from '@/components/services-page/ServicesHero'
+import HeroBanner from '@/components/servicedetails/HeroBanner'
 import ServiceContent from '@/components/services-page/ServiceContent'
 import WhyChooseUsV6 from '@/components/homepage-17/WhyChooseUsV6'
 import FAQ from '@/components/shared/FAQ'
-import { useParams } from 'next/navigation'
-import HeroBanner from '@/components/aboutpage/HeroBanner'
+import CTA from '@/components/shared/CTA'
 
 const ServiceDetails = () => {
   const dispatch = useDispatch()
   const { slug } = useParams()
 
-  const serviceDetails = useSelector((state) => state.serviceDetails)
+  const { data, status } = useSelector((state) => state.serviceDetails)
+  const servicesDetails = useSelector((state) => state.services)
 
   useEffect(() => {
-    if (slug) {
-      dispatch(fetchServiceDetails(slug))
+    if (slug && typeof slug === 'string') {
+      dispatch(fetchServiceDetails({ slug })) // ✅ correct for service detail
+      dispatch(fetchServicesDetails({ slug: 'services' })) // ✅ correct for CTA
     }
   }, [dispatch, slug])
 
+  if (status === false && (!data || !data.banner)) {
+    return (
+      <LayoutOne>
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="text-lg">No service data available</div>
+        </div>
+      </LayoutOne>
+    )
+  }
+
   return (
     <LayoutOne>
-      <HeroBanner banner={serviceDetails.page_content.banner} />
-      <ServiceContent service={serviceDetails.page_content.table_contents} />
-      <WhyChooseUsV6 whyChooseUs={serviceDetails.page_content.why_choose_us} />
-      <FAQ faqs={serviceDetails.page_content.faqs} titleChange />
+      {data?.banner && <HeroBanner banner={data.banner} />}
+      {data?.table_contents && <ServiceContent service={data.table_contents} />}
+      {data?.why_choose_us?.length > 0 && (
+        <WhyChooseUsV6
+          whyChooseUs={{
+            title: 'Why Choose Us',
+            sub_title_one: 'for Your Business',
+            section_content: 'We exist so you can focus on your vision: while we handle the creative execution',
+            button: 'Get Started',
+            data: data.why_choose_us,
+          }}
+        />
+      )}
+      {data?.faqs?.length > 0 && <FAQ faqs={data.faqs} titleChange />}
+
+      {/* ✅ Correct CTA from services slice */}
+      {servicesDetails?.page_content?.enquiry_data && (
+        <CTA
+          title={servicesDetails.page_content.enquiry_data.title_one ?? ''}
+          subtitle={servicesDetails.page_content.enquiry_data.title_two ?? ''}
+          button={servicesDetails.page_content.enquiry_data.button}
+        />
+      )}
     </LayoutOne>
   )
 }

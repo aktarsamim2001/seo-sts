@@ -33,13 +33,17 @@ const ContactPage = () => {
         <div className="mb-10 flex flex-col items-start justify-center gap-x-10 gap-y-6 sm:items-center md:mb-20 md:flex-row lg:justify-start">
           <div className="flex-1">
             <RevealWrapper className="rv-badge mb-3 md:mb-4">
-              <span className="rv-badge-text">{banner?.title_one}</span>
+              <span className="rv-badge-text">{contact_data?.contact_section?.title_one}</span>
             </RevealWrapper>
-            {(banner?.title_two || banner?.title_three) && (
+            {(contact_data?.contact_section?.title_two || contact_data?.contact_section?.title_three) && (
               <TextAppearAnimation>
-                <h2 className="text-appear" key={banner.title_two + banner.title_three}>
-                  {banner.title_two} <br />
-                  <span className="font-instrument italic !text-[#F54BB4]">{banner.title_three}</span>
+                <h2
+                  className="text-appear"
+                  key={contact_data?.contact_section?.title_two + contact_data?.contact_section?.title_three}>
+                  {contact_data?.contact_section?.title_two} <br />
+                  <span className="font-instrument italic !text-[#F54BB4]">
+                    {contact_data?.contact_section?.title_three}
+                  </span>
                 </h2>
               </TextAppearAnimation>
             )}
@@ -47,7 +51,7 @@ const ContactPage = () => {
           <div className="flex-1 max-md:w-full">
             <TextAppearAnimation>
               <p className="text-appear max-w-lg max-md:text-justify md:place-self-end md:text-right">
-                {banner?.content}
+                {contact_data?.contact_section?.content}
               </p>
             </TextAppearAnimation>
           </div>
@@ -81,9 +85,8 @@ const ContactPage = () => {
 
       {/* Enquiry Hero */}
       <PageHero
-        title={page_content?.enquiry_data?.subtitle}
-        badgeTitle={page_content?.enquiry_data?.title}
-        description={page_content?.enquiry_data?.content}
+        title={page_content?.form_section?.title}
+        description={page_content?.form_section?.content}
         scale
         spacing="pt-[130px] md:pt-[180px] pb-20 sm:pb-32 md:pb-36 lg:pb-36 xl:pb-[100px] relative overflow-hidden"
       />

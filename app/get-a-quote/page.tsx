@@ -12,6 +12,23 @@ import LayoutOne from '../..//components/shared/LayoutOne'
 import type { RootState, AppDispatch } from '@/store/store'
 import HeroBanner from '@/components/aboutpage/HeroBanner'
 
+// Interface for submission data
+interface SubmissionData {
+  service_id: number
+  name: string
+  company: string
+  email: string
+  mobile: string
+  timeline: string
+  budget: string
+  about_project: string
+  additional_message: string
+  project?: string
+  file_name?: string
+  file_type?: string
+  file_size?: number
+}
+
 const Page = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { page_content } = useSelector((state: RootState) => state.getQuotePage)
@@ -35,6 +52,8 @@ const Page = () => {
 
   // File upload state
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [fileBase64, setFileBase64] = useState<string>('')
+  const [fileUploading, setFileUploading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const enquiry = useSelector((state: any) => state.enquiry)
@@ -64,6 +83,7 @@ const Page = () => {
         otherMessage: '',
       })
       setSelectedFile(null) // Reset file selection
+      setFileBase64('') // Reset base64
     }
   }, [enquiry.thankYouMessage, enquiry.response?.message])
 
@@ -72,38 +92,94 @@ const Page = () => {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  // File upload handlers
-  const handleFileSelect = (event: any) => {
-    const file = event.target.files[0]
-    setSelectedFile(file)
+  // Convert file to base64
+  const convertToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => resolve(reader.result as string)
+      reader.onerror = (error) => reject(error)
+    })
+  }
+
+  // File upload handlers with better error handling
+  const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    // Check file size (optional - limit to 10MB)
+    const maxSize = 10 * 1024 * 1024 // 10MB in bytes
+    if (file.size > maxSize) {
+      toast.error('File size should be less than 10MB')
+      return
+    }
+
+    setFileUploading(true)
+    console.log('Converting file to base64:', file.name) // Debug log
+
+    try {
+      const base64 = await convertToBase64(file)
+      console.log('Base64 conversion successful, length:', base64.length) // Debug log
+      setSelectedFile(file)
+      setFileBase64(base64)
+      toast.success('File uploaded successfully!')
+    } catch (error) {
+      toast.error('Failed to upload file')
+      console.error('File conversion error:', error)
+      setSelectedFile(null)
+      setFileBase64('')
+    } finally {
+      setFileUploading(false)
+    }
   }
 
   const handleUploadClick = () => {
     fileInputRef.current?.click()
   }
 
+  // Remove file
+  const handleRemoveFile = () => {
+    setSelectedFile(null)
+    setFileBase64('')
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
+  }
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
     // Find service_id from service_options
     let service_id = 1
     if (page_content?.form_options?.service_options) {
       const found = page_content.form_options.service_options.find((opt: any) => opt.title === formData.service)
       if (found) service_id = found.service_id
     }
-    dispatch(
-      submitEnquiry({
-        service_id,
-        name: formData.name,
-        company: formData.company,
-        email: formData.email,
-        mobile: formData.phone,
-        timeline: formData.timeline,
-        budget: formData.budget,
-        about_project: formData.description,
-        additional_message: formData.otherMessage,
-        // Add file if needed: file: selectedFile
-      }),
-    )
+
+    // Prepare submission data with proper typing
+    const submissionData: SubmissionData = {
+      service_id,
+      name: formData.name,
+      company: formData.company,
+      email: formData.email,
+      mobile: formData.phone,
+      timeline: formData.timeline,
+      budget: formData.budget,
+      about_project: formData.description,
+      additional_message: formData.otherMessage,
+    }
+
+    // Add file data if file is selected and converted to base64
+    if (fileBase64 && selectedFile) {
+      submissionData.project = fileBase64 // Base64 string: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUg..."
+      submissionData.file_name = selectedFile.name
+      submissionData.file_type = selectedFile.type
+      submissionData.file_size = selectedFile.size
+    }
+
+    console.log('Submission data:', submissionData) // Debug log
+
+    dispatch(submitEnquiry(submissionData))
   }
 
   // Reset enquiry message on unmount
@@ -140,7 +216,6 @@ const Page = () => {
             as="form"
             onSubmit={handleSubmit}
             className="reveal-me mx-auto grid max-w-[800px] grid-cols-1 gap-[30px] md:grid-cols-2">
-            {/* Show response message as toast handled in useEffect, not inline */}
             {/* Full Name */}
             <div className="md:col-span-full">
               <label
@@ -310,40 +385,97 @@ const Page = () => {
                   type="text"
                   readOnly
                   value={selectedFile ? selectedFile.name : ''}
-                  placeholder="Choose a file to upload"
-                  className="w-full cursor-pointer border bg-backgroundBody py-4 pl-5 pr-12 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark"
+                  placeholder="Choose a file to upload (PDF, Images, Docs)"
+                  className="w-full cursor-pointer border bg-backgroundBody py-4 pl-5 pr-24 text-xl leading-[1.4] tracking-[0.4px] text-colorText focus:border-[#F54BB4] focus:outline-none dark:border-dark dark:bg-dark"
                   onClick={handleUploadClick}
                 />
-                <button
-                  type="button"
-                  onClick={handleUploadClick}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#F54BB4] transition-colors hover:text-[#d63ea0]">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M7 10L12 5L17 10"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 5V15"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-                <input ref={fileInputRef} type="file" onChange={handleFileSelect} className="hidden" accept="*/*" />
+
+                {/* Upload/Remove buttons */}
+                <div className="absolute right-2 top-1/2 flex -translate-y-1/2 gap-2">
+                  {selectedFile && (
+                    <button
+                      type="button"
+                      onClick={handleRemoveFile}
+                      className="text-red-500 transition-colors hover:text-red-700"
+                      title="Remove file">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M18 6L6 18M6 6L18 18"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={handleUploadClick}
+                    disabled={fileUploading}
+                    className="text-[#F54BB4] transition-colors hover:text-[#d63ea0] disabled:opacity-50"
+                    title="Upload file">
+                    {fileUploading ? (
+                      <svg
+                        className="animate-spin"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M12 2V6M12 18V22M4.93 4.93L7.76 7.76M16.24 16.24L19.07 19.07M2 12H6M18 12H22M4.93 19.07L7.76 16.24M16.24 7.76L19.07 4.93"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    ) : (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M7 10L12 5L17 10"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M12 5V15"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  onChange={handleFileSelect}
+                  className="hidden"
+                  accept="image/*,.pdf,.doc,.docx,.txt,.xls,.xlsx,.ppt,.pptx"
+                />
               </div>
+
+              {/* File info */}
+              {selectedFile && (
+                <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                  <p>File: {selectedFile.name}</p>
+                  <p>Size: {(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                  <p>Type: {selectedFile.type}</p>
+                </div>
+              )}
             </div>
 
             {/* About the project description */}
@@ -384,7 +516,7 @@ const Page = () => {
               <button
                 type="submit"
                 className="rv-button rv-button-primary block w-full md:inline-block md:w-auto"
-                disabled={enquiry.loading}>
+                disabled={enquiry.loading || fileUploading}>
                 <div className="rv-button-top">
                   <span>{enquiry.loading ? 'Sending...' : 'Send Message'}</span>
                 </div>

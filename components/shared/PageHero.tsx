@@ -31,11 +31,6 @@ const PageHero = ({
 
       <div className="container">
         <RevealWrapper className="text-center">
-          {/* {badgeTitle && (
-            <div className="rv-badge">
-              <span className="rv-badge-text">{badgeTitle}</span>
-            </div>
-          )} */}
           {title && (
             <h1 className="mb-4 mt-3.5 font-[400]">
               {title} <i className="font-instrument italic text-[#F54BB4]">{italicTitle}</i>

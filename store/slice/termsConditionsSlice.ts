@@ -1,19 +1,10 @@
-// src/store/slice/termsConditionsSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { service } from '../api_services/api_service'
 
 export interface TermsConditionsContent {
-  title: string
-  sub_title_one: string
-  sub_title_two: string
+  title_one: string
+  title_two: string
   page_content: string
-  page_seo?: {
-    meta_title: string
-    meta_author: string
-    meta_description: string
-    meta_keywords: string
-    feature_image: string
-  }
 }
 
 export interface TermsConditionsState {
@@ -35,9 +26,8 @@ const initialState: TermsConditionsState = {
   page_title: '',
   page_slug: '',
   page_content: {
-    title: '',
-    sub_title_one: '',
-    sub_title_two: '',
+    title_one: '',
+    title_two: '',
     page_content: '',
   },
   page_seo: {
@@ -59,7 +49,7 @@ const termsConditionsSlice = createSlice({
       state.page_title = action.payload.page_title
       state.page_slug = action.payload.page_slug
       state.page_content = action.payload.page_content
-      state.page_seo = (action.payload as any).page_seo
+      state.page_seo = action.payload.page_seo
     },
     setTermsConditionsLoading(state, action: PayloadAction<boolean>) {
       state.status = action.payload

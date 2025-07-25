@@ -7,8 +7,8 @@ import { useState } from 'react'
 import RevealWrapper from '../animation/RevealWrapper'
 
 interface FaqItem {
-  question?: string
-  answer?: string
+  question: string
+  answer: string
 }
 
 interface FaqContent {
@@ -20,18 +20,90 @@ interface FaqContent {
 }
 
 interface FaqProps {
-  faqs: FaqContent
+  faqs: FaqContent | FaqItem[] // Allow both formats
   bigTitleWithBadge?: boolean
+  titleChange?: boolean // For service details page
 }
 
-const FAQ = ({ faqs, bigTitleWithBadge }: FaqProps) => {
+const FAQ = ({ faqs, bigTitleWithBadge, titleChange }: FaqProps) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
   }
 
-  const data = faqs?.faq_data ?? []
+  console.log('FAQ Component Data:', faqs)
+  console.log('Is Array:', Array.isArray(faqs))
+  console.log('titleChange:', titleChange)
+
+  // Handle different data formats
+  let data: FaqItem[] = []
+  let title_one = 'Frequently Asked'
+  let title_two = 'Questions'
+  let button = "Let's Start"
+  let button_url = '/get-a-quote'
+
+  if (Array.isArray(faqs)) {
+    // Service details format - simple array
+    data = faqs
+    if (titleChange) {
+      title_one = 'Frequently Asked'
+      title_two = 'Questions'
+    }
+  } else if (faqs && typeof faqs === 'object') {
+    // Homepage format - complex object
+    data = faqs.faq_data ?? []
+    title_one = faqs.title_one ?? 'Frequently Asked'
+    title_two = faqs.title_two ?? 'Questions'
+    button = faqs.button ?? "Let's Start"
+    button_url = faqs.button_url ?? '/get-a-quote'
+  }
+
+  console.log('Processed FAQ data:', data)
+
+  // Return null if no data
+  if (!data || data.length === 0) {
+    console.log('No FAQ data available')
+    return null
+  }
+
+  // Helper to render answer as numbered list if it contains numbered points
+  const renderAnswer = (answer?: string) => {
+    if (!answer) return null
+
+    // Check if answer contains HTML tags
+    if (answer.includes('<') && answer.includes('>')) {
+      return (
+        <div
+          className="faq-body-transition duration-[500ms] max-md:px-5 max-md:text-base md:px-10"
+          dangerouslySetInnerHTML={{ __html: answer }}
+        />
+      )
+    }
+
+    // Regex to match lines starting with number-dot-space (e.g., 1. )
+    const numberedLines = answer.match(/^(\d+)\.\s+/m)
+    if (numberedLines) {
+      // Split by lines, filter those starting with number-dot-space
+      const lines = answer.split(/\n/).filter((line) => /^\d+\.\s+/.test(line))
+      // If at least 2 numbered lines, render as list
+      if (lines.length >= 2) {
+        return (
+          <ol className="faq-body-transition list-inside list-decimal space-y-1 duration-[500ms] max-md:px-5 max-md:text-base md:px-10">
+            {lines.map((line, idx) => (
+              <li key={idx}>{line.replace(/^\d+\.\s+/, '')}</li>
+            ))}
+          </ol>
+        )
+      }
+    }
+    // Otherwise, render as paragraph (with line breaks)
+    return (
+      <p className="faq-body-transition whitespace-pre-line duration-[500ms] max-md:px-5 max-md:text-base md:px-10">
+        {answer}
+      </p>
+    )
+  }
 
   return (
     <section
@@ -45,8 +117,8 @@ const FAQ = ({ faqs, bigTitleWithBadge }: FaqProps) => {
       <div className="container">
         <div className="mb-8 text-center md:mb-16">
           <h2 className="text-appear mb-3">
-            {faqs?.title_one} <br />
-            <span className="font-instrument italic text-[#F54BB4]">{faqs?.title_two}</span>
+            {title_one} <br />
+            <span className="font-instrument italic text-[#F54BB4]">{title_two}</span>
           </h2>
         </div>
 
@@ -78,11 +150,7 @@ const FAQ = ({ faqs, bigTitleWithBadge }: FaqProps) => {
                 className={`grid transition-all duration-[400ms] ease-in-out ${
                   activeIndex === index ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
                 }`}>
-                <div className="overflow-hidden">
-                  <p className="faq-body-transition duration-[500ms] max-md:px-5 max-md:text-base md:px-10">
-                    {item.answer}
-                  </p>
-                </div>
+                <div className="overflow-hidden">{renderAnswer(item.answer)}</div>
               </div>
             </div>
           ))}
@@ -90,14 +158,12 @@ const FAQ = ({ faqs, bigTitleWithBadge }: FaqProps) => {
 
         <RevealWrapper as="ul" className="mx-auto mt-[56px] flex list-none justify-center">
           <li className="mx-auto block w-[90%] text-center md:inline-block md:w-auto">
-            <Link
-              href={faqs?.button_url || '/get-a-quote'}
-              className="rv-button rv-button-sm rv-button-primary block md:inline-block">
+            <Link href={button_url} className="rv-button rv-button-sm rv-button-primary block md:inline-block">
               <div className="rv-button-top">
-                <span>{faqs?.button || 'Let’s Start'}</span>
+                <span>{button}</span>
               </div>
               <div className="rv-button-bottom">
-                <span className="text-nowrap">{faqs?.button || 'Let’s Start'}</span>
+                <span className="text-nowrap">{button}</span>
               </div>
             </Link>
           </li>

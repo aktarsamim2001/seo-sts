@@ -125,7 +125,7 @@ const HeroV24 = ({ heroSlides }: any) => {
         />
       </div>
 
-      <RevealWrapper className="reveal-me mx-auto flex max-w-[1600px] flex-col items-start justify-start gap-y-8 px-6 pt-14 md:px-14 xl:flex-row xl:justify-between">
+      <RevealWrapper className="reveal-me mx-auto flex max-w-[1600px] flex-col items-start justify-start gap-y-8 px-6 xl:flex-row xl:justify-between">
         {/* Content Section */}
         <div className="flex-1">
           <div ref={contentRef}>

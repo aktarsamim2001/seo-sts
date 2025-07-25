@@ -22,13 +22,13 @@ import Marquee from 'react-fast-marquee'
 import RevealWrapper from '../animation/RevealWrapper'
 import TextAppearAnimation from '../animation/TextAppearAnimation'
 
-const TestimonialV2 = ({ titleOne = '', titleTwo = '', subtitle = '', testimonials = [] }) => {
+const TestimonialV2 = ({ title_one = '', title_two = '', subtitle = '', testimonials = [] }) => {
   return (
     <section className="overflow-hidden pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[88px] lg:pt-[88px] xl:pb-[100px] xl:pt-[100px]">
       <div className="container">
         <div className="mb-8 text-center md:mb-20">
           <h1 className="mb-4 mt-3.5 font-[400]">
-            {titleOne} <span className="font-instrument italic text-[#F54BB4]">{titleTwo}</span>
+            {title_one} <span className="font-instrument italic text-[#F54BB4]">{title_two}</span>
           </h1>
           <h2 className="text-appear mx-auto max-w-[770px] font-[450] md:mb-8 md:text-[28px] md:leading-[1.3] lg:text-[35px] lg:leading-[1.3]">
             {subtitle}

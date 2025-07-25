@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchBlogsDetails, fetchBlogsDetailsData } from '../../../store/slice/blogsSlice'
 import { useParams } from 'next/navigation'
 import { fetchBlogList } from '../../../store/slice/blogListSlice'
+import HeroBanner from '@/components/aboutpage/HeroBanner'
 
 const BlogDetails = () => {
   const dispatch = useDispatch()
@@ -19,7 +20,7 @@ const BlogDetails = () => {
   const blogData = blogsDetails?.blogsDetailsData
   const blogList = useSelector((state) => state.blogList.blogListData)
 
-  console.log('Blog Details:', blogList?.data)
+  console.log('Blog Details:', blogsDetails)
 
   useEffect(() => {
     if (slug) {
@@ -32,14 +33,17 @@ const BlogDetails = () => {
   const postBlog = {
     title: blogData?.title,
     description: blogData?.short_desc,
+    buttonText: blogData?.button || '', //
+    buttonUrl: blogData?.redirection_url || '#',
   }
 
   return (
     <LayoutOne>
       <PageHero
-        badgeTitle="Blog Details"
         title={postBlog.title}
         description={postBlog.description}
+        buttonText={postBlog.buttonText}
+        buttonUrl={postBlog.buttonUrl}
         spacing="pt-32 md:pt-44 lg:pt-[200px] pb-10 md:pb-16 lg:pb-[88px] xl:pb-[100px] relative overflow-hidden"
       />
       <BlogContent blog_content={blogData?.table_contents} blogList={blogList?.data} image={blogData?.feature_image} />

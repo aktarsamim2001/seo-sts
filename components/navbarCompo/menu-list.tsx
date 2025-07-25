@@ -191,17 +191,19 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListProps>((props, ref)
           {item.sub_menues && item.sub_menues.length > 0 && (
             <ul
               ref={(el) => setDropdownRef(el, item.menu_item_title)}
-              className={`menu-list-item-dropdown relative h-fit max-h-[50vh] w-full gap-x-4 overflow-y-auto md:absolute md:left-1/2 md:w-[350px] md:-translate-x-1/2 md:overflow-visible md:pb-0 lg:w-[650px] xl:w-[700px] ${
+              className={`menu-list-item-dropdown relative left-0 h-fit max-h-[60vh] w-full gap-x-4 overflow-y-auto md:absolute md:left-[48%] md:max-h-none md:w-[350px] md:overflow-visible md:pb-0 lg:left-[33%] lg:w-[650px] xl:left-[44%] xl:w-[700px] ${
                 item.menu_item_title === 'Home'
-                  ? '!grid !grid-cols-1 lg:-mt-[70px] lg:!grid-cols-2'
-                  : '!grid !grid-cols-1 items-center lg:-mt-[70px]'
+                  ? 'grid grid-cols-1 place-items-center lg:-mt-[70px] lg:grid-cols-2'
+                  : 'grid grid-cols-1 place-items-center lg:bottom-14 lg:-mt-[70px]'
               } ${activeItems.includes(item.menu_item_title) || (item.menu_item_title === 'Home' && pathname === '/' && initialLoad) ? 'block' : 'hidden'}`}>
               {item.sub_menues.map((subItem) => (
-                <li key={`${subItem.menu_item_id}-${subItem.menu_item_slug}`} className="group cursor-pointer">
+                <li
+                  key={`${subItem.menu_item_id}-${subItem.menu_item_slug}`}
+                  className="group cursor-pointer md:flex md:w-full md:justify-center">
                   <Link
                     href={`/services/${subItem.menu_item_slug}`}
                     onClick={() => onItemClick?.()}
-                    className="menu-list-item-dropdown-list block w-full pb-1 pl-3 text-base leading-8 text-white transition-colors duration-150 hover:!text-[#9BCB4B] md:text-2xl md:leading-[50px]"
+                    className="menu-list-item-dropdown-list block w-full pb-1 pl-3 text-base leading-8 text-white transition-colors duration-150 hover:!text-[#9BCB4B] md:text-left md:text-2xl md:leading-[50px]"
                     tabIndex={0}>
                     {subItem.menu_item_title.includes('-') ? (
                       <>

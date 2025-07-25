@@ -28,7 +28,7 @@ const HeroBanner = ({ banner }: { banner: Banner }) => {
         />
       </div>
 
-      <div className="mx-auto flex max-w-[1600px] flex-col items-start justify-start gap-y-8 px-6 pt-14 md:px-14 xl:flex-row xl:justify-between">
+      <div className="mx-auto flex max-w-[1600px] flex-col items-start justify-start gap-y-8 xl:flex-row xl:justify-between">
         {/* Content Section */}
         <div className="flex-1">
           {banner?.title_one && (
@@ -39,7 +39,7 @@ const HeroBanner = ({ banner }: { banner: Banner }) => {
 
           <h1
             id="hero-heading"
-            className="mb-4 mt-3.5 text-5xl font-[400] leading-tight tracking-[-2px] sm:text-[55px] md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]">
+            className="mb-4 mt-3.5 text-5xl font-[400] leading-tight tracking-[-2px] sm:text-[55px] md:pr-10 md:text-[67px] 2xl:text-8xl 2xl:leading-[1.17] 2xl:tracking-[-2.88px]">
             {banner?.title_two} <i className="font-instrument italic text-[#F54BB4]">{banner?.title_three}</i>
           </h1>
 

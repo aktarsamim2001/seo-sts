@@ -71,8 +71,8 @@ const AboutPage = () => {
 
       {aboutUsDetails?.page_content?.testimonial && (
         <TestimonialV2
-          titleOne={aboutUsDetails?.page_content?.testimonial?.title_one}
-          titleTwo={aboutUsDetails?.page_content?.testimonial?.title_two}
+          title_one={aboutUsDetails?.page_content?.testimonial?.title_one}
+          title_two={aboutUsDetails?.page_content?.testimonial?.title_two}
           subtitle={aboutUsDetails?.page_content?.testimonial?.subtitle}
           testimonials={aboutUsDetails?.page_content?.testimonial?.testimonials}
         />

@@ -23,11 +23,16 @@ const FAQPage = () => {
     return <p>Loading...</p>
   }
 
+  console.log('Privacy Policy details:', pageDetails)
+
   return (
     <LayoutOne>
-      <PageHero title={privacyData?.sub_title_one} italicTitle={privacyData?.sub_title_two} badgeTitle="Policy" scale />
+      <PageHero
+        title={pageDetails?.page_content?.page_content?.title_one}
+        italicTitle={pageDetails?.page_content?.page_content?.title_two}
+        scale
+      />
       <TermsPolicyBody termsData={privacyData?.page_content} />
-
       {/* <CTA enquiryData={pageDetails.page_content.enquiry_data}>
         {pageDetails.page_content.enquiry_data.title_one}
         <CtaImageSlider

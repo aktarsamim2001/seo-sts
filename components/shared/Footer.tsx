@@ -9,38 +9,57 @@ import { useSelector } from 'react-redux'
 import type { RootState } from '@/store/store'
 
 type MenuItem = {
+  menu_item_id: number
+  item_parent_id?: number
   menu_item_title: string
   menu_item_slug: string
+  menu_type: string
+  sub_menues?: MenuItem[]
 }
 
 type MenuSection = {
+  menu_item_id: number
   menu_item_title: string
-  logo?: {
-    src: string
-    alt: string
-  }
+  menu_item_slug: string
+  menu_type: string
   sub_menues?: MenuItem[]
-  socials?: Array<{
-    href: string
-    label: string
-    icon: string
-  }>
 }
 
 type Menu = {
-  menu_name: string
+  menu_id: number
+  menu_name?: string
   menu_items?: MenuSection[]
 }
 
 const Footer = () => {
   const menus = useSelector((state: RootState) => state.menus.data as Menu[])
-  const footerMenu = menus.find((menu) => menu.menu_name.toLowerCase().includes('footer'))
+  const footerMenu = menus.find((menu) => menu.menu_name?.toLowerCase().includes('footer'))
+
+  console.log('Footer menu data:', footerMenu)
+
+  // Helper function to get proper link based on menu type
+  const getMenuLink = (item: MenuItem) => {
+    // If menu item is Home, always link to '/'
+    if (item.menu_item_title.toLowerCase() === 'home') {
+      return '/'
+    }
+    switch (item.menu_type) {
+      case 'service':
+        return `/services/${item.menu_item_slug}`
+      case 'cms':
+        return `/${item.menu_item_slug}`
+      case 'external':
+        return item.menu_item_slug
+      default:
+        return `/${item.menu_item_slug}`
+    }
+  }
 
   return (
     <FooterProvider>
       <div className="container">
         <div className="relative z-10 flex flex-col flex-wrap justify-center gap-y-10 sm:flex-row sm:justify-between sm:gap-y-16">
-          {/* REACH US */}
+          {/* REACH US - First Column */}
           <div className="pr-8 max-lg:basis-full">
             <h5 className="mb-4 font-[poppins] text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
               Reach Us
@@ -68,118 +87,100 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* FOOTER MENU SECTIONS */}
+          {/* DYNAMIC FOOTER MENU SECTIONS */}
           {footerMenu?.menu_items?.map((section, index) => {
             const sectionTitle = section.menu_item_title.toLowerCase()
 
-            // QUICK MENUS
-            if (sectionTitle === 'quick menus') {
+            // QUICK MENUS - Second Column
+            if (sectionTitle === 'quick menues') {
               return (
-                <div key={`Id_${index}`}>
+                <div key={`section_${section.menu_item_id}`}>
                   <h5 className="mb-4 font-[poppins] text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
-                    {section.menu_item_title}
+                    Quick Menus
                   </h5>
                   <ul>
-                    {section.sub_menues
-                      ?.filter((item) =>
-                        ['home', 'about us', 'services', 'portfolio', 'blogs', 'contact us', 'get a quote'].includes(
-                          item.menu_item_title.toLowerCase(),
-                        ),
-                      )
-                      .map((item, i) => (
-                        <li className="mb-4" key={i}>
-                          <Link
-                            href={`/${item.menu_item_slug}`}
-                            className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary">
-                            {item.menu_item_title}
-                          </Link>
-                        </li>
-                      ))}
+                    {section.sub_menues?.map((item, i) => (
+                      <li className="mb-4" key={`quick_${item.menu_item_id}`}>
+                        <Link
+                          href={getMenuLink(item)}
+                          className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary">
+                          {item.menu_item_title}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               )
             }
 
-            // WHAT WE DO
+            // WHAT WE DO - Third Column
             if (sectionTitle === 'what we do') {
               return (
-                <div key={`Id_${index}`}>
+                <div key={`section_${section.menu_item_id}`}>
                   <h5 className="mb-4 font-[poppins] text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
-                    {section.menu_item_title}
+                    What We Do
                   </h5>
                   <ul>
-                    {section.sub_menues
-                      ?.filter((item) =>
-                        ['brand identity design', 'illustration & custom graphics'].includes(
-                          item.menu_item_title.toLowerCase(),
-                        ),
-                      )
-                      .map((item, i) => (
-                        <li className="mb-4" key={i}>
-                          <Link
-                            href={`/services/${item.menu_item_slug}`}
-                            className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary">
-                            {item.menu_item_title}
-                          </Link>
-                        </li>
-                      ))}
+                    {section.sub_menues?.map((item, i) => (
+                      <li className="mb-4" key={`service_${item.menu_item_id}`}>
+                        <Link
+                          href={getMenuLink(item)}
+                          className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary">
+                          {item.menu_item_title}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               )
             }
 
-            // OTHER SECTIONS (e.g., Important Links)
+            // IMPORTANT LINKS - Fourth Column
+            if (sectionTitle === 'important links') {
+              return (
+                <div key={`section_${section.menu_item_id}`}>
+                  <h5 className="mb-4 font-[poppins] text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
+                    Important Links
+                  </h5>
+                  <ul>
+                    {section.sub_menues?.map((item, i) => (
+                      <li className="mb-4" key={`important_${item.menu_item_id}`}>
+                        <Link
+                          href={getMenuLink(item)}
+                          className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary">
+                          {item.menu_item_title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            }
+
+            // OTHER SECTIONS (fallback for any additional sections)
             return (
-              <div key={`Id_${index}`}>
+              <div key={`section_${section.menu_item_id}`}>
                 <h5 className="mb-4 font-[poppins] text-sm font-bold uppercase tracking-[3px] text-white sm:mb-8">
                   {section.menu_item_title}
                 </h5>
-
-                {section?.logo && (
-                  <div className="mb-4">
-                    <Image src={section.logo.src} alt={section.logo.alt} width={120} height={40} />
-                  </div>
-                )}
-
                 <ul>
                   {section.sub_menues?.map((item, i) => (
-                    <li className="mb-4" key={i}>
+                    <li className="mb-4" key={`other_${item.menu_item_id}`}>
                       <Link
-                        href={`/${item.menu_item_slug}`}
+                        href={getMenuLink(item)}
                         className="block text-white transition-colors duration-300 hover:font-medium hover:text-primary">
                         {item.menu_item_title}
                       </Link>
                     </li>
                   ))}
                 </ul>
-
-                {section?.socials && (
-                  <div className="mt-6 flex items-center gap-4">
-                    {section.socials.map((social) => (
-                      <Link
-                        key={social.href}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block">
-                        <Image
-                          src={social.icon}
-                          alt={social.label}
-                          width={18}
-                          height={18}
-                          className="brightness-100 invert hover:opacity-80"
-                        />
-                      </Link>
-                    ))}
-                  </div>
-                )}
               </div>
             )
           })}
         </div>
       </div>
 
-      <div className="absolute bottom-0 w-full">
+      <div className="absolute bottom-14 w-full">
         <h5 className="footer-text xs:text-5xl absolute bottom-0 left-1/2 w-full -translate-x-1/2 translate-y-[30%] text-nowrap text-center font-[poppins] text-4xl font-medium tracking-widest sm:text-6xl md:text-[110px]">
           SMARTTASK STUDIOS
         </h5>

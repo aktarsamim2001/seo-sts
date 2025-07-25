@@ -2,14 +2,30 @@
 
 import { slugify } from '@/utils/slugify'
 import { ReactNode, useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 interface TableOfContentProps {
   tableOfContents: string[]
   children?: ReactNode
 }
 
+const getHeadingFromPath = (path: string): string => {
+  const segments = path.split('/').filter(Boolean)
+
+  if (segments.includes('services')) {
+    return 'About Services'
+  } else if (segments.includes('blog')) {
+    return 'In This Article'
+  }
+
+  return 'Table of Contents'
+}
+
 const TableOfContent = ({ tableOfContents, children }: TableOfContentProps) => {
+  const pathname = usePathname()
   const [activeSection, setActiveSection] = useState<string>('')
+
+  const headingTitle = getHeadingFromPath(pathname)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,7 +55,7 @@ const TableOfContent = ({ tableOfContents, children }: TableOfContentProps) => {
 
   return (
     <div>
-      <h3 className="text-3xl md:text-4xl">About The Service</h3>
+      <h3 className="mt-7 text-3xl md:text-4xl">{headingTitle}</h3>
       <ul className="mt-3.5 md:mt-5 lg:mt-10 [&>*:not(:last-child)]:mb-2 md:[&>*:not(:last-child)]:mb-5">
         {tableOfContents?.map((content, index) => {
           const slug = slugify(content)
