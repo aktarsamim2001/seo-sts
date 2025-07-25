@@ -8,6 +8,7 @@ import img from '../../public/images/services/services-details2-img.webp'
 import ReactMarkdown from 'react-markdown'
 import rehypeSlug from 'rehype-slug'
 import rehypeRaw from 'rehype-raw'
+import { slugify } from '@/utils/slugify'
 
 interface ContentItem {
   title: string
@@ -17,17 +18,11 @@ interface ContentItem {
 interface ServiceContentProps {
   service: {
     content_data?: ContentItem[]
-    content_list?: any[]
+    content_list?: string[]
     banner_image?: string
     image_alt?: string
   }
 }
-
-const generateId = (text: string) =>
-  text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
 
 const ServiceContent = ({ service }: ServiceContentProps) => {
   const contentItems = service?.content_data || []
@@ -52,17 +47,26 @@ const ServiceContent = ({ service }: ServiceContentProps) => {
                   {contentItems.map((item, index) => (
                     <div key={index} className="space-y-4">
                       <h3
-                        id={generateId(item.title)}
+                        id={slugify(item.title)}
                         className="flex scroll-mt-32 items-center gap-2 text-xl font-semibold leading-snug">
                         <span className="text-[#F54BB4]">{index + 1}.</span>
                         <span>{item.title}</span>
                       </h3>
 
-                      <ReactMarkdown
-                        rehypePlugins={[rehypeSlug, rehypeRaw]}
-                        className="prose dark:prose-invert max-w-none">
-                        {item.description}
-                      </ReactMarkdown>
+                      <div className="prose dark:prose-invert max-w-none">
+                        <ReactMarkdown
+                          rehypePlugins={[rehypeSlug, rehypeRaw]}
+                          components={{
+                            ul: ({ children }) => (
+                              <ul className="ml-6 mt-4 list-outside list-disc space-y-2">{children}</ul>
+                            ),
+                            li: ({ children }) => (
+                              <li className="leading-relaxed text-gray-700 dark:text-gray-300">{children}</li>
+                            ),
+                          }}>
+                          {item.description}
+                        </ReactMarkdown>
+                      </div>
                     </div>
                   ))}
                 </div>

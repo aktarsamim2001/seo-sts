@@ -6,10 +6,9 @@ import RevealWrapper from '../animation/RevealWrapper'
 import BlogList from '../shared/BlogList'
 import TableOfContent from '../shared/TableOfContent'
 import rehypeRaw from 'rehype-raw'
+import { slugify } from '@/utils/slugify'
 
 const BlogContent = ({ blog_content, blogList, image }: any) => {
-  console.log('Blog Content:2', blog_content)
-
   const generateId = (text: string) =>
     text
       .toLowerCase()
@@ -32,10 +31,10 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
           />
         </RevealWrapper>
         <div className="mt-12 flex flex-col justify-start gap-10 pb-14 md:mt-[60px] md:pb-16 lg:flex-row lg:pb-[88px] xl:pb-[100px]">
-          <aside className="min-w-[275px]">
+          <aside className="min-w-[310px]">
             <div className="sticky top-24 max-md:mb-10">
               <TableOfContent tableOfContents={tableOfContents}>
-                <h3 className="mb-7 mt-10 text-3xl md:text-4xl lg:mt-16 xl:mt-20">Share</h3>
+                {/* <h3 className="mb-7 mt-10 text-3xl md:text-4xl lg:mt-16 xl:mt-20">Share</h3>
                 <ul className="flex items-center gap-5">
                   <li className="relative inline-block h-10 w-10 rounded-full border-2 border-secondary duration-300 hover:bg-primary dark:border-dark">
                     <Link href="https://discord.gg/fSxDJyvJmr" target="_blank">
@@ -134,22 +133,35 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                       </span>
                     </Link>
                   </li>
-                </ul>
+                </ul> */}
               </TableOfContent>
             </div>
           </aside>
-          <article className="career-details-body overflow-hidden">
+          <article className="career-details-body mt-8 overflow-hidden">
             {Array.isArray(blog_content?.content_data) ? (
               blog_content.content_data.map((item: any, index: number) => (
-                <div key={index} className="mb-8">
-                  {item.title && (
-                    <h2 id={generateId(item.title)} className="scroll-mt-32 text-[27px] font-[400]">
-                      {item.title}
-                    </h2>
-                  )}
-                  <ReactMarkdown rehypePlugins={[rehypeSlug, rehypeRaw]}>
-                    {typeof item.description === 'string' ? item.description : ''}
-                  </ReactMarkdown>
+                <div key={index} className="space-y-4">
+                  <h3
+                    id={slugify(item.title)}
+                    className="flex scroll-mt-32 items-center gap-2 text-xl font-semibold leading-snug">
+                    <span className="text-[#F54BB4]">{index + 1}.</span>
+                    <span>{item.title}</span>
+                  </h3>
+
+                  <div className="prose dark:prose-invert max-w-none">
+                    <ReactMarkdown
+                      rehypePlugins={[rehypeSlug, rehypeRaw]}
+                      components={{
+                        ul: ({ children }) => (
+                          <ul className="ml-6 mt-4 list-outside list-disc space-y-2">{children}</ul>
+                        ),
+                        li: ({ children }) => (
+                          <li className="leading-relaxed text-gray-700 dark:text-gray-300">{children}</li>
+                        ),
+                      }}>
+                      {item.description}
+                    </ReactMarkdown>
+                  </div>
                 </div>
               ))
             ) : (

@@ -1,24 +1,16 @@
 'use client'
+import { slugify } from '@/utils/slugify'
+import { ReactNode, useEffect, useState } from 'react'
 
-import React, { useEffect, useRef, useState } from 'react'
-
-interface Props {
+interface TableOfContentProps {
   tableOfContents: string[]
+  children?: ReactNode
 }
 
-const slugify = (text: string): string =>
-  text
-    .toLowerCase()
-    .replace(/ /g, '-')
-    .replace(/[^\w-]+/g, '') // remove non-word characters
-
-const TableOfContent = ({ tableOfContents }: any) => {
-  const [activeSection, setActiveSection] = useState('')
-  const observerRef = useRef<IntersectionObserver | null>(null)
+const TableOfContent = ({ tableOfContents, children }: TableOfContentProps) => {
+  const [activeSection, setActiveSection] = useState<string>('')
 
   useEffect(() => {
-    if (!tableOfContents || tableOfContents.length === 0) return
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -28,56 +20,44 @@ const TableOfContent = ({ tableOfContents }: any) => {
         })
       },
       {
-        rootMargin: '0px 0px -70% 0px',
-        threshold: 0.1,
+        rootMargin: '-20% 0px -80% 0px',
       },
     )
 
-    tableOfContents.forEach((title: any) => {
-      const id = slugify(title)
-      const element = document.getElementById(id)
-      if (element) observer.observe(element)
+    tableOfContents.forEach((content) => {
+      const element = document.getElementById(slugify(content))
+      if (element) {
+        observer.observe(element)
+      }
     })
 
-    observerRef.current = observer
-
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect()
-      }
-    }
-  }, [tableOfContents])
-
-  // Set default section on load
-  useEffect(() => {
-    if (tableOfContents.length > 0) {
-      setActiveSection(slugify(tableOfContents[0]))
+      observer.disconnect()
     }
   }, [tableOfContents])
 
   return (
-    <div className="dark:border-dark-300 dark:bg-dark-700 sticky top-28 hidden h-fit min-w-[300px] rounded-lg px-4 py-6 xl:block">
-      <h3 className="mb-6 mt-9 text-3xl font-semibold text-black dark:text-white">Table of Contents</h3>
-
-      <ul className="flex flex-col gap-4">
-        {tableOfContents.map((title: any, index: any) => {
-          const slug = slugify(title)
-          const isActive = activeSection === slug
-
+    <div>
+      <h3 className="text-3xl md:text-4xl">Table of contents</h3>
+      <ul className="mt-3.5 md:mt-5 lg:mt-10 [&>*:not(:last-child)]:mb-2 md:[&>*:not(:last-child)]:mb-5">
+        {tableOfContents.map((content) => {
+          const slug = slugify(content)
           return (
-            <li key={slug} className="flex items-start gap-2">
-              <span className="mt-3 font-medium text-[#a3a3a3]">{index + 1}.</span>
+            <li key={content}>
               <a
                 href={`#${slug}`}
-                className={`text-xl transition-all hover:text-[#F54BB4] dark:hover:text-[#F54BB4] ${
-                  isActive ? 'font-semibold text-[#F54BB4] dark:text-[#F54BB4]' : 'text-[#000000b3] dark:text-dark-100'
+                className={`lenis-scroll-to text-xl font-normal normal-case leading-7 tracking-normal transition-all hover:text-secondary dark:hover:text-backgroundBody ${
+                  activeSection === slug
+                    ? 'text-secondary dark:text-backgroundBody'
+                    : 'text-[#000000b3] dark:text-dark-100'
                 }`}>
-                {title}
+                {content}
               </a>
             </li>
           )
         })}
       </ul>
+      {children}
     </div>
   )
 }

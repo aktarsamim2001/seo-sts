@@ -50,7 +50,7 @@ const ProjectServicesV3 = ({
             </figure>
             <div className="project-item-content">
               <p className="text-xs font-normal uppercase leading-3 tracking-[5px] text-secondary dark:text-backgroundBody md:leading-6 md:tracking-[8px]">
-                USER EXPERIENCE
+                {project.tag_name}
               </p>
               <div className="blog-title mb-2 mt-3 md:mt-4 lg:mb-4 lg:mt-5 xl:mt-7">
                 <h3 className="text-3xl sm:text-4xl md:text-[40px] lg:text-[56px] lg:leading-[1.2] lg:tracking-[-1.68px]">
