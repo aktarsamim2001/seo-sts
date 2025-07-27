@@ -1,45 +1,31 @@
 // src/app/services.tsx
-'use client'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-// import { RootState } from '@/store/store'
-import { fetchServicesDetails } from '@/store/slice/servicesSlice'
-import LayoutOne from '@/components/shared/LayoutOne'
-import PageHero from '@/components/shared/PageHero'
-import ServicesV14 from '@/components/homepage-16/ServicesV14'
-import Process from '@/components/services-page/Process'
-import CTA from '@/components/shared/CTA'
-import CtaImageSlider from '@/components/shared/CtaImageSlider'
-import HeroBanner from '@/components/aboutpage/HeroBanner'
-import FAQ from '@/components/shared/FAQ'
+import { service } from '@/store/api_services/api_service'
+import ServicesPageClient from './ServicesPageClient'
 
-const ServicesPage = () => {
-  const dispatch = useDispatch()
-  const servicesDetails = useSelector((state) => state.services)
-  console.log('Services details:', servicesDetails)
-
-  useEffect(() => {
-    dispatch(fetchServicesDetails({ slug: 'services' }))
-  }, [dispatch])
-
-  return (
-    <LayoutOne>
-      <HeroBanner banner={servicesDetails?.page_content?.banner ?? []} />
-      <ServicesV14
-        services={servicesDetails.page_content.section_content ?? []}
-        title_one={servicesDetails.page_content.section_content.title_one}
-        title_two={servicesDetails.page_content.section_content.title_two}
-        subtitle={servicesDetails.page_content.section_content.subtitle}
-      />
-      <Process processSteps={servicesDetails.page_content.process ?? []} />
-      <FAQ faqs={servicesDetails.page_content.faqs ?? []} />
-      <CTA
-        title={servicesDetails.page_content.enquiry_data.title_one ?? ''}
-        subtitle={servicesDetails.page_content.enquiry_data.title_two ?? ''}
-        button={servicesDetails.page_content.enquiry_data.button}
-      />
-    </LayoutOne>
-  )
+// Server-side SEO
+export async function generateMetadata() {
+  const res = await service.fetchPageDetailsApi({ slug: 'services' })
+  const data = res.data
+  const seo = data?.page_seo || {}
+  return {
+    title: seo?.meta_title || 'Services - Smart Task Studios',
+    description: seo?.meta_description || '',
+    keywords: seo?.meta_keywords || '',
+    authors: [{ name: seo?.meta_author || 'Smart Task Studios' }],
+    openGraph: {
+      images: [seo?.feature_image || ''],
+      title: seo?.meta_title || '',
+      description: seo?.meta_description || '',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: seo?.meta_title || '',
+      description: seo?.meta_description || '',
+      images: [seo?.feature_image || ''],
+    },
+  }
 }
 
-export default ServicesPage
+export default function ServicesPage() {
+  return <ServicesPageClient />
+}

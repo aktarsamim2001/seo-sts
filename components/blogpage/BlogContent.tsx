@@ -34,9 +34,8 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
           <aside className="min-w-[310px]">
             <div className="sticky top-24 max-md:mb-10">
               <TableOfContent tableOfContents={tableOfContents}>
-                <h3 className="mb-7 mt-10 text-3xl md:text-4xl lg:mt-16 xl:mt-20">Share</h3>
+                {/* <h3 className="mb-7 mt-10 text-3xl md:text-4xl lg:mt-16 xl:mt-20">Share</h3>
                 <ul className="flex items-center gap-5">
-                  {/* Facebook */}
                   <li className="relative inline-block h-10 w-10 rounded-full border-2 border-secondary duration-300 hover:bg-primary dark:border-dark">
                     <a
                       href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
@@ -44,7 +43,6 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                       rel="noopener noreferrer"
                       aria-label="Share on Facebook">
                       <span className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 dark:hidden">
-                        {/* Facebook SVG (light) */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -55,7 +53,6 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                         </svg>
                       </span>
                       <span className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 dark:inline">
-                        {/* Facebook SVG (dark) */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -67,7 +64,6 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                       </span>
                     </a>
                   </li>
-                  {/* Twitter */}
                   <li className="relative inline-block h-10 w-10 rounded-full border-2 border-secondary duration-300 hover:bg-primary dark:border-dark">
                     <a
                       href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}&text=${encodeURIComponent('')}`}
@@ -75,7 +71,6 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                       rel="noopener noreferrer"
                       aria-label="Share on Twitter">
                       <span className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 dark:hidden">
-                        {/* Twitter SVG (light) */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -86,7 +81,6 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                         </svg>
                       </span>
                       <span className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 dark:inline">
-                        {/* Twitter SVG (dark) */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -98,7 +92,6 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                       </span>
                     </a>
                   </li>
-                  {/* LinkedIn */}
                   <li className="relative inline-block h-10 w-10 rounded-full border-2 border-secondary duration-300 hover:bg-primary dark:border-dark">
                     <a
                       href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
@@ -106,7 +99,6 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                       rel="noopener noreferrer"
                       aria-label="Share on LinkedIn">
                       <span className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 dark:hidden">
-                        {/* LinkedIn SVG (light) */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -117,7 +109,6 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                         </svg>
                       </span>
                       <span className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 dark:inline">
-                        {/* LinkedIn SVG (dark) */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -129,7 +120,6 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                       </span>
                     </a>
                   </li>
-                  {/* Instagram (copy link) */}
                   <li className="relative inline-block h-10 w-10 rounded-full border-2 border-secondary duration-300 hover:bg-primary dark:border-dark">
                     <button
                       type="button"
@@ -141,7 +131,6 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                       aria-label="Copy link for Instagram"
                       className="m-0 h-full w-full border-none bg-transparent p-0">
                       <span className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 dark:hidden">
-                        {/* Instagram SVG (light) */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -152,7 +141,6 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                         </svg>
                       </span>
                       <span className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 dark:inline">
-                        {/* Instagram SVG (dark) */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
@@ -164,7 +152,7 @@ const BlogContent = ({ blog_content, blogList, image }: any) => {
                       </span>
                     </button>
                   </li>
-                </ul>
+                </ul> */}
               </TableOfContent>
             </div>
           </aside>

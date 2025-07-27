@@ -5,13 +5,23 @@ import AboutPageClient from './AboutPageClient'
 export async function generateMetadata() {
   const res = await service.fetchPageDetailsApi({ slug: 'about-us' })
   const data = res.data
+  const seo = data?.data?.page_seo || {}
+  console.log('About Us Page SEO Data:', data)
   return {
-    title: data?.seo_title || 'About Us - SmartTask Studios',
-    description: data?.seo_description || '',
+    title: seo?.meta_title || 'About Us - SmartTask Studios',
+    description: seo?.meta_description || '',
+    keywords: seo?.meta_keywords || '',
+    authors: [{ name: seo?.meta_author || 'Smart Task Studios' }],
     openGraph: {
-      images: [data?.seo_og_image || ''],
-      title: data?.seo_og_title || '',
-      description: data?.seo_og_description || '',
+      images: [seo?.feature_image || ''],
+      title: seo?.meta_title || '',
+      description: seo?.meta_description || '',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: seo?.meta_title || '',
+      description: seo?.meta_description || '',
+      images: [seo?.feature_image || ''],
     },
   }
 }

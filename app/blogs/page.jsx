@@ -1,44 +1,32 @@
-'use client'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@/store/store'
-import { fetchBlogsDetails } from '@/store/slice/blogsSlice'
-import LayoutOne from '@/components/shared/LayoutOne'
-import PageHero from '@/components/shared/PageHero'
-import BlogPostV5 from '@/components/blogpage/BlogPostV5'
-import CTA from '@/components/shared/CTA'
-import CtaImageSlider from '@/components/shared/CtaImageSlider'
-import HeroBanner from '@/components/aboutpage/HeroBanner'
+import { service } from '@/store/api_services/api_service'
+import BlogPageClient from './BlogPageClient'
 
-// export const metadata = {
-//   title: 'Blogs',
-// }
-
-const BlogPage = () => {
-  const blogsDetails = useSelector((state) => state.blogs)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(fetchBlogsDetails({ slug: 'blogs' }))
-  }, [dispatch])
-
-  return (
-    <LayoutOne>
-      <HeroBanner banner={blogsDetails.page_content.banner} />
-      <PageHero
-        title={blogsDetails?.page_content?.section_content?.title_one ?? ''}
-        italicTitle={blogsDetails?.page_content?.section_content?.title_two ?? ''}
-        description={blogsDetails?.page_content?.section_content?.content ?? ''}
-      />
-      <BlogPostV5 />
-      <CTA
-        title={blogsDetails.page_content.enquiry_data.title}
-        subtitle={blogsDetails.page_content.enquiry_data.subtitle}
-        button={blogsDetails.page_content.enquiry_data.button}
-        buttonUrl={blogsDetails.page_content.enquiry_data.button_url}
-      />
-    </LayoutOne>
-  )
+// Server-side SEO
+export async function generateMetadata() {
+  const res = await service.fetchPageDetailsApi({ slug: 'blogs' })
+  const data = res.data
+  const seo = data?.data?.page_seo || {}
+  console.log('Blogs Page SEO Data:', data)
+  return {
+    title: seo?.meta_title || 'Blogs - SmartTask Studios',
+    description: seo?.meta_description || '',
+    keywords: seo?.meta_keywords || '',
+    authors: [{ name: seo?.meta_author || 'Smart Task Studios' }],
+    openGraph: {
+      images: [seo?.feature_image || ''],
+      title: seo?.meta_title || '',
+      description: seo?.meta_description || '',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: seo?.meta_title || '',
+      description: seo?.meta_description || '',
+      images: [seo?.feature_image || ''],
+    },
+  }
 }
 
-export default BlogPage
+// Server component fetches data and passes to client
+export default async function BlogPage() {
+  return <BlogPageClient />
+}

@@ -1,53 +1,31 @@
 // src/app/terms/page.jsx
-'use client'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchTermsConditionsDetails } from '@/store/slice/termsConditionsSlice'
-import LayoutOne from '@/components/shared/LayoutOne'
-import PageHero from '@/components/shared/PageHero'
-import CTA from '@/components/shared/CTA'
-import CtaImageSlider from '@/components/shared/CtaImageSlider'
-import TermsPolicyBody from '@/components/shared/TermsPolicyBody'
+import { service } from '@/store/api_services/api_service'
+import TermsConditionsClient from './TermsConditionsClient'
 
-const Page = () => {
-  const dispatch = useDispatch()
-  const pageDetails = useSelector((state) => state?.termsConditions)
-  const terms = pageDetails?.page_content?.page_content
-
-  console.log('Page details:', pageDetails)
-
-  useEffect(() => {
-    dispatch(fetchTermsConditionsDetails({ slug: 'terms-conditions' }))
-  }, [dispatch])
-
-  return (
-    <LayoutOne>
-      <PageHero title={pageDetails?.page_content?.title_one} italicTitle={pageDetails?.page_content?.title_two} scale />
-      <TermsPolicyBody termsData={terms} />
-
-      {/* <TermsPolicyBody
-        termsData={{
-          slug: pageDetails?.page_slug,
-          content: pageDetails?.page_content?.page_content,
-        }}
-        heading={true}
-      />
-      <CTA>
-        Let's chat!
-        <CtaImageSlider
-          slides={[
-            { id: '1', img: '/images/agent/18.webp' },
-            { id: '2', img: '/images/agent/16.webp' },
-            { id: '3', img: '/images/agent/19.webp' },
-          ]}
-        />
-        with us.
-        <i className="block font-instrument italic text-[#F54BB4] max-md:inline-block max-sm:pl-2 sm:mt-10">
-          A virtual coffee?
-        </i>
-      </CTA> */}
-    </LayoutOne>
-  )
+// Server-side SEO
+export async function generateMetadata() {
+  const res = await service.fetchTermsConditionsDetails({ slug: 'terms-conditions' })
+  const data = res.data
+  const seo = data?.page_seo || {}
+  return {
+    title: seo?.meta_title || 'Terms & Conditions - Smart Task Studios',
+    description: seo?.meta_description || '',
+    keywords: seo?.meta_keywords || '',
+    authors: [{ name: seo?.meta_author || 'Smart Task Studios' }],
+    openGraph: {
+      images: [seo?.feature_image || ''],
+      title: seo?.meta_title || '',
+      description: seo?.meta_description || '',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: seo?.meta_title || '',
+      description: seo?.meta_description || '',
+      images: [seo?.feature_image || ''],
+    },
+  }
 }
 
-export default Page
+export default function TermsConditionsPage() {
+  return <TermsConditionsClient />
+}
